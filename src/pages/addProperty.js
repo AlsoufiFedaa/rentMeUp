@@ -7,22 +7,19 @@ class AddProperty extends Component{
 
 
     }
-    // updateValueCity=(e)=> { 
-    //    let city = this.state.city
-    //     this.setState({city:e.target.value})
+    updateValueCity=(e)=> { 
+        this.setState({city:e.target.value})
 
-    // }
+    }
 
-    // updateValueProvince=(e)=> { 
-    //   let  province = this.state.province
-    //     this.setState({province:e.target.value})
+    updateValueProvince=(e)=> { 
+        this.setState({province:e.target.value})
 
-    // }
-    // updateValueStreet=(e)=> { 
-    //  let  street = this.state.street
-    //     this.setState({street:e.target.value})
+    }
+    updateValueStreet=(e)=> { 
+        this.setState({street:e.target.value})
 
-    // }
+    }
 
     render() {
     return( 
@@ -30,9 +27,9 @@ class AddProperty extends Component{
         <h1> ADD Property</h1>
         <div> 
 
-        City: <input type="text" placeholder="city" />  
-        province: <input type="text" placeholder="province" /> 
-        street: <input type="text" placeholder="street"  /> 
+        City: <input type="text" placeholder="city"  value= {this.state.city} onChange={this.updateValueCity} className='City'/> 
+        province:<input type="text" placeholder="province"  value={this.state.province} onChange={this.updateValueProvince} className='Province'/> 
+        street: <input type="text" placeholder="street"  value={this.state.street} onChange={this.updateValueStreet} className='Street'/> 
 
         </div>
         </div>
