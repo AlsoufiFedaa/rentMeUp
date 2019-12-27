@@ -10,9 +10,9 @@ import AddProperty from './addProperty'
 const Home=()=> {
     return ( 
         <>
-        <AddProperty/>
+        {/* <AddProperty/> */}
            
-             {/* <Hero>
+             <Hero>
                
 
                 <Banner title="Welcome" subtitlte="Find the best estate"> 
@@ -23,7 +23,7 @@ const Home=()=> {
                 <ImageCarousel/>
              </Hero>
         <Services/> 
-        <MainMap/> */}
+        <MainMap/>
         </> 
     )
 }
