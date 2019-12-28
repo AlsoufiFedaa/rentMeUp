@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { MdAddAPhoto } from "react-icons/md";
+import { Link } from "react-router-dom";
 class Profile extends Component {
   state = {
     Name: "",
@@ -31,8 +33,13 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <div className="nav-header">
-          <h1 style={{ marginTop: "180px" }}>Profile</h1>
+        <div className="nav-header" style={{ marginTop: "180px" }}>
+          <h1>Profile</h1>
+
+          <button>
+            {" "}
+            <MdAddAPhoto />{" "}
+          </button>
         </div>
         <div className="input">
           <h1>{this.state.name}</h1>
