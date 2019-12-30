@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import logo from "../assets/logo1.png";
+
 import { Link } from "react-router-dom";
+import * as firebase from "firebase";
 
 class SignUP extends Component {
   state = {
@@ -10,22 +11,54 @@ class SignUP extends Component {
     Mobile: ""
   };
 
-  handleChange1 = e => {
+  addUser = () => {
+    const { Name, Email, Password, Mobile } = this.state;
+    console.log("EEEERRRRorrr");
+    const db = firebase.firestore();
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(Email, Password)
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.error(errorCode, errorMessage);
+
+        // ...
+      })
+      .then(function() {
+        db.collection("users")
+          .add({
+            name: Name,
+            mobile: Mobile
+          })
+
+          .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function(error) {
+            console.error("Error adding document: ", error);
+          });
+      });
+  };
+
+  handleNameChange = e => {
     this.setState({
       Name: e.target.value
     });
   };
-  handleChange2 = e => {
+  handleEmailChange = e => {
     this.setState({
       Email: e.target.value
     });
   };
-  handleChange3 = e => {
+  handlePasswordChange = e => {
     this.setState({
       Password: e.target.value
     });
   };
-  handleChange4 = e => {
+  handleMobileChange = e => {
     this.setState({
       Mobile: e.target.value
     });
@@ -43,7 +76,7 @@ class SignUP extends Component {
           <h3>Name:</h3>
           <input
             defaultValue={this.state.Name}
-            onChange={this.handleTextChange1}
+            onChange={this.handleNameChange}
             placeholder="enter ur Name"
           />
         </div>
@@ -51,7 +84,7 @@ class SignUP extends Component {
           <h3>Email:</h3>
           <input
             defaultValue={this.state.Email}
-            onChange={this.handleTextChange2}
+            onChange={this.handleEmailChange}
             placeholder="enter ur Email"
           />
         </div>
@@ -59,7 +92,7 @@ class SignUP extends Component {
           <h3>Password:</h3>
           <input
             defaultValue={this.state.Password}
-            onChange={this.handleTextChange3}
+            onChange={this.handlePasswordChange}
             placeholder="enter ur Password"
           />
         </div>
@@ -67,11 +100,12 @@ class SignUP extends Component {
           <h3>Mobil:</h3>
           <input
             defaultValue={this.state.Mobile}
-            onChange={this.handleTextChange4}
+            onChange={this.handleMobileChange}
             placeholder="enter ur Mobil"
           />
         </div>
-        <Link to="/Profile" className="btn-primary">
+        <Link to="/LogIn" className="btn-primary" onClick={this.addUser}>
+          {" "}
           Sign Up
         </Link>
       </div>
