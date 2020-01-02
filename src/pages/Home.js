@@ -4,7 +4,7 @@ import Banner from "../Components/Banner"
 import {Link} from "react-router-dom"
 import Services from "../Components/Services"
 import ImageCarousel from '../Components/imageCarousel'
-import MainMap from "./mainMap";
+import MainContainer from "./mapContainer";
 import AddProperty from './addProperty'
 
 const Home=()=> {
@@ -23,7 +23,7 @@ const Home=()=> {
                 <ImageCarousel/>
              </Hero>
         <Services/> 
-        <MainMap/>
+        <MainContainer/>
         </> 
     )
 }
