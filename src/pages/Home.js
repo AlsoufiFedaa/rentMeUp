@@ -11,7 +11,7 @@ import MainMap from './mapContainer'
 const Home=()=> {
     return ( 
         <>
-       
+            {/* <AddPropery/> */}
            
              <Hero>
                

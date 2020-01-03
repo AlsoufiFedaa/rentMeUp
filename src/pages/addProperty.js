@@ -3,7 +3,9 @@ import Title from '../Components/Title'
 import {Link} from "react-router-dom"
 import * as firebase from 'firebase';
 import 'firebase/storage'
-import {storage} from 'firebase';
+
+
+
 class AddProperty extends Component{
     state={
         type:"all", 
@@ -15,7 +17,9 @@ class AddProperty extends Component{
        downtown:false, 
        overLookingSea: false, 
        selectedFile:null, 
-       url:''
+       downloadURL:'', 
+       progress:0, 
+       data :null
 
 
     }
@@ -29,14 +33,20 @@ class AddProperty extends Component{
       handleChangeImage=(e)=>{ 
         {if(e.target.files[0]){ 
           const selectedFile = e.target.files[0]
-          this.setState({selectedFile})
+          console.log(selectedFile)
+                    this.setState({selectedFile})
 
         }}
       }
+     
+    
+   
+    
+        
  
       addPropertyToMap=()=> {
 
-        console.log(this.state.selectedFile)
+        
         var db = firebase.firestore();
         
             db.collection("estates").add({
@@ -49,6 +59,7 @@ class AddProperty extends Component{
              roomNum:this.state.roomNum, 
              downtown:this.state.downtown, 
              overLookingSea:this.state.overLookingSea, 
+             url:this.downloadURL
         
    
          
@@ -58,29 +69,51 @@ class AddProperty extends Component{
        .catch(function(error) {
            console.error("Error adding document: ", error);
        })
-      const image = this.state.selectedFile
 
-      
-
-      
-
-     const uploadTask=  firebase.storage().ref(`images${image.name}`).put(image);
-     uploadTask.on('state changed', 
-     (snapshot)=>{
-       //progress function
-
-
-      } , (error)=>{
-        //error function 
-        console.log(error)
-      } , ()=> {
-        //complete function
-        storage.ref('images').child(image.name).getDownloadURL().then(url=>{
-          console.log(url)
-        })
-
-      })
       }
+    upLoadImage=()=>{ 
+      const file = this.state.selectedFile;
+
+
+       var uploadTask =  firebase.storage().ref(`images/${file.name}`).put(file);
+
+       // Register three observers:
+       // 1. 'state_changed' observer, called any time the state changes
+       // 2. Error observer, called on failure
+       // 3. Completion observer, called on successful completion
+       uploadTask.on('state_changed', (snapshot)=>{
+         // Observe state change events such as progress, pause, and resume
+         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+         console.log('Upload is ' + progress + '% done');
+         switch (snapshot.state) {
+           case firebase.storage.TaskState.PAUSED: // or 'paused'
+             console.log('Upload is paused');
+             break;
+           case firebase.storage.TaskState.RUNNING: // or 'running'
+             console.log('Upload is running');
+             break;
+         }
+       }, (error)=> {
+         // Handle unsuccessful uploads
+       }, ()=> {
+         // Handle successful uploads on complete
+         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
+           console.log('File available at', downloadURL);
+          
+           this.setState({downloadURL})
+
+
+
+         });
+       });
+
+
+
+
+
+    }
     render() {
       console.log(firebase.storage())
     return( 
@@ -124,8 +157,16 @@ class AddProperty extends Component{
         <label htmlFor='overLookingSea'>overLookingSea</label>
         </div>
         </div> 
-        <input type='file' name='selectedFile' accept="image/*" onChange={this.handleChangeImage} />
-       
+        <div className='button'>
+      <label htmlFor='multi'>
+        {/* <FontAwesomeIcon icon={faImages} color='#6d84b4' size='10x' /> */}
+      </label>
+        <input type='file' name='selectedFile' accept="image/*" onChange={this.handleChangeImage} multiple />
+        <button onClick={this.upLoadImage}>Upload image</button>
+        <br/> 
+        <img src={this.state.downloadURL || 'http://via.placeholder.com/400x300'} alt="Uploaded images" height="300" width="400"/>
+
+       </div>
         
    
         </div>
