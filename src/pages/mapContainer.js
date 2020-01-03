@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import MainMap from './mainMap'
 import FilterEstates from './filterEstates'
 import {Marker } from 'google-maps-react';
+import AddProperty from './addProperty'
 import * as firebase from 'firebase';
 class MapContainer extends Component { 
 
@@ -112,11 +113,12 @@ class MapContainer extends Component {
     }
     render(){ 
         return( 
-            <>
+            <div style={{marginTop:150}}>
             <FilterEstates type={this.state.type} handleChange = {this.handleChange} city={this.state.city} street={this.state.street} minprice={this.state.minprice} estates={this.state.estates}
             maxprice={this.state.maxprice} minspace={this.state.minspace} maxspace={this.state.maxspace} roomNum={this.state.roomNum} downtown={this.state.downtown}overLookingSea={this.state.overLookingSea } price={this.state.price} />
             <MainMap displayMarkers={this.displayMarkers}/>
-            </>
+            
+            </div>
         );
     }
 }

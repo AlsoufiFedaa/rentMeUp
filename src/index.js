@@ -6,6 +6,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as firebase from "firebase";
 import "firebase/firestore";
+import 'firebase/storage'
+
 var firebaseConfig = {
   apiKey: "AIzaSyD47xlalTqy3QK4fFgfD9jImnI5prteLfw",
   authDomain: "rentmeup.firebaseapp.com",
@@ -18,6 +20,7 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
 firebase.analytics();
 
 ReactDOM.render(

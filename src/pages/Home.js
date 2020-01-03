@@ -4,13 +4,14 @@ import Banner from "../Components/Banner"
 import {Link} from "react-router-dom"
 import Services from "../Components/Services"
 import ImageCarousel from '../Components/imageCarousel'
-import MainContainer from "./mapContainer";
-import AddProperty from './addProperty'
+import AddPropery from "./addProperty";
+import MainMap from './mapContainer'
+
 
 const Home=()=> {
     return ( 
         <>
-        {/* <AddProperty/> */}
+       
            
              <Hero>
                
@@ -23,7 +24,9 @@ const Home=()=> {
                 <ImageCarousel/>
              </Hero>
         <Services/> 
-        <MainContainer/>
+       
+        <MainMap/>
+      
         </> 
     )
 }

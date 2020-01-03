@@ -1,5 +1,7 @@
 import React, {Component} from 'react'; 
 import Title from '../Components/Title';
+import {Link} from "react-router-dom"
+
 // get all unique values 
 const getUnique = (items , value)=> { 
 
@@ -42,8 +44,8 @@ console.log(price)
             <Title title="Seach Estates"/>
             <form className= "filter-form"> 
          {/* SelectType  */}
-           <div className='form-group'> 
-         <label htmlFor="type">Estate Type</label>  
+         <div className='form-group'> 
+         <label htmlFor="type">Type</label>  
         <select name='type' id= 'type' className='form-control' value={type} onChange={handleChange}> 
             {types}
          </select>
@@ -70,7 +72,7 @@ console.log(price)
 
          {/* SelectNum */}
          <div className='form-group'> 
-         <label htmlFor="roomNum">Room Number</label>  
+         <label htmlFor="roomNum">Rooms</label>  
         <select name='roomNum' id= 'roomNum' className='form-control' value={roomNum} onChange={handleChange}> 
             {roomsNumber}
          </select>
@@ -108,17 +110,19 @@ console.log(price)
         </div>
         <div className='single-extra'> 
         <input type='checkbox' name='overLookingSea' id = 'overLookingSea' checked={overLookingSea}  onChange={handleChange}/> 
-        <label htmlFor='overLookingSea'>overLookingtheSea</label>
+        <label htmlFor='overLookingSea'>overLookingSea</label>
+        </div>
+        </div> 
+   
+        <div> 
+          <Link to="/AddPropery" className="btn-add">+</Link>
+          
+
 
         </div>
-            </div> 
-
-
-            </form>
-
-            
-            </section>
-        )
+        </form>
+        </section>
+    )
     
 
 }

@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SignUP from "./pages/signUP";
 import AddPropery from "./pages/addProperty";
-import MainMap from "./pages/mainMap";
+import MainContainer from "./pages/mapContainer";
 import SingleEstate from "./pages/singleEstate";
 import Error from "./pages/error";
 import NavBar from "./Components/NavBar"
@@ -21,7 +21,7 @@ function App() {
       <Route exact path="/LogIn" component={LogIn}/>
       <Route exact path="/Profile" component={Profile}/>
       <Route exact path="/AddPropery" component={AddPropery}/>
-      <Route exact path="/MainMap" component={MainMap}/>
+      <Route exact path="/MainMap" component={MainContainer}/>
       <Route exact path="/SingleEstate" component={SingleEstate}/>
       <Route component={Error}/>
       </Switch>
