@@ -64,6 +64,8 @@ h6 {
   transition: var(--mainTransition);
   text-transform: uppercase;
   cursor: pointer;
+  margin-left: 30px;
+  margin-top:40px;
 }
 .btn-primary:hover {
   background: transparent;
@@ -93,15 +95,15 @@ h6 {
   top: 0;
   left: 0;
   width: 100%;
- 
+
   background: var(--offWhite);
   z-index: 200;
-  
 }
 .nav-header {
   display: flex;
   justify-content: space-between;
-  position: static; 
+  position: static;
+  /* margin-top: 180px; */
 }
 .nav-btn {
   background: transparent;
@@ -118,7 +120,6 @@ h6 {
   overflow: hidden;
   transition: var(--mainTransition);
   list-style-type: none;
- 
 }
 .nav-links a {
   display: block;
@@ -138,7 +139,6 @@ h6 {
 .show-nav {
   height: 100px;
   overflow: visible;
-
 }
 @media screen and (min-width: 768px) {
   .nav-btn {
@@ -154,7 +154,7 @@ h6 {
     height: auto;
     display: flex;
     margin-left: 8rem;
-    margin-top: 80px
+    margin-top: 80px;
   }
   .nav-links a {
     margin: 0 1rem;
@@ -167,13 +167,13 @@ h6 {
 .defaultHero,
 .estateHero {
   min-height: calc(100vh - 66px);
-  background: center/cover no-repeat; 
+  background: center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .estateHero {
-  background-image: url("./assets/kitchen.jpg"); 
+  background-image: url("./assets/kitchen.jpg");
   min-height: calc(100vh - 66px);
 }
 /* End of Hero */
@@ -188,6 +188,7 @@ h6 {
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
   z-index: 100;
+  margin-top: 205.7px;
 }
 .banner h1 {
   font-size: 2.5rem;
@@ -205,7 +206,6 @@ h6 {
 @media screen and (min-width: 576px) {
   .banner {
     padding: 2rem 3rem;
-    
   }
   .banner h1 {
     font-size: 3rem;
@@ -224,7 +224,6 @@ h6 {
 .section-title {
   text-align: center;
   margin-bottom: 4rem;
- 
 }
 .section-title h4 {
   font-size: 2rem;
@@ -523,5 +522,18 @@ h6 {
     width: 95vw;
     max-width: 1170px;
   }
+}
+.singUp {
+  align-items: center;
+  flex: 1;
+}
+.input {
+  flex-direction: row;
+  display: flex;
+  margin: 17px;
+}
+
+.inNA {
+  margin-right: 20px;
 }
 /* end of rooms fitler*/

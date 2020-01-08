@@ -37,23 +37,27 @@ class LogIn extends Component {
     return (
       <div>
         <div className="nav-header">
-          <h1 style={{ marginTop: "180px" }}>:Log In</h1>
+          <h1 style={{ marginTop: "180px" }}>Log In</h1>
         </div>
 
         <div className="input">
-          <h3>Email:</h3>
+          <h3 className="inNA">Email:</h3>
           <input
+            type="email"
             defaultValue={this.state.Email}
             onChange={this.handleEmailChange}
             placeholder="enter ur Email"
+            required
           />
         </div>
         <div className="input">
-          <h3>Password:</h3>
+          <h3 className="inNA">Password:</h3>
           <input
+            type="password"
             defaultValue={this.state.Password}
             onChange={this.handlePasswordChange}
             placeholder="enter ur Password"
+            required
           />
         </div>
         <Link to="/mainMap" className="btn-primary" onClick={this.signin}>

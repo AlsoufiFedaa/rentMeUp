@@ -21,8 +21,8 @@ class SignUP extends Component {
       .createUserWithEmailAndPassword(Email, Password)
       .catch(function(error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         console.error(errorCode, errorMessage);
 
         // ...
@@ -70,44 +70,54 @@ class SignUP extends Component {
         <div className="nav-header">
           <h1 style={{ marginTop: "180px" }}>SignUP</h1>
         </div>
+        <div className="singUp">
+          <div className="input">
+            <h1>{this.state.name}</h1>
+            <h3 className="inNA">Name:</h3>
+            <input
+              type="text"
+              defaultValue={this.state.Name}
+              onChange={this.handleNameChange}
+              placeholder="enter ur Name"
+              required
+            />
+          </div>
 
-        <div className="input">
-          <h1>{this.state.name}</h1>
-          <h3>Name:</h3>
-          <input
-            defaultValue={this.state.Name}
-            onChange={this.handleNameChange}
-            placeholder="enter ur Name"
-          />
+          <div className="input">
+            <h3 className="inNA">Email:</h3>
+            <input
+              type="email"
+              defaultValue={this.state.Email}
+              onChange={this.handleEmailChange}
+              placeholder="enter ur Email"
+              required
+            />
+          </div>
+          <div className="input">
+            <h3 className="inNA">Password:</h3>
+            <input
+              type="password"
+              defaultValue={this.state.Password}
+              onChange={this.handlePasswordChange}
+              placeholder="enter ur Password"
+              required
+            />
+          </div>
+          <div className="input">
+            <h3 className="inNA">Mobil:</h3>
+            <input
+              type="tel"
+              defaultValue={this.state.Mobile}
+              onChange={this.handleMobileChange}
+              placeholder="enter ur Mobil"
+              required
+            />
+          </div>
+          <Link to="/LogIn" className="btn-primary" onClick={this.addUser}>
+            {" "}
+            Sign Up
+          </Link>
         </div>
-        <div className="input">
-          <h3>Email:</h3>
-          <input
-            defaultValue={this.state.Email}
-            onChange={this.handleEmailChange}
-            placeholder="enter ur Email"
-          />
-        </div>
-        <div className="input">
-          <h3>Password:</h3>
-          <input
-            defaultValue={this.state.Password}
-            onChange={this.handlePasswordChange}
-            placeholder="enter ur Password"
-          />
-        </div>
-        <div className="input">
-          <h3>Mobil:</h3>
-          <input
-            defaultValue={this.state.Mobile}
-            onChange={this.handleMobileChange}
-            placeholder="enter ur Mobil"
-          />
-        </div>
-        <Link to="/LogIn" className="btn-primary" onClick={this.addUser}>
-          {" "}
-          Sign Up
-        </Link>
       </div>
     );
   }

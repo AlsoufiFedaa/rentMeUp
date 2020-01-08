@@ -32,7 +32,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="">
         <div className="nav-header" style={{ marginTop: "180px" }}>
           <h1>Profile</h1>
 
