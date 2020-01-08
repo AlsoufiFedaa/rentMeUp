@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
-import MainMap from './mainMap'
+import Map from './mainMap'
 import FilterEstates from './filterEstates'
 import {Marker } from 'google-maps-react';
-import AddProperty from './addProperty'
+
 import * as firebase from 'firebase';
+import AddProperty from './addProperty';
+//NeedToDo
+// read from firebase/database 
 class MapContainer extends Component { 
 
     state={
         estates:[
             
-              {latitude: 47.359423, longitude: -122.021071, type:'renting',city:'Rafah',street:'Tariq Bin Zyaed' , price:400, space:'300',roomNum:'4' , overLookingSea:false , downtown:true },
-              {latitude: 47.2052192687988, longitude: -121.988426208496, type:'buying', city:'Gaza', street:'Alsinaa', price:15000, space:'700', roomNum:'6', overLookingSea:false , downtown:true},
-              {latitude: 47.6307081, longitude: -122.1434325, type:'renting',city:'Khanyonis', street:'Aldhraa', price:500, space:'400', roomNum:'5', overLookingSea:false , downtown:true}
         ], 
         sortedEstates:[],
         type:"all", 
@@ -28,33 +28,56 @@ class MapContainer extends Component {
 
     }
     componentDidMount(){
-      var db = firebase.firestore();
-     this.state.estates.map(estate=> 
-         db.collection("estates").add({ latitude: estate.latitude, 
-          longitude :estate.longitude, 
-          type: estate.type, 
-          city: estate.city, 
-          street: estate.street, 
-          price:estate.price, 
-          space:estate.space, 
-          roomNum:estate.roomNum, 
-          downtown:estate.downtown, 
-          overLookingSea:estate.overLookingSea
+      // const snapshot =  firebase.firestore().collection('estates').get()
+      // console.log(snapshot)
+      // return snapshot.docs.map( 
+      //   doc => {
+        
+        
+      //   console.log(doc.data())
+        
+      // } );
+          //  let db = firebase.firestore();
 
-      
-      }) .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    }))
+          // let docRef = db.collection("estates").get()
+          // console.log(docRef)
+
+    
+
+      // Get a document, forcing the SDK to fetch from the offline cache.
+      // docRef.docs.map( doc => console.log(doc.data()))
+
+      // var db = firebase.firestore();
+      // var docRef = db.collection("estate").get().then(querySnapshot => {
+      //   querySnapshot.docs.map(doc => {
+      //     console.log('LOG 1', doc.data());
+      //   });
+      // });
+     
    
-   
-      let maxprice = Math.max(...this.state.estates.map(item=> item.price))
-      let maxspace = Math.max(...this.state.estates.map(item=> item.space))
-      this.setState({maxprice,maxspace })
+  
+      // let maxprice = Math.max(...this.state.estates.map(item=> item.price))
+      // let maxspace = Math.max(...this.state.estates.map(item=> item.space))
+      // this.setState({maxprice,maxspace })
 
     }
+
+
+    async componentWillMount() {
+      const {estates} = this.state;
+      const snapshot = await firebase.firestore().collection('estates').get()
+      const collection = {};
+      snapshot.forEach(doc => {
+          collection[doc.id] = doc.data();
+          estates.push(collection[doc.id])
+          this.setState({estates})
+         
+      });
+      
+    
+    console.log(estates)
+
+  }
     displayMarkers=()=> { 
         return this.state.estates.map((index, item)=>{
 
@@ -116,7 +139,7 @@ class MapContainer extends Component {
             <div style={{marginTop:150}}>
             <FilterEstates type={this.state.type} handleChange = {this.handleChange} city={this.state.city} street={this.state.street} minprice={this.state.minprice} estates={this.state.estates}
             maxprice={this.state.maxprice} minspace={this.state.minspace} maxspace={this.state.maxspace} roomNum={this.state.roomNum} downtown={this.state.downtown}overLookingSea={this.state.overLookingSea } price={this.state.price} />
-            <MainMap displayMarkers={this.displayMarkers}/>
+            <Map/>
             
             </div>
         );

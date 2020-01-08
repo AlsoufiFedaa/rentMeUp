@@ -1,6 +1,9 @@
-import React, {Component} from 'react'; 
+import React from 'react'; 
 import Title from '../Components/Title';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+
+//needToDO  
+//filter according to firebase/database
 
 // get all unique values 
 const getUnique = (items , value)=> { 
@@ -10,7 +13,7 @@ const getUnique = (items , value)=> {
     
 }
 const FilterEstates =({handleChange, type, roomNum ,estates, city, street , price,minprice, maxprice, minspace, maxspace, downtown,overLookingSea})=>{
-console.log(price)
+
   //get cities 
   let cities = getUnique(estates, 'city');
    //add all
