@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
 import Map from './mainMap'
 import FilterEstates from './filterEstates'
-import {Marker } from 'google-maps-react';
+import {Link} from "react-router-dom";
+import {  InfoWindow, Marker } from "react-google-maps";
 
 import * as firebase from 'firebase';
-import AddProperty from './addProperty';
+
+
 //NeedToDo
 // read from firebase/database 
 class MapContainer extends Component { 
@@ -27,43 +29,9 @@ class MapContainer extends Component {
        overLookingSea: false
 
     }
-    componentDidMount(){
-      // const snapshot =  firebase.firestore().collection('estates').get()
-      // console.log(snapshot)
-      // return snapshot.docs.map( 
-      //   doc => {
-        
-        
-      //   console.log(doc.data())
-        
-      // } );
-          //  let db = firebase.firestore();
-
-          // let docRef = db.collection("estates").get()
-          // console.log(docRef)
-
-    
-
-      // Get a document, forcing the SDK to fetch from the offline cache.
-      // docRef.docs.map( doc => console.log(doc.data()))
-
-      // var db = firebase.firestore();
-      // var docRef = db.collection("estate").get().then(querySnapshot => {
-      //   querySnapshot.docs.map(doc => {
-      //     console.log('LOG 1', doc.data());
-      //   });
-      // });
-     
-   
-  
-      // let maxprice = Math.max(...this.state.estates.map(item=> item.price))
-      // let maxspace = Math.max(...this.state.estates.map(item=> item.space))
-      // this.setState({maxprice,maxspace })
-
-    }
 
 
-    async componentWillMount() {
+    async componentDidMount() {
       const {estates} = this.state;
       const snapshot = await firebase.firestore().collection('estates').get()
       const collection = {};
@@ -71,22 +39,43 @@ class MapContainer extends Component {
           collection[doc.id] = doc.data();
           estates.push(collection[doc.id])
           this.setState({estates})
+          this.setState({sortedEstates:estates})
          
       });
+      let maxprice = Math.max(...this.state.estates.map(item=> item.price))
+      let maxspace = Math.max(...this.state.estates.map(item=> item.space))
+      this.setState({maxprice,maxspace })
       
     
-    console.log(estates)
+    
 
   }
     displayMarkers=()=> { 
-        return this.state.estates.map((index, item)=>{
-
-            return <Marker id={index} key={index} position={{
-                lat: item.latitude, 
-                lon:item.longitude
-            }}
-            onClick={()=> alert("heeey")}/>
-        })
+        return this.state.sortedEstates.map((item, index)=>{
+            console.log(item)
+            return (
+            <>
+           	<InfoWindow
+							onClose={this.onInfoWindowClose}
+							position={{ lat: ( item.lat + 0.067 ), lng: item.lng }}
+						>
+							<div className='infoWin'>
+              <h4> {item.type}</h4>
+								<span style={{ padding: 0, margin: 0 }}>{ item.street }</span>
+                <img src={item.url[0]} width='50' height='50'/>
+                <h4> {item.price}</h4>
+              <Link to={{pathname:"/SingleEstate", params:{item}} }className="btn-add">More</Link>
+							</div>
+						</InfoWindow>
+						{/*Marker*/}
+						<Marker google={this.props.google}
+						        name={item.city}
+						        draggable={false}
+						        
+                    position={{ lat: ( item.lat + 0.0018 ), lng: item.lng }}
+						/>
+            </>
+        )})
     }
     handleChange=(event)=>{ 
       const target = event.target; 
@@ -135,11 +124,15 @@ class MapContainer extends Component {
    
     }
     render(){ 
+      
         return( 
             <div style={{marginTop:150}}>
             <FilterEstates type={this.state.type} handleChange = {this.handleChange} city={this.state.city} street={this.state.street} minprice={this.state.minprice} estates={this.state.estates}
             maxprice={this.state.maxprice} minspace={this.state.minspace} maxspace={this.state.maxspace} roomNum={this.state.roomNum} downtown={this.state.downtown}overLookingSea={this.state.overLookingSea } price={this.state.price} />
-            <Map/>
+            <Map displayMarkers={this.displayMarkers} google={this.props.google}
+            center={{lat: 31.3547, lng: 34.3088}}
+            height='300px'
+            zoom={9}/>
             
             </div>
         );

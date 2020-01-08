@@ -1,54 +1,74 @@
 import React , {Component} from "react"; 
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 
 class MainMap extends Component{
-    state={
-        estates:[
+    // state={
+    //     estates:[
            
-              {latitude: 37.778519, longitude: -122.405640},
-              {latitude: 47.2052192687988, longitude: -121.988426208496},
-              {latitude: 47.6307081, longitude: -122.1434325},
-              {latitude: 31.354675, longitude: 34.308826}
-        ]
-    }
-    displayMarkers=()=> { 
-        return this.state.estates.map(( item,index)=>{
+    //           {latitude: 37.778519, longitude: -122.405640},
+    //           {latitude: 47.2052192687988, longitude: -121.988426208496},
+    //           {latitude: 47.6307081, longitude: -122.1434325},
+    //           {latitude: 31.354675, longitude: 34.308826}
+    //     ]
+    // }
+    // displayMarkers=()=> { 
+    //     return this.state.estates.map(( item,index)=>{
 
-            return <Marker id={index} key={index} position={{
-                lat: item.latitude, 
-                lng:item.longitude
-            }}
-            onClick={()=> alert("heeey")}/>
-        })
-    }
+    //         return <Marker id={index} key={index} position={{
+    //             lat: item.latitude, 
+    //             lng:item.longitude
+    //         }}
+    //         onClick={()=> alert("heeey")}/>
+    //     })
+    // }
     render() {
 
-        console.log(this.state.estates)
-    return( 
-        <>
-        <Map
-        google={this.props.google}
-        defaulttZoom={5}
-        style={{  width: '100%',
-        height: '100%',}}
-        initialCenter={{ lat: 31.354675, lng: -122.405640}}
 
-        > 
+      const AsyncMap = withScriptjs(
+        withGoogleMap(
+          props => (
 
-{
-this.displayMarkers()
 
+       <GoogleMap
+       google={ this.props.google }
+       defaultZoom={ 9 }
+       defaultCenter={{lat: 31.3547, lng: 34.3088}}
+       style={{  width: '100%',
+       height: '100%',}}
+       
+
+       > 
+
+
+{    this.props.displayMarkers()
 }
-        </Map>
 
-      </> 
+       </GoogleMap>
+
+)
+)
+);
+let map;
+    return( 
+      map= 
+      <AsyncMap
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0&libraries=places"
+      loadingElement={
+        <div style={{ height: `100%` }} />
+      }
+      containerElement={
+        <div style={{ height: this.props.height }} />
+      }
+      mapElement={
+        <div style={{ height: `100%` }} />
+      }
+    />
+
+ 
     )
 }}
 
-export default 
-  GoogleApiWrapper({
-    apiKey: 'AIzaSyAEi35fry8bHtORqY8JqikhNfMOsD-Yo7E'
-  })(MainMap);
+export default MainMap;
 
 
   

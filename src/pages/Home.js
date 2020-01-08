@@ -24,7 +24,7 @@ const Home=()=> {
              </Hero>
         <Services/> 
        
-       
+       <MapContainer/>
       
         </> 
     )

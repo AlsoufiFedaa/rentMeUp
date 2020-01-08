@@ -1,7 +1,6 @@
 import React from 'react';
 import {Gallery, GalleryImage} from "react-gesture-gallery";
-import Banner from "./Banner"
-import {Link} from "react-router-dom"
+
 const image1 =require("../assets/Gaza1.jpg")
 const image2 =require("../assets/Gaza3.jpg")
 const image3 =require("../assets/couch-.jpg")

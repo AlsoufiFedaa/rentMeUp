@@ -22,7 +22,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 firebase.analytics();
-const storage = firebase.storage();
+
 ReactDOM.render(
     <Router><App /></Router>
 , document.getElementById('root'));

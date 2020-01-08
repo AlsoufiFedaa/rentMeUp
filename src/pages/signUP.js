@@ -1,6 +1,5 @@
 import React , {Component} from "react"; 
-import logo from '../assets/logo1.png'
-import {Link} from "react-router-dom";
+
 
 class SignUP extends Component{
   state = {
