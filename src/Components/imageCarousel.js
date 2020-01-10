@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef, useEffect } from "react";
 import {Gallery, GalleryImage} from "react-gesture-gallery";
-
+import { TimelineLite, Power2 } from "gsap";
+import CSSRulePlugin from "gsap/CSSRulePlugin";
 const image1 =require("../assets/Gaza1.jpg")
 const image2 =require("../assets/Gaza3.jpg")
 const image3 =require("../assets/couch-.jpg")
@@ -8,9 +9,24 @@ const image4 =require("../assets/Gaza_City.JPG")
 
 const images= [image1 ,image2 ,image3 , image4]
 const ImageCarousel=()=>{
+  // let image = useRef(null);
+  // let container = useRef(null);
+  // let imageReveal = CSSRulePlugin.getRule(".img-container:after");
+
+  // let tl = new TimelineLite();
+
+  // useEffect(() => {
+  //   tl.to(container, 0, { css: { visibility: "visible" } });
+  //   tl.to(imageReveal, 1.4, { width: "0%", ease: Power2.easeInOut });
+  //   tl.from(image, 1.4, {
+  //     x: 300,
+  //     ease: Power2.easeInOut,
+  //     delay: -1.4
+  //   });
+  // });
     const [index, setIndex] = React.useState(0);
 
-    React.useEffect(() => {
+    useEffect(() => {
       const timer = setInterval(() => {
         if (index === 4) {
           setIndex(0);
@@ -22,7 +38,8 @@ const ImageCarousel=()=>{
     }, [index]);
   
     return (
-        <>
+       
+    
       <Gallery
       
     
@@ -30,6 +47,7 @@ const ImageCarousel=()=>{
         onRequestChange={i => {
           setIndex(i);
         }}
+        
       
         style={{
         position: 'absolute',
@@ -40,12 +58,19 @@ const ImageCarousel=()=>{
         }}>
         {images.map(image => (
             
-          <GalleryImage objectFit="contain" key={image} src={image}  style={{ 
-          left: '0', right:'0', bottom: '0', zIndex:0}}/>
+          <GalleryImage objectFit="contain" key={image} src={image}  
+          className=''
+          style={{ 
+          left: '0', right:'0', bottom: '0', zIndex:0}}
+          ref={el => {
+            image = el;
+          }}
+          />
         ))}
       </Gallery>
+  
 
-    </>
+     
     );
 
   }

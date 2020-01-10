@@ -50,6 +50,53 @@ class MapContainer extends Component {
     
 
   }
+
+    handleChange=(event)=>{ 
+      const target = event.target; 
+      const value = target.type ===  'checkbox'? 
+      target.checked : target.value;
+      const name = event.target.name;
+      this.setState({[name]:value}, this.filterEstates,this.displayMarkers);
+    };
+    filterEstates=()=>{ 
+      let {type, city, street, minprice, maxspace, price, minspace,maxprice, roomNum, overLookingSea , downtown} = this.state
+      //all estates
+      let tempEstates = this.state.estates
+      // convert to integer
+      roomNum=parseInt(roomNum)
+      price = parseInt(price)
+      //filter by type
+      {if (type!=='all') { 
+        tempEstates = tempEstates.filter(estate=> estate.type===type )
+      }}
+    // filter by city 
+    tempEstates = tempEstates.filter(estate=> estate.city === city)
+      //filter by street 
+    tempEstates = tempEstates.filter(estate=> estate.street=== street)
+    // filter by roomNum
+    {if (roomNum !==1) { 
+        tempEstates = tempEstates.filter(estate=> estate.roomNum===roomNum)
+    }}
+    //filter by price 
+    tempEstates = tempEstates.filter(estate => estate.price <= price );
+    // filter by space 
+    tempEstates = tempEstates.filter(estate => estate.space>= minspace && estate.space <= maxspace);
+    // filter by downtown 
+    {if (downtown){ 
+        tempEstates = tempEstates.filter(estate => estate.downtown === true);
+
+    }}
+    // filter by overlookingSea
+    {if (overLookingSea){ 
+        tempEstates = tempEstates.filter(estate => estate.overLookingSea === true);
+
+    }}
+
+    //change state
+      this.setState({sortedEstates:tempEstates})
+      
+  
+    }
     displayMarkers=()=> { 
         return this.state.sortedEstates.map((item, index)=>{
             console.log(item)
@@ -77,52 +124,7 @@ class MapContainer extends Component {
             </>
         )})
     }
-    handleChange=(event)=>{ 
-      const target = event.target; 
-      const value = target.type ===  'checkbox'? 
-      target.checked : target.value;
-      const name = event.target.name;
-      this.setState({[name]:value}, this.filterEstates);
-    };
-    filterEstates=()=>{ 
-      let {type, city, street, minprice, maxspace, price, minspace,maxprice, roomNum, overLookingSea , downtown} = this.state
-      //all estates
-      let tempEstates = this.state.estates
-      // convert to integer
-      roomNum=parseInt(roomNum)
-      price = parseInt(price)
-      //filter by type
-      {if (type!=='all') { 
-        tempEstates = tempEstates.filter(estate=> estate.type===type )
-      }}
-    // filter by city 
-    tempEstates = tempEstates.filter(estate=> estate.city === city)
-      //filter by street 
-    tempEstates = tempEstates.filter(estate=> estate.street=== street)
-    // filter by roomNum
-     {if (roomNum !==1) { 
-        tempEstates = tempEstates.filter(estate=> estate.roomNum===roomNum)
-     }}
-     //filter by price 
-     tempEstates = tempEstates.filter(estate => estate.price <= price );
-     // filter by space 
-     tempEstates = tempEstates.filter(estate => estate.space>= minspace && estate.space <= maxspace);
-     // filter by downtown 
-     {if (downtown){ 
-        tempEstates = tempEstates.filter(estate => estate.downtown === true);
 
-     }}
-    // filter by overlookingSea
-    {if (overLookingSea){ 
-        tempEstates = tempEstates.filter(estate => estate.overLookingSea === true);
-
-     }}
-
-    //change state
-      this.setState({sortedEstates:tempEstates})
-      
-   
-    }
     render(){ 
       
         return( 

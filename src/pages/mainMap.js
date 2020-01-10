@@ -1,5 +1,5 @@
 import React , {Component} from "react"; 
-import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
+import { withGoogleMap, GoogleMap, withScriptjs } from "react-google-maps";
 
 class MainMap extends Component{
     // state={

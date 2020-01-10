@@ -245,9 +245,9 @@ class AddProperty extends Component{
             db.collection("estates").add({
 				
 			 type: this.state.type, 
-			 name: name,
-			 email:email,
-			 phone:phone,
+			//  name: name,
+			//  email:email,
+			//  phone:phone,
              city: this.state.city, 
              street: this.state.street, 
              price:this.state.price, 

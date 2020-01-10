@@ -1,3 +1,4 @@
+ 
 * {
   margin: 0;
   padding: 0;
@@ -64,11 +65,14 @@ h6 {
   transition: var(--mainTransition);
   text-transform: uppercase;
   cursor: pointer;
+  margin-left: 30px;
+  margin-top:40px;
 }
 .btn-primary:hover {
   background: transparent;
   color: var(--primaryColor);
 }
+
 .btn-add {
   display: inline-block;
   text-decoration: none;
@@ -110,15 +114,15 @@ h6 {
   top: 0;
   left: 0;
   width: 100%;
- 
+
   background: var(--offWhite);
   z-index: 200;
-  
 }
 .nav-header {
   display: flex;
   justify-content: space-between;
-  position: static; 
+  position: static;
+  /* margin-top: 180px; */
 }
 .nav-btn {
   background: transparent;
@@ -135,7 +139,6 @@ h6 {
   overflow: hidden;
   transition: var(--mainTransition);
   list-style-type: none;
- 
 }
 .nav-links a {
   display: block;
@@ -155,7 +158,6 @@ h6 {
 .show-nav {
   height: 100px;
   overflow: visible;
-
 }
 @media screen and (min-width: 768px) {
   .nav-btn {
@@ -171,7 +173,7 @@ h6 {
     height: auto;
     display: flex;
     margin-left: 8rem;
-    margin-top: 80px
+    margin-top: 80px;
   }
   .nav-links a {
     margin: 0 1rem;
@@ -184,13 +186,13 @@ h6 {
 .defaultHero,
 .estateHero {
   min-height: calc(100vh - 66px);
-  background: center/cover no-repeat; 
+  background: center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .estateHero {
-  background-image: url("./assets/kitchen.jpg"); 
+  background-image: url("./assets/kitchen.jpg");
   min-height: calc(100vh - 66px);
 }
 /* End of Hero */
@@ -205,6 +207,7 @@ h6 {
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
   z-index: 100;
+  margin-top: 205.7px;
 }
 .banner h1 {
   font-size: 2.5rem;
@@ -222,7 +225,6 @@ h6 {
 @media screen and (min-width: 576px) {
   .banner {
     padding: 2rem 3rem;
-    
   }
   .banner h1 {
     font-size: 3rem;
@@ -241,7 +243,6 @@ h6 {
 .section-title {
   text-align: center;
   margin-bottom: 4rem;
- 
 }
 .section-title h4 {
   font-size: 2rem;
@@ -257,7 +258,41 @@ h6 {
   background: var(--primaryColor);
 }
 /* end of Title */
+// ImageCarousel
+.container {
+  width: 100vw;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+}
 
+
+.img-container {
+  position: relative;
+  left: 0;
+  right:0;
+  bottom: 0;
+  height: 100%;
+  width: 100vw; 
+            
+  overflow: hidden;
+&:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  top: 0;
+  right: 0;
+}
+img {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+}
 /* services */
 .services {
   padding: 5rem 0;
@@ -301,7 +336,95 @@ h6 {
   }
 }
 /*end of services */
+/* featured rooms */
 
+.featured-rooms {
+  padding: 5rem 0;
+}
+.featured-rooms-center {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 40px;
+}
+@media screen and (min-width: 776px) {
+  .featured-rooms-center {
+    width: 90vw;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  }
+}
+@media screen and (min-width: 992px) {
+  .featured-rooms-center {
+    width: 95vw;
+    max-width: 1170px;
+  }
+}
+/* end pf featured rooms */
+/* room */
+.room {
+  box-shadow: var(--lightShadow);
+  transition: var(--mainTransition);
+}
+.room:hover {
+  box-shadow: var(--darkShadow);
+}
+
+.img-container {
+  position: relative;
+}
+.img-container img {
+  width: 100%;
+  display: block;
+  transition: var(--mainTransition);
+}
+.price-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--mainWhite);
+  padding: 0.3rem 0.6rem 0.5rem;
+  border-bottom-right-radius: 1rem;
+  font-size: 0.5rem;
+  text-align: center;
+  transition: var(--mainTransition);
+}
+.price-top h6 {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: var(--mainSpacing);
+}
+.room-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: scale(0);
+  transition: all 0.3s linear;
+}
+.img-container:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+.img-container:hover img {
+  opacity: 0.3;
+}
+.img-container:hover .price-top {
+  opacity: 0;
+}
+.img-container:hover .room-link {
+  transform: translate(-50%, -50%) scale(1);
+}
+.room-info {
+  background: var(--darkGrey);
+  text-transform: capitalize;
+  padding: 0.5rem 0;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: var(--mainSpacing);
+}
+/* end of room  */
 /* single room*/
 
 .single-room {
@@ -377,16 +500,40 @@ h6 {
   }
 }
 /* end of single room*/
+/* roomlist */
+.roomslist {
+  padding: 5rem 0;
+}
+.roomslist-center {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 30px;
+}
 
+@media screen and (min-width: 776px) {
+  .roomslist-center {
+    width: 90vw;
+  }
+}
+@media screen and (min-width: 992px) {
+  .roomslist-center {
+    width: 95vw;
+    max-width: 1170px;
+  }
+}
+/* end of roomlist */
 /*  rooms fitler*/
 .filter-container {
-  padding: 4rem 0;
+  padding: 5rem 0;
 }
 .filter-form {
   width: 60vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
   grid-row-gap: 2rem;
   grid-column-gap: 40px;
 }
@@ -415,9 +562,8 @@ h6 {
 }
 .single-extra label {
   display: inline-block;
-  font-size: 0.7rem;
-  margin-left: 0.4rem;
- 
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
 }
 @media screen and (min-width: 776px) {
   .filter-form {
@@ -429,5 +575,18 @@ h6 {
     width: 95vw;
     max-width: 1170px;
   }
+}
+.singUp {
+  align-items: center;
+  flex: 1;
+}
+.input {
+  flex-direction: row;
+  display: flex;
+  margin: 17px;
+}
+
+.inNA {
+  margin-right: 20px;
 }
 /* end of rooms fitler*/

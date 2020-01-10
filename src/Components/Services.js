@@ -3,6 +3,7 @@ import Title from './Title';
 import {FaBuilding , FaRegClock
     , FaDollarSign
 ,FaRegSmile} from 'react-icons/fa';
+import ScrollAnimation from 'react-animate-on-scroll'
 
 class Services extends Component{
     state={ 
@@ -41,17 +42,25 @@ class Services extends Component{
     render() {
     return( 
         <section className="services"> 
+        <ScrollAnimation animateIn='bounceInRight'
+                animateOut='bounceOutLeft'>
            <Title title="Services"/> 
+           </ScrollAnimation>
            <div className="services-center"> 
            {this.state.services.map((item, index) => {
                return (
-                <>
+                
+            <ScrollAnimation animateIn='flipInY'
+            animateOut='flipOutY'>
+        
+                
                 <article key={index}  className="service">
                <span>{item.icon}</span>
                <h5 style={{fontSize:'18px', fontFamily:'Tahoma'}} > {item.title}</h5>
                <p style={{fontSize:'17px', fontFamily:'Geneva'}}> {item.info}</p>
                </article>
-               </>
+              
+                </ScrollAnimation>
                );
            })}
            </div>
