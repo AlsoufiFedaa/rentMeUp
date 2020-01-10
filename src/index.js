@@ -7,7 +7,6 @@ import * as serviceWorker from './serviceWorker';
 import * as firebase from "firebase";
 import "firebase/firestore";
 import 'firebase/storage'
-import AOS from 'aos'; 
 
 var firebaseConfig = {
   apiKey: "AIzaSyD47xlalTqy3QK4fFgfD9jImnI5prteLfw",
@@ -23,7 +22,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 firebase.analytics();
-AOS.init()
+
 
 ReactDOM.render(
     <Router><App /></Router>
