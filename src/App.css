@@ -65,7 +65,7 @@ h6 {
   text-transform: uppercase;
   cursor: pointer;
   margin-left: 30px;
-  margin-top:40px;
+  margin-top: 40px;
 }
 .btn-primary:hover {
   background: transparent;
@@ -395,9 +395,14 @@ h6 {
   grid-template-columns: 1fr;
   margin: 2rem auto;
 }
+.data {
+  float: left;
+}
 .desc,
 .info {
-  margin: 1rem 0;
+  margin: 30px;
+  float: left;
+  margin-left: 90px;
 }
 .desc h3 {
   text-transform: capitalize;
@@ -405,15 +410,19 @@ h6 {
 }
 .desc p {
   line-height: 1.5;
+  margin-left: 20px;
+  margin-top: 33px;
 }
 .info h3,
 .info h6 {
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
+  margin-top: 31px;
+  margin-left: 25px;
 }
 
 .info h6 {
-  font-weight: 300;
+  font-weight: 400;
 }
 .room-extras {
   width: 80vw;

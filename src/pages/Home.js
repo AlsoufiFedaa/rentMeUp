@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Services from "../Components/Services";
 import ImageCarousel from "../Components/imageCarousel";
 import MainMap from "./mainMap";
-import AddProperty from "./addProperty";
+// import AddProperty from "./addProperty";
 
 const Home = () => {
   return (

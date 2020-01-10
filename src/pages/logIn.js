@@ -17,7 +17,7 @@ class LogIn extends Component {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(error);
+        console.log(errorCode,errorMessage);
         // ...
       });
   };

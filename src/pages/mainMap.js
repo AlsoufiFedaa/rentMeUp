@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import  Modalup from "../Components/modal";
 
 class MainMap extends Component {
   state = {
@@ -19,7 +20,7 @@ class MainMap extends Component {
             lat: item.latitude,
             lon: item.longitude
           }}
-          onClick={() => alert("heeey")}
+          onClick={() => <Modalup />}
         />
       );
     });

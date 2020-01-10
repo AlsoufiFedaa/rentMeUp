@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Hero from "../Components/Hero";
 import Banner from "../Components/Banner";
 import { Link } from "react-router-dom";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
 class SingleEstate extends Component {
   state = {
     listOfImages: []
@@ -19,7 +19,7 @@ class SingleEstate extends Component {
       <div>
         <Hero>
           <Banner title={"SingleEstate"}>
-            <Link to="/LogIn" className="btn-primary">
+            <Link to="/MainMap" className="btn-primary">
               Back To The Map
             </Link>
           </Banner>
@@ -37,7 +37,7 @@ class SingleEstate extends Component {
               );
             })}
           </div>
-          <div>
+          <div className="data">
             <article className="desc">
               <h3> Details</h3>
               <p>
@@ -53,7 +53,7 @@ class SingleEstate extends Component {
                 ndsjfds;jfdsafhsosdafihl
               </p>
             </article>
-            <article className="Info">
+            <article className="info">
               <h3>Info</h3>
               <h6> price: 222</h6>
               <h6> price: 222</h6>
