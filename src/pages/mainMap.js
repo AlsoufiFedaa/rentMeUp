@@ -7,9 +7,9 @@ class MainMap extends Component {
       withGoogleMap(props => (
         <GoogleMap
           google={this.props.google}
-          defaultZoom={9}
+          defaultZoom={8}
           defaultCenter={{ lat: 31.3547, lng: 34.3088 }}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: "210px" }}
         >
           {this.props.displayMarkers()}
         </GoogleMap>

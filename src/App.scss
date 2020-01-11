@@ -336,29 +336,25 @@ h6 {
 /*end of services */
 /*contact*/
 .contacts {
-  padding: 2rem;
-}
-.contacts {
+  padding: 1.69rem;
   background: var(--mainBlack);
   text-align: center;
 }
+
 .contact-center {
   width: 167px;
-  height: 7px;
+  height: 3px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
   grid-row-gap: 20rem;
-  grid-column-gap: 50px;
+  grid-column-gap: 20px;
 }
 .contact img {
-  display: inline-block;
-  color: var(--primaryColor);
-  font-size: 2.5rem;
   margin-bottom: 1.5rem;
 }
 .contact :hover {
-  width: 60px;
+  width: 50px;
   transition: 0.4s all;
   background: transparent;
   background: var(--primaryColor);

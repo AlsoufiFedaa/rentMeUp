@@ -12,23 +12,28 @@ import Error from "./pages/error";
 import NavBar from "./Components/NavBar";
 import LogIn from "./pages/logIn";
 import { Route, Switch } from "react-router-dom";
+import AuthProvider from "./Components/auth";
+import PrivateRoute from "./Components/privateRoute";
 // import Fire from "./pages/ClassFire";
 function App() {
   return (
-    <div>
-      {/* <Fire /> */}
-      <NavBar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/SignUP" component={SignUP} />
-        <Route exact path="/LogIn" component={LogIn} />
-        <Route exact path="/Profile" component={Profile} />
-        <Route exact path="/AddPropery" component={AddContainer} />
-        <Route exact path="/MainContainer" component={MainContainer} />
-        <Route exact path="/SingleEstate" component={SingleEstate} />
-        <Route component={Error} />
-      </Switch>
-    </div>
+    <AuthProvider>
+      <div>
+        {/* <Fire /> */}
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/SignUP" component={SignUP} />
+          <Route exact path="/LogIn" component={LogIn} />
+          <PrivateRoute exact path="/Profile" component={Profile} />
+          <PrivateRoute exact path="/AddPropery" component={AddContainer} />
+          <PrivateRoute exact path="/MainContainer" component={MainContainer} />
+          <PrivateRoute exact path="/AddPropery" component={AddContainer} />
+          <Route exact path="/SingleEstate" component={SingleEstate} />
+          <Route component={Error} />
+        </Switch>
+      </div>
+    </AuthProvider>
   );
 }
 

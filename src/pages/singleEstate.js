@@ -70,6 +70,8 @@ class SingleEstate extends Component {
             </article>
             <article className="info">
               <h3>Info</h3>
+              <h6> Owner: {item.name}</h6>
+              <h6> for contact: {item.phone}</h6>
               <h6> type:{item.type}</h6>
 
               <h6> city: {item.city}</h6>

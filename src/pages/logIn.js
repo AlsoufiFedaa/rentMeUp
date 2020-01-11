@@ -1,13 +1,17 @@
-import React, { Component } from "react";
-import * as firebase from "firebase";
 import Title from "../Components/Title";
 import { Link } from "react-router-dom";
+
+import React, { Component, useContext } from "react";
+import { Redirect } from "react-router";
+import * as firebase from "firebase";
+import { AuthContext } from "../Components/auth";
 
 class LogIn extends Component {
   state = {
     Email: "",
     Password: ""
   };
+  static contextType = AuthContext;
   signin = () => {
     const { Email, Password } = this.state;
     firebase
@@ -35,13 +39,19 @@ class LogIn extends Component {
   };
 
   render() {
+    const { currentUser } = this.context;
+    console.log(currentUser);
+
+    if (currentUser) {
+      return <Redirect to="/MainContainer" />;
+    }
     return (
       <div>
         <div
           className="nav-header"
           style={{ marginTop: "120px", marginLeft: "25%" }}
         >
-          <Title title="SignUp" />
+          <Title title="logIn" />
         </div>
 
         <div className="input">
