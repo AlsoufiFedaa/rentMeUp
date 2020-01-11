@@ -1,6 +1,81 @@
 
 
+//  filterEstates = () => {
+//   let {
+//     type,
+//     city,
+//     street,
+//     minprice,
+//     maxspace,
+//     price,
+//     minspace,
+//     maxprice,
+//     roomNum,
+//     overLookingSea,
+//     downtown
+//   } = this.state;
+//   //all estates
+//   let tempEstates = this.state.estates;
 
+//   // convert to integer
+//   roomNum = parseInt(roomNum);
+//   price = parseInt(price);
+//   //filter by type
+//   {
+//     if (type !== "all") {
+//       tempEstates = tempEstates.filter(estate => estate.type === type);
+//     }
+//   }
+//   // filter by city
+//   {
+//     if (city !== "all") {
+//       tempEstates = tempEstates.filter(estate => estate.city === city);
+//     }
+//   }
+//   //filter by street
+//   {
+//     if (street !== "all") {
+//       tempEstates = tempEstates.filter(estate => estate.street === street);
+//     }
+//   }
+//   // filter by roomNum
+//   {
+//     if (roomNum !== 1) {
+//       tempEstates = tempEstates.filter(estate => estate.roomNum === roomNum);
+//     }
+//   }
+//   //filter by price
+//   {
+//     if (minprice !== 0) {
+//       tempEstates = tempEstates.filter(estate => estate.price <= price);
+//     }
+//   }
+//   // filter by space
+//   {
+//     if (minspace !== 0) {
+//       tempEstates = tempEstates.filter(
+//         estate => estate.space >= minspace && estate.space <= maxspace
+//       );
+//     }
+//   }
+//   // filter by downtown
+//   {
+//     if (downtown) {
+//       tempEstates = tempEstates.filter(estate => estate.downtown === true);
+//     }
+//   }
+//   // filter by overlookingSea
+//   {
+//     if (overLookingSea) {
+//       tempEstates = tempEstates.filter(
+//         estate => estate.overLookingSea === true
+//       );
+//     }
+//   }
+
+//   //change state
+//   this.setState({ sortedEstates: tempEstates });
+// };
 
 
 // console.log(item)

@@ -1,4 +1,3 @@
- 
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +21,7 @@ body {
   color: var(--mainBlack);
   background: var(--mainWhite);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 h1 {
   font-size: 3em;
@@ -66,8 +65,10 @@ h6 {
   text-transform: uppercase;
   cursor: pointer;
   margin-left: 30px;
-  margin-top:40px;
+
+  margin-top: 40px;
 }
+
 .btn-primary:hover {
   background: transparent;
   color: var(--primaryColor);
@@ -114,7 +115,6 @@ h6 {
   top: 0;
   left: 0;
   width: 100%;
-
   background: var(--offWhite);
   z-index: 200;
 }
@@ -122,7 +122,6 @@ h6 {
   display: flex;
   justify-content: space-between;
   position: static;
-  /* margin-top: 180px; */
 }
 .nav-btn {
   background: transparent;
@@ -268,30 +267,29 @@ h6 {
   visibility: hidden;
 }
 
-
 .img-container {
   position: relative;
   left: 0;
-  right:0;
+  right: 0;
   bottom: 0;
   height: 100%;
-  width: 100vw; 
-            
+  width: 100vw;
+
   overflow: hidden;
-&:after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  top: 0;
-  right: 0;
-}
-img {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-}
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    top: 0;
+    right: 0;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
 }
 /* services */
 .services {
@@ -336,6 +334,35 @@ img {
   }
 }
 /*end of services */
+/*contact*/
+.contacts {
+  padding: 2rem;
+}
+.contacts {
+  background: var(--mainBlack);
+  text-align: center;
+}
+.contact-center {
+  width: 167px;
+  height: 7px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+  grid-row-gap: 20rem;
+  grid-column-gap: 50px;
+}
+.contact img {
+  display: inline-block;
+  color: var(--primaryColor);
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.contact :hover {
+  width: 60px;
+  transition: 0.4s all;
+  background: transparent;
+  background: var(--primaryColor);
+}
 /* featured rooms */
 
 .featured-rooms {
@@ -448,9 +475,14 @@ img {
   grid-template-columns: 1fr;
   margin: 2rem auto;
 }
+.data {
+  float: left;
+}
 .desc,
 .info {
-  margin: 1rem 0;
+  margin: 30px;
+  float: left;
+  margin-left: 90px;
 }
 .desc h3 {
   text-transform: capitalize;
@@ -458,15 +490,19 @@ img {
 }
 .desc p {
   line-height: 1.5;
+  margin-left: 20px;
+  margin-top: 33px;
 }
 .info h3,
 .info h6 {
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
+  margin-top: 31px;
+  margin-left: 25px;
 }
 
 .info h6 {
-  font-weight: 300;
+  font-weight: 400;
 }
 .room-extras {
   width: 80vw;
@@ -589,4 +625,3 @@ img {
 .inNA {
   margin-right: 20px;
 }
-/* end of rooms fitler*/

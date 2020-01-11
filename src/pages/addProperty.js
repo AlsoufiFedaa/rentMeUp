@@ -322,15 +322,12 @@ class AddProperty extends Component{
 								height: '40px',
 								paddingLeft: '16px',
 								marginTop: '2px',
-								marginBottom: '50px',
+								marginBottom: '90px',
 							}}
 							onPlaceSelected={ this.onPlaceSelected }
 							types={['(regions)']}
 						/>
-               <div style={{justifyContent:'center' ,marginTop:50 }}> 
-             <Link to="/MainMap" className="btn-primary" onClick={this.addPropertyToMap}> Add Property</Link>
-          
-             </div> 
+           
 					</GoogleMap>
 				)
 			)
@@ -341,7 +338,19 @@ class AddProperty extends Component{
 
 				<div>
 				<Title title='Add Property'/>
-					<div className="form-group">
+				<AsyncMap
+					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0&libraries=places"
+					loadingElement={
+						<div style={{ height: `100%` }} />
+					}
+					containerElement={
+						<div style={{ height: this.props.height }} />
+					}
+					mapElement={
+						<div style={{ height: `100%` }} />
+					}
+				/>
+					<div className="form-group"  style={{marginTop:70}}>
 						<label htmlFor="">City</label>
 						<input type="text" name="city"  onChange={ this.handleChange } value={ this.state.city }/>
 					</div>
@@ -395,21 +404,14 @@ class AddProperty extends Component{
 					<label htmlFor='overLookingSea'>overLookingSea</label>
 					</div>
 					</div> 
+					<div style={{justifyContent:'center' ,marginTop:20 }}> 
+             <Link to="/MainContainer" className="btn-primary" onClick={this.addPropertyToMap}> Add Property</Link>
+          
+             </div> 
 
 				</div>
 
-				<AsyncMap
-					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0&libraries=places"
-					loadingElement={
-						<div style={{ height: `100%` }} />
-					}
-					containerElement={
-						<div style={{ height: this.props.height }} />
-					}
-					mapElement={
-						<div style={{ height: `100%` }} />
-					}
-				/>
+			
 			</div>
 		} else {
 			map = <div style={{height: this.props.height}} />
