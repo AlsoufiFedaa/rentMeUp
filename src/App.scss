@@ -614,14 +614,26 @@ h6 {
 }
 .singUp {
   align-items: center;
+  justify-content: center;
+  margin-left: 30%;
   flex: 1;
 }
 .input {
   flex-direction: row;
   display: flex;
   margin: 17px;
+  margin-top: 30px;
 }
 
 .inNA {
   margin-right: 20px;
+}
+.INna {
+  margin-block-end: 5px;
+  justify-content: end;
+  // border-radius: 20%;
+}
+.navImg {
+  height: 100px;
+  width: 100px;
 }

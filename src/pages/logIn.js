@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
+import Title from "../Components/Title";
 import { Link } from "react-router-dom";
 
 class LogIn extends Component {
@@ -17,7 +18,7 @@ class LogIn extends Component {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(errorCode,errorMessage);
+        console.log(errorCode, errorMessage);
         // ...
       });
   };
@@ -36,13 +37,17 @@ class LogIn extends Component {
   render() {
     return (
       <div>
-        <div className="nav-header">
-          <h1 style={{ marginTop: "180px" }}>Log In</h1>
+        <div
+          className="nav-header"
+          style={{ marginTop: "120px", marginLeft: "25%" }}
+        >
+          <Title title="SignUp" />
         </div>
 
         <div className="input">
           <h3 className="inNA">Email:</h3>
           <input
+            className="INna"
             type="email"
             defaultValue={this.state.Email}
             onChange={this.handleEmailChange}
@@ -53,6 +58,7 @@ class LogIn extends Component {
         <div className="input">
           <h3 className="inNA">Password:</h3>
           <input
+            className="INna"
             type="password"
             defaultValue={this.state.Password}
             onChange={this.handlePasswordChange}

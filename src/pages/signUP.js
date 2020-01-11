@@ -1,6 +1,5 @@
-
-import React , {Component} from "react"; 
-
+import React, { Component } from "react";
+import Title from "../Components/Title";
 
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
@@ -69,14 +68,15 @@ class SignUP extends Component {
   render() {
     return (
       <div>
-        <div className="nav-header">
-          <h1 style={{ marginTop: "180px" }}>SignUP</h1>
+        <div className="nav-header" style={{ marginTop: "120px",marginLeft:"25%" }}>
+          <Title title="SignUp"  />
         </div>
         <div className="singUp">
           <div className="input">
             <h1>{this.state.name}</h1>
             <h3 className="inNA">Name:</h3>
             <input
+              className="INna"
               type="text"
               defaultValue={this.state.Name}
               onChange={this.handleNameChange}
@@ -88,6 +88,7 @@ class SignUP extends Component {
           <div className="input">
             <h3 className="inNA">Email:</h3>
             <input
+              className="INna"
               type="email"
               defaultValue={this.state.Email}
               onChange={this.handleEmailChange}
@@ -98,6 +99,7 @@ class SignUP extends Component {
           <div className="input">
             <h3 className="inNA">Password:</h3>
             <input
+              className="INna"
               type="password"
               defaultValue={this.state.Password}
               onChange={this.handlePasswordChange}
@@ -108,6 +110,7 @@ class SignUP extends Component {
           <div className="input">
             <h3 className="inNA">Mobil:</h3>
             <input
+              className="INna"
               type="tel"
               defaultValue={this.state.Mobile}
               onChange={this.handleMobileChange}

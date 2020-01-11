@@ -15,6 +15,9 @@ class SingleEstate extends Component {
   // };
 
   render() {
+    const { item } = this.props.location.params;
+    console.log(item);
+
     return (
       <div>
         <Hero>
@@ -25,8 +28,8 @@ class SingleEstate extends Component {
           </Banner>
         </Hero>
         <section className="single-room">
-          <div>
-            {this.state.listOfImages.map((item, i) => {
+          <div style={{ alignItems: "center" }}>
+            {item.url.map((item, i) => {
               return (
                 <img
                   src={item || "http://via.placeholder.com/400x300"}
@@ -42,23 +45,38 @@ class SingleEstate extends Component {
               <h3> Details</h3>
               <p>
                 {" "}
-                sdfghjklkjhgfdsdfghjkdsofhdsjniuesfnkdsiovnsdv
+                Driveway parking as well as plenty of street parking.
                 <br />
-                dsfbjnkdsafjoodsf;mladfdos;fkmafn
+                The garage (300 sq ft) was converted to a bonus room that was
                 <br />
-                asfvdhasbkdasjhdasouidhsuaidnsaijdsadsadhsa
+                not included in the 1240 sq ft of the house.
                 <br />
-                dfjsdandjasdaksdasjhdjashdklsasdahufsdjfnsdljf
+                Within walking distance to public transportation, nearby
                 <br />
-                ndsjfds;jfdsafhsosdafihl
+                schools, shopping center, and the beach.
+                <br />
+                Enjoy the large open concept of your living room, and the full
+                <br />
+                size dining room!
+                <br />
+                This apartment home also has a designated bar height counter
+                <br />
+                space that can be used as your bar or breakfast nook,
+                <br />
+                and can seat three people! Plus, with all the wall to wall
+                <br />
+                closet space you will have space to store all your belongings!
               </p>
             </article>
             <article className="info">
               <h3>Info</h3>
-              <h6> price: 222</h6>
-              <h6> price: 222</h6>
-              <h6> price: 222</h6>
-              <h6> price: 222</h6>
+              <h6> type:{item.type}</h6>
+
+              <h6> city: {item.city}</h6>
+              <h6> street:{item.street}</h6>
+              <h6> room number:{item.roomNum}</h6>
+              <h6> price:{item.price}</h6>
+              {/* <h6> place :{item.}</h6> */}
             </article>
           </div>
         </section>
