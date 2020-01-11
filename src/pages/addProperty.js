@@ -212,10 +212,10 @@ class AddProperty extends Component{
 	
     handleChange=(event)=>{ 
         const target = event.target; 
-        const value = target.type ===  'checkbox'? 
+        const value = target.type ===  'radio'? 
         target.checked : target.value;
-        const name = event.target.name;
-        this.setState({[name]:value});
+        const id = event.target.id;
+        this.setState({[id]:value});
       };
       handleChangeImage=(e)=>{ 
         {if(e.target.files){ 
@@ -352,38 +352,38 @@ class AddProperty extends Component{
 				/>
 					<div className="form-group"  style={{marginTop:70}}>
 						<label htmlFor="">City</label>
-						<input type="text" name="city"  onChange={ this.handleChange } value={ this.state.city }/>
+						<input type="text" id="city"    onChange={ this.handleChange } value={ this.state.city }/>
 					</div>
 					<div className="form-group">
 						<label htmlFor="">Area</label>
-						<input type="text" name="area"  onChange={ this.handleChange }  value={ this.state.area }/>
+						<input type="text" id="area"  onChange={ this.handleChange }  value={ this.state.area }/>
 					</div>
 	
 					<div className="form-group">
 						<label htmlFor="">Address</label>
-						<input type="text" name="address" onChange={ this.handleChange }value={ this.state.address }/>
+						<input type="text" id="address" onChange={ this.handleChange }value={ this.state.address }/>
 					</div>
 
 						<div className='form-group'> 
 					<label htmlFor="price">Price</label> 
-						<input type="number" placeholder="price"  value={this.state.price} onChange={this.handleChange} name='price'/> 
+						<input type="number" placeholder="price"  defaultValue={this.state.price} onChange={this.handleChange} id='price'/> 
 						</div> 
 						<div className='form-group'> 
 					<label htmlFor="space">Space</label> 
-					<input type="number" placeholder="space"  value={this.state.space} onChange={this.handleChange} name='space'/> 
+					<input type="number" placeholder="space"  defaultValue={this.state.space} onChange={this.handleChange} id='space'/> 
 						</div> 
 						<div className='form-group'> 
 					<label htmlFor="type">Type</label> 
-					<input type="text" placeholder="write either buying or renting"  value={this.state.type} onChange={this.handleChange} name='type'/> 
+					<input type="text" placeholder="write either buying or renting"  defaultValue={this.state.type} onChange={this.handleChange} id='type'/> 
 						</div> 
 					<div className='form-group'> 
 						<label htmlFor="rooms">Rooms</label> 
-						<input type="number" placeholder="rooms"  value={this.state.roomNum} onChange={this.handleChange} name='roomNum'/> 
+						<input type="number" placeholder="rooms"  defaultValue={this.state.roomNum} onChange={this.handleChange} id='roomNum'/> 
 						</div> 
 						<br/> 
 						<div className='button'>
 					<label htmlFor='multi'></label>
-					<input type='file' name='selectedFile' accept="image/*" onChange={this.handleChangeImage} multiple />
+					<input type='file' id='selectedFile' accept="image/*" onChange={this.handleChangeImage} multiple />
 					<button onClick={this.upLoadImage}>Upload image</button>
 					<br/> 
 					
@@ -395,12 +395,13 @@ class AddProperty extends Component{
 					<br/> 
 					<div className ='form-group'>
 					<div className='single-extra'> 
-					<input type='checkbox' name='downtown' id = 'downtown'  checked={this.state.downtown}  onChange={this.handleChange} /> 
+					<input type='radio' name='radioBox' id = 'downtown'  defaultChecked={this.state.downtown}  onChange={this.handleChange} /> 
 					<label htmlFor='downtown'>downtown</label>
 
 					</div>
 					<div className='single-extra'> 
-					<input type='checkbox' name='overLookingSea' id = 'overLookingSea'  checked={this.state.overLookingSea}  onChange={this.handleChange}/> 
+					<input type='radio' name='radioBox' 
+					id = 'overLookingSea'  defaultChecked={this.state.overLookingSea}  onChange={this.handleChange}/> 
 					<label htmlFor='overLookingSea'>overLookingSea</label>
 					</div>
 					</div> 

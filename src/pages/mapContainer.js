@@ -8,6 +8,7 @@ import * as firebase from "firebase";
 
 //NeedToDo
 // read from firebase/database
+
 class MapContainer extends Component {
   state = {
     estates: [],
@@ -46,7 +47,7 @@ class MapContainer extends Component {
 
   handleChange = event => {
     const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.type === "radio" ? target.checked : target.value;
     const name = event.target.name;
     this.setState({ [name]: value }, () => {
       this.filterEstates();
@@ -108,7 +109,8 @@ class MapContainer extends Component {
           .get()
           .then(querySnapshot => {
             querySnapshot.forEach(doc => {
-              let item = (doc.id, " => ", doc.data());
+              let item = doc.data();
+              item.id = doc.id;
 
               tempEstates.push(item);
             });
@@ -121,35 +123,47 @@ class MapContainer extends Component {
     //filtering by type
   };
 
+  openInfo = i => {
+    const { sortedEstates } = this.state;
+    sortedEstates[i].isOpen = true;
+    this.setState(sortedEstates);
+  };
+
   displayMarkers = () => {
+    console.log(this.state.sortedEstates, "sortedEstates");
     return this.state.sortedEstates.map((item, index) => {
       console.log(item);
       return (
         <>
-          <InfoWindow
-            onClose={this.onInfoWindowClose}
-            position={{ lat: item.lat + 0.067, lng: item.lng }}
-          >
-            <div className="infoWin">
-              <h4> {item.type}</h4>
-              <span style={{ padding: 0, margin: 0 }}>{item.street}</span>
-              <img src={item.url[0]} width="50" height="50" />
-              <h4> {item.price}</h4>
-              <Link
-                to={{ pathname: "/SingleEstate", params: { item } }}
-                className="btn-add"
-              >
-                More
-              </Link>
-            </div>
-          </InfoWindow>
           {/*Marker*/}
+
           <Marker
+            onClick={() => this.openInfo(index)}
             google={this.props.google}
             name={item.city}
             draggable={false}
             position={{ lat: item.lat + 0.0018, lng: item.lng }}
-          />
+          >
+            {item.isOpen && (
+              <InfoWindow
+                onClose={this.onInfoWindowClose}
+                position={{ lat: item.lat + 0.067, lng: item.lng }}
+              >
+                <div className="infoWin">
+                  <h4> {item.type}</h4>
+                  <span style={{ padding: 0, margin: 0 }}>{item.street}</span>
+                  <img src={item.url[0]} width="50" height="50" />
+                  <h4> {item.price}</h4>
+                  <Link
+                    to={{ pathname: "/SingleEstate", params: { item } }}
+                    className="btn-add"
+                  >
+                    More
+                  </Link>
+                </div>
+              </InfoWindow>
+            )}
+          </Marker>
         </>
       );
     });
