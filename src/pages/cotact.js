@@ -4,43 +4,34 @@ import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
 
-class SignUP extends Component {
+class Contact extends Component {
   state = {
     Name: "",
     Email: "",
-    Password: "",
-    Mobile: ""
+    Subejact: "",
+    Massage: ""
   };
 
   addUser = () => {
-    const { Name, Email, Password, Mobile } = this.state;
-    console.log(Name, Email, Password, Mobile);
+    const { Name, Email, Massage, Subejact } = this.state;
+
     const db = firebase.firestore();
 
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(Email, Password)
-      .catch(function(error) {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(errorCode, errorMessage);
+    console.log(Name, Email, Massage, Subejact);
 
-        // ...
+    db.collection("FeedBacks")
+      .add({
+        name: Name,
+        email: Email,
+        subejact: Subejact,
+        massage: Massage
       })
-      .then(function() {
-        db.collection("users")
-          .add({
-            name: Name,
-            mobile: Mobile
-          })
 
-          .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-          })
-          .catch(function(error) {
-            console.error("Error adding document: ", error);
-          });
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
       });
   };
 
@@ -54,14 +45,14 @@ class SignUP extends Component {
       Email: e.target.value
     });
   };
-  handlePasswordChange = e => {
+  handleSubejactChange = e => {
     this.setState({
-      Password: e.target.value
+      Subejact: e.target.value
     });
   };
-  handleMobileChange = e => {
+  handleMassageChange = e => {
     this.setState({
-      Mobile: e.target.value
+      Massage: e.target.value
     });
   };
 
@@ -70,9 +61,9 @@ class SignUP extends Component {
       <div>
         <div
           className="nav-header"
-          style={{ marginTop: "40px", marginLeft: "25%" }}
+          style={{ marginTop: "45px", marginLeft: "25%" }}
         >
-          <Title title="SignUp" />
+          <Title title="Contact US" />
 
           <div className="singUp">
             <div className="form-groupp">
@@ -107,22 +98,8 @@ class SignUP extends Component {
 
             <div className="form-groupp">
               <input
-                defaultValue={this.state.Password}
-                onChange={this.handlePasswordChange}
-                type="password"
-                name="firstName"
-                id="firstName"
-                className="form-control"
-                required
-              />
-              <label className="sl" htmlFor="firstName">
-                Password
-              </label>
-            </div>
-            <div className="form-groupp">
-              <input
-                defaultValue={this.state.Mobile}
-                onChange={this.handleMobileChange}
+                defaultValue={this.state.Subejact}
+                onChange={this.handleSubejactChange}
                 type="text"
                 name="firstName"
                 id="firstName"
@@ -130,13 +107,27 @@ class SignUP extends Component {
                 required
               />
               <label className="sl" htmlFor="firstName">
-                Mobile
+                Subejact
+              </label>
+            </div>
+            <div className="form-groupp">
+              <input
+                defaultValue={this.state.massage}
+                onChange={this.handleMassageChange}
+                type="text"
+                name="firstName"
+                id="firstName"
+                className="form-control"
+                required
+              />
+              <label className="sl" htmlFor="firstName">
+                Massage
               </label>
             </div>
 
-            <Link to="/LogIn" className="btn-primary" onClick={this.addUser}>
+            <Link to="/" className="btn-primary" onClick={this.addUser}>
               {" "}
-              Sign Up
+              Submit
             </Link>
           </div>
           <div className="imgSL">
@@ -147,4 +138,4 @@ class SignUP extends Component {
     );
   }
 }
-export default SignUP;
+export default Contact;

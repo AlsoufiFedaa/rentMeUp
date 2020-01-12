@@ -29,16 +29,19 @@ class SingleEstate extends Component {
         </Hero>
         <section className="single-room">
           <div style={{ alignItems: "center" }}>
-            {item.url.map((item, i) => {
-              return (
-                <img
-                  src={item || "http://via.placeholder.com/400x300"}
-                  alt="Uploaded images"
-                  height="300"
-                  width="400"
-                />
-              );
-            })}
+            <div className="images">
+              {item.url.map((item, i) => {
+                return (
+                  <img
+                    className="singleImage"
+                    src={item || "http://via.placeholder.com/400x300"}
+                    alt="Uploaded images"
+                    height="300"
+                    width="400"
+                  />
+                );
+              })}
+            </div>
           </div>
           <div className="data">
             <article className="desc">

@@ -44,15 +44,17 @@ class Services extends Component {
         <div className="services-center">
           {this.state.services.map((item, index) => {
             return (
-              <ScrollAnimation animateIn="flipInY" animateOut="flipOutY">
+              <ScrollAnimation
+                key={index}
+                animateIn="flipInY"
+                animateOut="flipOutY"
+              >
                 <article key={index} className="service">
                   <span>{item.icon}</span>
                   <h5 style={{ fontSize: "18px", fontFamily: "Tahoma" }}>
-                  
                     {item.title}
                   </h5>
                   <p style={{ fontSize: "17px", fontFamily: "Geneva" }}>
-                    
                     {item.info}
                   </p>
                 </article>

@@ -32,7 +32,7 @@ class NavBar extends Component {
               <Link to="/"> Home</Link>
             </li>
             <li>
-              <Link to="#"> Contact</Link>
+              <Link to="/contactUs"> Contact</Link>
             </li>
           </ul>
         </div>

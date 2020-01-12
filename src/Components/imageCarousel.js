@@ -10,6 +10,8 @@ const image3 = require("../assets/couch-.jpg");
 const image4 = require("../assets/Gaza_City.JPG");
 
 const images = [image1, image2, image3, image4];
+let timer;
+
 const ImageCarousel = () => {
   // let image = useRef(null);
   // let container = useRef(null);
@@ -26,10 +28,11 @@ const ImageCarousel = () => {
   //     delay: -1.4
   //   });
   // });
+  
   const [index, setIndex] = React.useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    timer = setInterval(() => {
       if (index === 4) {
         setIndex(0);
       } else {
@@ -38,6 +41,13 @@ const ImageCarousel = () => {
     }, 3000);
     return () => clearInterval(timer);
   }, [index]);
+
+  useEffect(() => {
+    return () => {
+      console.log("cleaned up");
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <Gallery
@@ -55,10 +65,10 @@ const ImageCarousel = () => {
         zIndex: 0
       }}
     >
-      {images.map(image => (
+      {images.map((image, index) => (
         <GalleryImage
           objectFit="contain"
-          key={image}
+          key={index}
           src={image}
           className=""
           style={{
@@ -74,6 +84,10 @@ const ImageCarousel = () => {
       ))}
     </Gallery>
   );
+};
+
+ImageCarousel.componentWillMount = props => {
+  console.log(images);
 };
 
 export default ImageCarousel;

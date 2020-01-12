@@ -88,7 +88,7 @@ class MapContainer extends Component {
     roomNum = parseInt(roomNum);
     price = parseInt(price);
     const db = firebase.firestore();
-    {
+    
       if (
         (city !== "all") &
         (type !== "all")
@@ -118,7 +118,7 @@ class MapContainer extends Component {
 
         console.log(tempEstates);
         this.setState({ sortedEstates: tempEstates });
-      }
+      
     }
     //filtering by type
   };
@@ -152,7 +152,7 @@ class MapContainer extends Component {
                 <div className="infoWin">
                   <h4> {item.type}</h4>
                   <span style={{ padding: 0, margin: 0 }}>{item.street}</span>
-                  <img src={item.url[0]} width="50" height="50" />
+                  <img alt="50*50" src={item.url[0]} width="50" height="50" />
                   <h4> {item.price}</h4>
                   <Link
                     to={{ pathname: "/SingleEstate", params: { item } }}

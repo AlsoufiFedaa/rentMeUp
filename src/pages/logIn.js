@@ -1,6 +1,6 @@
 import Title from "../Components/Title";
 import { Link } from "react-router-dom";
-
+import logo from "../assets/logo1.png";
 import React, { Component, useContext } from "react";
 import { Redirect } from "react-router";
 import * as firebase from "firebase";
@@ -49,37 +49,50 @@ class LogIn extends Component {
       <div>
         <div
           className="nav-header"
-          style={{ marginTop: "120px", marginLeft: "25%" }}
+          style={{ marginTop: "40px", marginLeft: "25%" }}
         >
-          <Title title="logIn" />
-        </div>
+          <Title title="LogIn" />
 
-        <div className="input">
-          <h3 className="inNA">Email:</h3>
-          <input
-            className="INna"
-            type="email"
-            defaultValue={this.state.Email}
-            onChange={this.handleEmailChange}
-            placeholder="enter ur Email"
-            required
-          />
+          <div className="singUp">
+            <div className="form-groupp">
+              <input
+                defaultValue={this.state.Email}
+                onChange={this.handleEmailChange}
+                type="text"
+                name="firstName"
+                id="firstName"
+                className="form-control"
+                required
+              />
+              <label className="sl" className="sl" htmlFor="firstName">
+                Email
+              </label>
+            </div>
+
+            <div className="form-groupp">
+              <input
+                defaultValue={this.state.Password}
+                onChange={this.handlePasswordChange}
+                type="text"
+                name="firstName"
+                id="firstName"
+                className="form-control"
+                required
+              />
+              <label className="sl" className="sl" htmlFor="firstName">
+                Password
+              </label>
+            </div>
+
+            <Link to="/mainMap" className="btn-primary" onClick={this.signin}>
+              {" "}
+              Log In
+            </Link>
+          </div>
+          <div className="imgSL">
+            <img className="IMsl" src={logo} alt="rentmeUp" />
+          </div>
         </div>
-        <div className="input">
-          <h3 className="inNA">Password:</h3>
-          <input
-            className="INna"
-            type="password"
-            defaultValue={this.state.Password}
-            onChange={this.handlePasswordChange}
-            placeholder="enter ur Password"
-            required
-          />
-        </div>
-        <Link to="/mainMap" className="btn-primary" onClick={this.signin}>
-          {" "}
-          Log In
-        </Link>
       </div>
     );
   }

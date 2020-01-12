@@ -1,7 +1,7 @@
 import "./App.scss";
 
 import React from "react";
-
+import Contact from "./pages/cotact";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SignUP from "./pages/signUP";
@@ -23,6 +23,7 @@ function App() {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/contactUs" component={Contact} />
           <Route exact path="/SignUP" component={SignUP} />
           <Route exact path="/LogIn" component={LogIn} />
           <PrivateRoute exact path="/Profile" component={Profile} />

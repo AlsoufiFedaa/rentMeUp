@@ -172,7 +172,7 @@ h6 {
     height: auto;
     display: flex;
     margin-left: 8rem;
-    margin-top: 80px;
+    margin-top: 37px;
   }
   .nav-links a {
     margin: 0 1rem;
@@ -256,6 +256,9 @@ h6 {
   margin: 0 auto;
   background: var(--primaryColor);
 }
+.GestureGallery {
+  max-width: 100%;
+}
 /* end of Title */
 // ImageCarousel
 .container {
@@ -336,19 +339,29 @@ h6 {
 /*end of services */
 /*contact*/
 .contacts {
-  padding: 1.69rem;
+  padding: 0.4rem;
   background: var(--mainBlack);
   text-align: center;
+  display: block;
+  max-width: 100%;
 }
 
 .contact-center {
-  width: 167px;
-  height: 3px;
+  // width: 167px;
+  // height: 3px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-  grid-row-gap: 20rem;
-  grid-column-gap: 20px;
+  display: block;
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+  // grid-row-gap: 20rem;
+  // grid-column-gap: 20px;
+}
+.contact {
+  display: inline-block;
+  margin-right: 33px;
+  justify-self: center;
+  align-self: center;
+  margin-top: 19px;
 }
 .contact img {
   margin-bottom: 1.5rem;
@@ -577,6 +590,7 @@ h6 {
   letter-spacing: var(--mainSpacing);
   margin-bottom: 0.5rem;
 }
+
 .form-control {
   width: 100%;
   background: transparent;
@@ -609,16 +623,22 @@ h6 {
   }
 }
 .singUp {
+  justify-self: center;
+  align-self: center;
   align-items: center;
   justify-content: center;
-  margin-left: 30%;
+
   flex: 1;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 20%;
 }
 .input {
   flex-direction: row;
   display: flex;
   margin: 17px;
-  margin-top: 30px;
+  // margin-top: 30px;
 }
 
 .inNA {
@@ -632,4 +652,105 @@ h6 {
 .navImg {
   height: 100px;
   width: 100px;
+}
+.form-groupp {
+  width: 300px;
+  height: auto;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 30px;
+}
+.form-groupp .sl {
+  display: block;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 0.5rem;
+}
+.form-control {
+  position: relative;
+  height: 50px;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid #555;
+  border-radius: 0;
+  transition: 0.5s ease-in-out;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-bottom: 2px solid #222;
+}
+.sl {
+  position: absolute;
+  top: 0;
+  font-size: 18px;
+  padding-left: 15px;
+  line-height: 50px;
+  transition: 0.5s ease;
+}
+.form-control:focus + .sl,
+.form-control:valid + .sl {
+  top: -30px;
+  padding-left: 0;
+  font-size: 20x;
+}
+.imgSL {
+  position: absolute;
+  top: 30%;
+  left: 57%;
+}
+.IMsl {
+  height: 330px;
+  width: 330px;
+}
+
+// #######################################
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.singleImage {
+  padding: 0 20px 20px;
+  height: 300px;
+  border-radius: 34;
+}
+
+.singleImage:hover {
+  padding: 5px;
+  /* opacity: .5; */
+  transition: 0.9s;
+  transform: scale(
+    1.24
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.popupParent {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popupImage {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+}
+
+.imageClosingButton {
+  position: relative;
 }
