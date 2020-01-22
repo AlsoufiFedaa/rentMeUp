@@ -3,13 +3,15 @@ import Title from "../Components/Title";
 import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
+// import Rating from "react-rating";
 
 class Contact extends Component {
   state = {
     Name: "",
     Email: "",
     Subejact: "",
-    Massage: ""
+    Massage: "",
+    feed: ""
   };
 
   addUser = () => {
@@ -53,6 +55,11 @@ class Contact extends Component {
   handleMassageChange = e => {
     this.setState({
       Massage: e.target.value
+    });
+  };
+  handleFeedChange = e => {
+    this.setState({
+      feed: e.target.value
     });
   };
 
@@ -124,9 +131,27 @@ class Contact extends Component {
                 Massage
               </label>
             </div>
+            <div className="form-groupp">
+              <input
+                defaultValue={this.state.feed}
+                onChange={this.handleFeedChange}
+                type="text"
+                name="firstName"
+                id="firstName"
+                className="form-control"
+                required
+              />
+              <label className="sl" htmlFor="firstName">
+                Your Feedback
+              </label>
+            </div>
+            {/* <Rating rating={4} total={5} /> */}
 
-            <Link to="/" className="btn-primary" onClick={this.addUser}>
-              {" "}
+            <Link
+              to="/MainContainer"
+              className="btn-primary"
+              onClick={this.addUser}
+            >
               Submit
             </Link>
           </div>

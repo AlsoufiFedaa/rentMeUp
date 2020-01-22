@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import Services from "../Components/Services";
 import ImageCarousel from "../Components/imageCarousel";
 import AOS from "aos";
-import { AuthContext } from "../Components/auth";
+
 import ContactUs from "./contactUs";
-import { Redirect } from "react-router";
-const Home = () => {
+
+const HomeLogged = () => {
   useEffect(() => {
     /**
      * Server-side rendering does not provide the 'document' object
@@ -29,21 +29,15 @@ const Home = () => {
     }
   });
 
-  const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
-  if (currentUser) {
-    return <Redirect to="/HomeLogged" />;
-  }
-
   return (
     <>
       <Hero>
         <Banner title="Welcome">
-          <Link to="/SignUP" className="btn-primary">
-            Sign Up
+          <Link to="/MainContainer" className="btn-primary">
+            See Map
           </Link>
-          <Link to="/LogIn" className="btn-primary">
-            Log In
+          <Link to="/AddPropery" className="btn-primary">
+            Add Your Home
           </Link>
         </Banner>
 
@@ -54,4 +48,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default HomeLogged;

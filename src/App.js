@@ -14,20 +14,23 @@ import LogIn from "./pages/logIn";
 import { Route, Switch } from "react-router-dom";
 import AuthProvider from "./Components/auth";
 import PrivateRoute from "./Components/privateRoute";
+import HomeLogged from "./pages/homeLogged";
+import Feedbacks from "./pages/feedbacksPage";
 // import Fire from "./pages/ClassFire";
 function App() {
   return (
     <AuthProvider>
       <div>
-        {/* <Fire /> */}
         <NavBar />
+
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/Feedbacks" component={Feedbacks} />
           <Route exact path="/contactUs" component={Contact} />
           <Route exact path="/SignUP" component={SignUP} />
           <Route exact path="/LogIn" component={LogIn} />
           <PrivateRoute exact path="/Profile" component={Profile} />
-          <PrivateRoute exact path="/AddPropery" component={AddContainer} />
+          <PrivateRoute exact path="/HomeLogged" component={HomeLogged} />
           <PrivateRoute exact path="/MainContainer" component={MainContainer} />
           <PrivateRoute exact path="/AddPropery" component={AddContainer} />
           <Route exact path="/SingleEstate" component={SingleEstate} />

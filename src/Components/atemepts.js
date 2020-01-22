@@ -1,3 +1,15 @@
+// firebase.auth().signOut().then(function() {
+//   console.log('Signed Out');
+// }, function(error) {
+//   console.error('Sign Out Error', error);
+// });
+
+
+// var Rating = require('react-rating');
+//<Rating rating={4} total={5}/>
+// rating={2} total={5} interactive={false} 
+
+
 //  filterEstates = () => {
 //   let {
 //     type,

@@ -6,8 +6,7 @@ import { InfoWindow, Marker } from "react-google-maps";
 
 import * as firebase from "firebase";
 
-//NeedToDo
-// read from firebase/database
+
 
 class MapContainer extends Component {
   state = {
@@ -150,10 +149,11 @@ class MapContainer extends Component {
                 position={{ lat: item.lat + 0.067, lng: item.lng }}
               >
                 <div className="infoWin">
-                  <h4> {item.type}</h4>
-                  <span style={{ padding: 0, margin: 0 }}>{item.street}</span>
-                  <img alt="50*50" src={item.url[0]} width="50" height="50" />
-                  <h4> {item.price}</h4>
+                  <h4 className='infotype'> {item.type}</h4>
+                  
+                  <img alt="50*50" src={item.url[0]} width="50" height="50" className='imageInfo' />
+                  <span style={{ padding: 0, margin: 0 }} className='infoStreet'>{item.street}</span>
+                  <h4 className='infoprice'> {item.price}</h4>
                   <Link
                     to={{ pathname: "/SingleEstate", params: { item } }}
                     className="btn-add"
