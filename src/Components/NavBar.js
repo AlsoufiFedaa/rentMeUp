@@ -3,7 +3,7 @@ import { FaAlignRight } from "react-icons/fa";
 import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
-import { Redirect } from "react-router";
+
 import { AuthContext } from "../Components/auth";
 
 class NavBar extends Component {
@@ -19,14 +19,18 @@ class NavBar extends Component {
     console.log(currentUser);
 
     if (currentUser) {
-      return <Redirect to="/LogIn" />;
-    } else {
       return firebase
         .auth()
         .signOut()
-        .then(() => {
-          console.log("Signed Out");
+        .then(function() {
+          console.log("sign out ");
+          alert("sign out successfully");
+        })
+        .catch(function(error) {
+          console.log("An error happened.");
         });
+    } else {
+      return alert("Log In first");
     }
   };
   render() {
@@ -57,8 +61,10 @@ class NavBar extends Component {
             <li>
               <Link to="/Feedbacks"> Feedbacks</Link>
             </li>
-            <li className="singOut" onClick={this.SignOut}>
-              <Link onClick={this.SignOut}>Sign Out</Link>
+            <li className="singOut">
+              <Link to="/" onClick={this.SignOut}>
+                Sign Out
+              </Link>
             </li>
           </ul>
         </div>

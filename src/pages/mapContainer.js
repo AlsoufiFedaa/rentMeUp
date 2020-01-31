@@ -6,8 +6,6 @@ import { InfoWindow, Marker } from "react-google-maps";
 
 import * as firebase from "firebase";
 
-
-
 class MapContainer extends Component {
   state = {
     estates: [],
@@ -22,8 +20,7 @@ class MapContainer extends Component {
     maxspace: 0,
     roomNum: 1,
     downtown: false,
-    overLookingSea: false,
-    tempEstates: []
+    overLookingSea: false
   };
 
   async componentDidMount() {
@@ -37,7 +34,7 @@ class MapContainer extends Component {
       collection[doc.id] = doc.data();
       estates.push(collection[doc.id]);
       this.setState({ estates });
-      this.setState({ sortedEstates: estates });
+      this.setState({ sortedEstates: this.state.estates });
     });
     let maxprice = Math.max(...this.state.estates.map(item => item.price));
     let maxspace = Math.max(...this.state.estates.map(item => item.space));
@@ -58,15 +55,16 @@ class MapContainer extends Component {
       type,
       city,
       street,
-      minprice,
-      maxspace,
+      // minprice,
+      // maxspace,
       price,
-      minspace,
-      maxprice,
+      // minspace,
+      // maxprice,
       roomNum,
       overLookingSea,
       downtown,
-      tempEstates
+      // tempEstates,
+      sortedEstates
     } = this.state;
     //all estates
     console.log(this.state.estates);
@@ -86,38 +84,38 @@ class MapContainer extends Component {
     );
     roomNum = parseInt(roomNum);
     price = parseInt(price);
+    console.log("state", type, city, street);
     const db = firebase.firestore();
-    
-      if (
-        (city !== "all") &
-        (type !== "all")
-        //  &
-        // (roomNum !== 3) &
-        // (street !== "") &
-        // (price !== minprice)
-      ) {
-        db.collection("estates")
-          .where("type", "==", type)
-          .where("city", "==", city)
-          // .where("roomNum", "==", roomNum)
-          .where("street", "==", street)
-          // .where("downtown", "==", downtown)
-          // .where("overLookingSea", "==", overLookingSea)
-          // .where("price", "==", price)
-          // .where("space", "in", [minspace, maxspace])
-          .get()
-          .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-              let item = doc.data();
-              item.id = doc.id;
 
-              tempEstates.push(item);
-            });
+    if (
+      (city !== "all") &
+      (type !== "all")
+      //  &
+      // (roomNum !== 3) &
+      // (street !== "") &
+      // (price !== minprice)
+    ) {
+      db.collection("estates")
+        .where("type", "==", type)
+        .where("city", "==", city)
+        // .where("roomNum", "==", roomNum)
+        .where("street", "==", street)
+        // .where("downtown", "==", downtown)
+        // .where("overLookingSea", "==", overLookingSea)
+        // .where("price", "==", price)
+        // .where("space", "in", [minspace, maxspace])
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            let item = doc.data();
+            item.id = doc.id;
+
+            this.state.sortedEstates.push(item);
           });
-
-        console.log(tempEstates);
-        this.setState({ sortedEstates: tempEstates });
-      
+        });
+      this.setState({ sortedEstates });
+      console.log(sortedEstates);
+      // this.setState({ sortedEstates: this.state.tempEstates });
     }
     //filtering by type
   };
@@ -131,7 +129,6 @@ class MapContainer extends Component {
   displayMarkers = () => {
     console.log(this.state.sortedEstates, "sortedEstates");
     return this.state.sortedEstates.map((item, index) => {
-      console.log(item);
       return (
         <>
           {/*Marker*/}
@@ -149,11 +146,22 @@ class MapContainer extends Component {
                 position={{ lat: item.lat + 0.067, lng: item.lng }}
               >
                 <div className="infoWin">
-                  <h4 className='infotype'> {item.type}</h4>
-                  
-                  <img alt="50*50" src={item.url[0]} width="50" height="50" className='imageInfo' />
-                  <span style={{ padding: 0, margin: 0 }} className='infoStreet'>{item.street}</span>
-                  <h4 className='infoprice'> {item.price}</h4>
+                  <h4 className="infotype"> {item.type}</h4>
+
+                  <img
+                    alt="50*50"
+                    src={item.url[0]}
+                    width="50"
+                    height="50"
+                    className="imageInfo"
+                  />
+                  <span
+                    style={{ padding: 0, margin: 0 }}
+                    className="infoStreet"
+                  >
+                    {item.street}
+                  </span>
+                  <h4 className="infoprice"> {item.price}</h4>
                   <Link
                     to={{ pathname: "/SingleEstate", params: { item } }}
                     className="btn-add"
