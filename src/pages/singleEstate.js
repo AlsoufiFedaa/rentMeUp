@@ -79,7 +79,7 @@ class SingleEstate extends Component {
             </article>
           </div>
         </section>
-        <Link to="/MainMap" className="btn-primary">
+        <Link to="/MainContainer" className="btn-primary">
           Back To The Map
         </Link>
       </div>

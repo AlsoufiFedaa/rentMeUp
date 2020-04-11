@@ -6,6 +6,7 @@ import 'firebase/storage'
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
+import { NEG_ONE } from "long";
 Geocode.setApiKey( "AIzaSyA2loHLnnXg7c8A9LzTpkJ_N-kKvYlmO4s" );
 Geocode.enableDebug();
 class AddProperty extends Component{
@@ -245,9 +246,9 @@ class AddProperty extends Component{
             db.collection("estates").add({
 				
 			 type: this.state.type, 
-			 name: name,
+			 name: 'fedaa',
 			 email:email,
-			 phone:phone,
+			 phone:'0599616970',
              city: this.state.city, 
              street: this.state.street, 
              price:this.state.price, 
@@ -318,12 +319,16 @@ class AddProperty extends Component{
 						{/* For Auto complete Search Box */}
 						<Autocomplete
 							style={{
-								width: '100%',
+								width: '40%',
 								height: '40px',
 								paddingLeft: '16px',
 								marginTop: '2px',
-								marginBottom: '90px',
+								marginBottom: '20px',
+								border: 'none',
+								borderBottom: '2px solid #af9a7d',
+								background: "transparent"
 							}}
+							calssName='AutoComplete'
 							onPlaceSelected={ this.onPlaceSelected }
 							types={['(regions)']}
 						/>
@@ -334,23 +339,24 @@ class AddProperty extends Component{
 		);
 		let map;
 		if( this.props.center.lat !== undefined ) {
-			map = <div style={{marginTop:150 ,textAlign: "center"}}>
+			map = <div  style={{marginTop:150 ,textAlign: "center"}}>
 
-				<div>
+				<div className="addForm">
 				<Title title='Add Property'/>
+				<div calssName ='wrapper' >
 				<AsyncMap
 					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0&libraries=places"
 					loadingElement={
-						<div style={{ height: `100%` }} />
+						<div style={{ height: `80%` }} />
 					}
 					containerElement={
 						<div style={{ height: this.props.height }} />
 					}
 					mapElement={
-						<div style={{ height: `100%` }} />
+						<div style={{ height: `80%` }} />
 					}
 				/>
-					<div className="form-group"  style={{marginTop:70}}>
+					<div className="form-group"  style={{marginTop:30}}>
 						<label htmlFor="">City</label>
 						<input type="text" id="city"    onChange={ this.handleChange } value={ this.state.city }/>
 					</div>
@@ -383,8 +389,10 @@ class AddProperty extends Component{
 						<br/> 
 						<div className='button'>
 					<label htmlFor='multi'></label>
-					<input type='file' id='selectedFile' accept="image/*" onChange={this.handleChangeImage} multiple />
-					<button onClick={this.upLoadImage}>Upload image</button>
+					
+					<input type='file' id='selectedFile'  style={{opacity : 0, position:'absolute' , top: 1297 ,overflow:'hidden', zIndex:20}}  accept="image/*" onChange={this.handleChangeImage} multiple />
+					<button className='btn ' style={{position:'relative' ,zIndex:19}}> Choose images</button>
+					<button onClick={this.upLoadImage} className="btn" >Upload images</button>
 					<br/> 
 					
 				
@@ -413,6 +421,7 @@ class AddProperty extends Component{
 				</div>
 
 			
+			</div>
 			</div>
 		} else {
 			map = <div style={{height: this.props.height}} />

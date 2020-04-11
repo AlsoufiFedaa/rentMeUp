@@ -2,8 +2,7 @@ import React from 'react';
 import Title from '../Components/Title';
 import {Link} from "react-router-dom";
 
-//needToDO  
-//filter according to firebase/database
+
 
 // get all unique values 
 const getUnique = (items , value)=> { 
