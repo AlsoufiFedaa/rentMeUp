@@ -6,7 +6,6 @@ import 'firebase/storage'
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
-import { NEG_ONE } from "long";
 Geocode.setApiKey( "AIzaSyA2loHLnnXg7c8A9LzTpkJ_N-kKvYlmO4s" );
 Geocode.enableDebug();
 class AddProperty extends Component{
@@ -34,23 +33,14 @@ class AddProperty extends Component{
        overLookingSea: false, 
        selectedFile:null, 
        downloadURLs:[], 
-
-      
-      
-      }
-      
-   
-
-
+      }     
     }
-
-
-
   //   	 * Get the current address from the default map position and set those values in the state
 	//  */
 	componentDidMount() {
     		Geocode.fromLatLng( this.state.mapPosition.lat , this.state.mapPosition.lng ).then(
     			response => {
+					console.log('responseAdd', response)
     				const address = response.results[0].formatted_address,
     				      addressArray =  response.results[0].address_components,
     				      city = this.getCity( addressArray ),
@@ -76,9 +66,7 @@ class AddProperty extends Component{
   	/**
 	 * Component should only update ( meaning re-render ), when the user selects the address, or drags the pin
 	 *
-	 * @param nextProps
-	 * @param nextState
-	 * @return {boolean}
+
 	 */
 	shouldComponentUpdate( nextProps, nextState ){
 		if (
@@ -96,8 +84,7 @@ class AddProperty extends Component{
 	/**
 	 * Get the city and set the city input value to the one selected
 	 *
-	 * @param addressArray
-	 * @return {string}
+
 	 */
 	getCity = ( addressArray ) => {
 		let city = '';
@@ -130,20 +117,16 @@ class AddProperty extends Component{
 	/**
 	 * Get the address and set the address input value to the one selected
 	 *
-	 * @param addressArray
-	 * @return {string}
+
 	 */
 
-  	onInfoWindowClose = ( event ) => {
-
-	};
 
 	/**
-	 * When the marker is dragged you get the lat and long using the functions available from event object.
+	 * When the marker is dragged get the lat and long using the functions available from event object.
 	 * Use geocode to get the address, city, area and state from the lat and lng positions.
 	 * And then set those values in the state.
 	 *
-	 * @param event
+	
 	 */
 	onMarkerDragEnd = ( event ) => {
 		let newLat = event.latLng.lat(),
@@ -182,10 +165,10 @@ class AddProperty extends Component{
 
 	/**
 	 * When the user types an address in the search box
-	 * @param place
+
 	 */
 	onPlaceSelected = ( place ) => {
-		console.log( 'plc', place );
+		console.log( 'place', place );
 		const address = place.formatted_address,
 		      addressArray =  place.address_components,
 		      city = this.getCity( addressArray ),
@@ -210,14 +193,17 @@ class AddProperty extends Component{
 			},
 		})
 	};
-	
+	/* used to get values from different inputs and set then in the state*/
     handleChange=(event)=>{ 
         const target = event.target; 
         const value = target.type ===  'radio'? 
         target.checked : target.value;
         const id = event.target.id;
         this.setState({[id]:value});
-      };
+	  };
+	  
+	  /* hadles the selected images by user*/
+
       handleChangeImage=(e)=>{ 
         {if(e.target.files){ 
           
@@ -228,7 +214,7 @@ class AddProperty extends Component{
         }}
       }
      
- 
+ /*stores info/ detials in firebase*/ 
       addPropertyToMap=()=> {
 
 		let user = firebase.auth().currentUser;
@@ -268,27 +254,43 @@ class AddProperty extends Component{
            console.error("Error adding document: ", error);
        })
 
-      }
+	  }
+	  
+	  /* gets images from user's pc*/ 
+
     upLoadImage=()=>{ 
-     
+     console.log('this.state.selectedFile',this.state.selectedFile)
       let {downloadURLs} = this.state;
         var uploadTask =  firebase.storage().ref();
         
-        Object.keys(this.state.selectedFile).map((key)=>{
-         
-          uploadTask.child(`images/${this.state.selectedFile[key].name}`).put(this.state.selectedFile[key]).then((snapshot) =>
-          snapshot.ref.getDownloadURL().then((downloadURL) => {
-          
-           downloadURLs.push(downloadURL)
-           this.setState({downloadURLs})
-           
-          })
+        Promise.all(Object.keys(this.state.selectedFile).map((key)=>{
 
-          )})
-          console.log(downloadURLs)
+			
+         
+		  uploadTask.child(`images/${this.state.selectedFile[key].name}`).put(this.state.selectedFile[key]).on(
+            firebase.storage.TaskEvent.STATE_CHANGED,
+            snapshot => {
+              const progress = (
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                console.log(`Progress: ${progress}%`);
+              if (snapshot.state === firebase.storage.TaskState.RUNNING) {
+                 console.log('file uploading...')
+              }
+               // ...etc
+            },
+            error => console.log(error.code),
+            async () => {
+              const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+			  console.log(downloadURL);
+			  downloadURLs.push(downloadURL)
+			  this.setState({downloadURLs})
           
-       
-	}
+			});
+		}
+		))  
+	
+}
+
    
     render() {
     
@@ -299,15 +301,6 @@ class AddProperty extends Component{
 					           defaultZoom={ this.props.zoom }
 					           defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
 					>
-						{/* InfoWindow on top of marker */}
-						<InfoWindow
-							onClose={this.onInfoWindowClose}
-							position={{ lat: ( this.state.markerPosition.lat + 0.0018 ), lng: this.state.markerPosition.lng }}
-						>
-							<div>
-								<span style={{ padding: 0, margin: 0 }}>{ this.state.address }</span>
-							</div>
-						</InfoWindow>
 						{/*Marker*/}
 						<Marker google={this.props.google}
 						        name={'Dolores park'}
@@ -426,9 +419,6 @@ class AddProperty extends Component{
 		} else {
 			map = <div style={{height: this.props.height}} />
     }
-
-
-      
     return(
         map  )
 }}

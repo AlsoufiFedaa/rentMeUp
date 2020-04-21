@@ -95,7 +95,7 @@ class Contact extends Component {
           style={{ marginTop: "45px", marginLeft: "25%" }}
         >
           <Title title="Contact US" />
-
+      <div className="contactForm">
           <div className="singUp">
             <div className="form-groupp">
               <input
@@ -126,7 +126,7 @@ class Contact extends Component {
                 Email
               </label>
             </div>
-{/* 
+            {/* 
             <div className="form-groupp">
               <input
                 defaultValue={this.state.Subejact}
@@ -202,6 +202,7 @@ class Contact extends Component {
             >
               Submit
             </Link>
+          </div>
           </div>
           <div className="imgSL">
             <img className="IMsl" src={logo} alt="rentmeUp" />

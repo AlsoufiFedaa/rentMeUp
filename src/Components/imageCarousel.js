@@ -70,7 +70,6 @@ const ImageCarousel = () => {
           objectFit="contain"
           key={index}
           src={image}
-          className=""
           style={{
             left: "0",
             right: "0",

@@ -29,13 +29,17 @@ class MapContainer extends Component {
       .firestore()
       .collection("estates")
       .get();
-    const collection = {};
+
     snapshot.forEach(doc => {
-      collection[doc.id] = doc.data();
-      estates.push(collection[doc.id]);
+      let data = doc.data();
+
+      data.id = doc.id;
+      // collection[doc.id] = doc.data();
+      estates.push(data);
       this.setState({ estates });
       this.setState({ sortedEstates: this.state.estates });
     });
+
     let maxprice = Math.max(...this.state.estates.map(item => item.price));
     let maxspace = Math.max(...this.state.estates.map(item => item.space));
     this.setState({ maxprice, maxspace });
@@ -68,7 +72,7 @@ class MapContainer extends Component {
     } = this.state;
     //all estates
     console.log(this.state.estates);
-    // convert to integer
+
     console.log(
       "type",
       type,
@@ -82,6 +86,7 @@ class MapContainer extends Component {
       "down",
       downtown
     );
+    // convert to integer
     roomNum = parseInt(roomNum);
     price = parseInt(price);
     console.log("state", type, city, street);
@@ -144,30 +149,32 @@ class MapContainer extends Component {
               <InfoWindow
                 onClose={this.onInfoWindowClose}
                 position={{ lat: item.lat + 0.067, lng: item.lng }}
+                style={{ width: 150, height: 150 }}
               >
                 <div className="infoWin">
-                  <h4 className="infotype"> {item.type}</h4>
+                  <div className="estate">
+                    <div style={{ flexDirection: "row", alignItems: "center" }}>
+                      <img src={item.url[0]} width="70" height="60" />
+                      <h4 style={{ color: "gray" }}>
+                        {" "}
+                        x {item.roomNum} {item.type}
+                      </h4>
 
-                  <img
-                    alt="50*50"
-                    src={item.url[0]}
-                    width="50"
-                    height="50"
-                    className="imageInfo"
-                  />
-                  <span
-                    style={{ padding: 0, margin: 0 }}
-                    className="infoStreet"
-                  >
-                    {item.street}
-                  </span>
-                  <h4 className="infoprice"> {item.price}</h4>
-                  <Link
-                    to={{ pathname: "/SingleEstate", params: { item } }}
-                    className="btn-add"
-                  >
-                    More
-                  </Link>
+                      <div className="estateInfoContainer">
+                        <h4 style={{ marginLeft: 12 }}> ${item.price}</h4>
+                      </div>
+                    </div>
+
+                    <Link
+                      to={{
+                        pathname: `/SingleEstate/${item.id}`
+                        // params: { id: item.id }
+                      }}
+                      className="btn-add"
+                    >
+                      More
+                    </Link>
+                  </div>
                 </div>
               </InfoWindow>
             )}

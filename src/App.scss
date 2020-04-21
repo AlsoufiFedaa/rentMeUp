@@ -138,6 +138,8 @@ h6 {
   width: 100%;
   background: var(--offWhite);
   z-index: 200;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 .nav-header {
   display: flex;
@@ -167,7 +169,8 @@ h6 {
   color: rgb(83, 42, 3);
   transition: var(--mainTransition);
   text-align: center;
-  font-size: 12px;
+  font-size: 15px;
+  font-family: fantasy;
   font-weight: 550;
   letter-spacing: var(--mainSpacing);
 }
@@ -373,14 +376,7 @@ h6 {
 }
 
 .contact-center {
-  // width: 167px;
-  // height: 3px;
   margin: 0 auto;
-
-  // display: grid;
-  // grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-  // grid-row-gap: 20rem;
-  // grid-column-gap: 20px;
 }
 .contact {
   display: inline-block;
@@ -399,93 +395,10 @@ h6 {
   background: transparent;
   background: var(--primaryColor);
 }
-/* featured rooms */
-
-.featured-rooms {
-  padding: 5rem 0;
-}
-.featured-rooms-center {
-  width: 80vw;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  grid-row-gap: 2rem;
-  grid-column-gap: 40px;
-}
-@media screen and (min-width: 776px) {
-  .featured-rooms-center {
-    width: 90vw;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  }
-}
-@media screen and (min-width: 992px) {
-  .featured-rooms-center {
-    width: 95vw;
-    max-width: 1170px;
-  }
-}
-/* end pf featured rooms */
-/* room */
-.room {
-  box-shadow: var(--lightShadow);
-  transition: var(--mainTransition);
-}
-.room:hover {
-  box-shadow: var(--darkShadow);
-}
-
-.img-container {
-  position: relative;
-}
-.img-container img {
-  width: 100%;
-  display: block;
-  transition: var(--mainTransition);
-}
-
-.img-container:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-.img-container:hover img {
-  opacity: 0.3;
-}
-.img-container:hover .price-top {
-  opacity: 0;
-}
-.img-container:hover .room-link {
-  transform: translate(-50%, -50%) scale(1);
-}
-.room-info {
-  background: var(--darkGrey);
-  text-transform: capitalize;
-  padding: 0.5rem 0;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: var(--mainSpacing);
-}
-/* end of room  */
 /* single room*/
 
 .single-room {
   padding: 5rem 0 0 0;
-}
-.single-room-images {
-  width: 80vw;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-row-gap: 2rem;
-  grid-column-gap: 50px;
-}
-.single-room-images img {
-  width: 100%;
-  display: block;
-}
-.single-room-info {
-  width: 80vw;
-  display: grid;
-  grid-template-columns: 1fr;
-  margin: 2rem auto;
 }
 .data {
   float: left;
@@ -532,47 +445,12 @@ h6 {
   grid-row-gap: 1rem;
 }
 @media screen and (min-width: 992px) {
-  .single-room-images,
-  .single-room-info,
-  .room-extras {
-    width: 95vw;
-    max-width: 1170px;
-  }
-  .single-room-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 2rem;
-  }
   .info {
     padding-left: 3rem;
   }
 }
 /* end of single room*/
-/* roomlist */
-.roomslist {
-  padding: 5rem 0;
-}
-.roomslist-center {
-  width: 80vw;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  grid-row-gap: 2rem;
-  grid-column-gap: 30px;
-}
 
-@media screen and (min-width: 776px) {
-  .roomslist-center {
-    width: 90vw;
-  }
-}
-@media screen and (min-width: 992px) {
-  .roomslist-center {
-    width: 95vw;
-    max-width: 1170px;
-  }
-}
-/* end of roomlist */
 /*  rooms fitler*/
 .filter-container {
   padding: 5rem 0;
@@ -592,6 +470,7 @@ h6 {
   width: 100%;
   padding: 0 20px;
 }
+
 .addForm {
   max-width: 1000px;
   margin: 0 auto;
@@ -684,18 +563,26 @@ h6 {
   // margin-top: 30px;
 }
 //infoWindow
-.infotype {
-  text-align: left;
+
+.estate {
+  flex-direction: row;
+
+  border-radius: 20%;
+  padding: 10px;
+  background-color: aliceblue;
+  width: 80px;
 }
-.infoStreet {
-  text-align: center;
+.hours {
+  flex: 1;
+  flex-direction: column;
+  margin-left: 24;
+  justify-content: space-evenly;
 }
-.infoprice {
-  text-align: center;
+.estateInfoContainer {
+  flex: 1.5;
+  flex-direction: "row";
 }
-.imageInfo {
-  align-self: center;
-}
+
 .inNA {
   margin-right: 20px;
 }
@@ -705,15 +592,13 @@ h6 {
   // border-radius: 20%;
 }
 .navImg {
-  height: 100px;
-  width: 100px;
+  margin-left: 1.9rem;
+  height: 105px;
+  width: 120px;
 }
 .form-groupp {
   width: 300px;
   height: auto;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
   transform: translate(-50%, -50%);
   margin-top: 50px;
 }
@@ -844,14 +729,7 @@ h6 {
     padding: 10px 0;
     font-weight: bold;
   }
-  .details {
-    position: relative;
-  }
-  .features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+
 }
 
 /* #endregion */

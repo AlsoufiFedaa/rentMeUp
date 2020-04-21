@@ -134,8 +134,11 @@ class SignUP extends Component {
               </label>
             </div>
 
-            <Link to="/LogIn" className="btn-primary" onClick={this.addUser}>
-              {" "}
+            <Link
+              to="/HomeLogged"
+              className="btn-primary"
+              onClick={this.addUser}
+            >
               Sign Up
             </Link>
           </div>
