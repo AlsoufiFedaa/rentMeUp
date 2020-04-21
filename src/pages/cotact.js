@@ -125,7 +125,7 @@ class Contact extends Component {
               </label>
             </div>
 
-            <Link to="/" className="btn-primary" onClick={this.addUser}>
+                    <Link to="/MainContainer" className="btn-primary" onClick={this.addUser}>
               {" "}
               Submit
             </Link>
