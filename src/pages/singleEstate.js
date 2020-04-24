@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Hero from "../Components/Hero";
-import Banner from "../Components/Banner";
+
 import { Link } from "react-router-dom";
+import Title from "../Components/Title";
 // import * as firebase from "firebase";
 class SingleEstate extends Component {
   state = {
@@ -20,13 +20,7 @@ class SingleEstate extends Component {
 
     return (
       <div>
-        <Hero>
-          <Banner title={"SingleEstate"}>
-            <Link to="/MainMap" className="btn-primary">
-              Back To The Map
-            </Link>
-          </Banner>
-        </Hero>
+        <Title title="Images Gallery" />
         <section className="single-room">
           <div style={{ alignItems: "center" }}>
             <div className="images">
@@ -85,6 +79,9 @@ class SingleEstate extends Component {
             </article>
           </div>
         </section>
+        <Link to="/MainContainer" className="btn-primary">
+          Back To The Map
+        </Link>
       </div>
     );
   }

@@ -12,7 +12,7 @@ class ContactUs extends Component {
           {this.state.images.map((item, index) => {
             return (
               <article key={index} className="contact">
-                <img src={item} width="30px" height="30px" className='img' />
+                <img src={item} width="30px" height="30px" className='img' alt='contacts'/>
               </article>
             );
           })}

@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Gallery, GalleryImage } from "react-gesture-gallery";
 
-import { TimelineLite, Power2 } from "gsap";
-import CSSRulePlugin from "gsap/CSSRulePlugin";
+// import { TimelineLite, Power2 } from "gsap";
+// import CSSRulePlugin from "gsap/CSSRulePlugin";
 
 const image1 = require("../assets/Gaza1.jpg");
 const image2 = require("../assets/Gaza3.jpg");
@@ -28,7 +28,7 @@ const ImageCarousel = () => {
   //     delay: -1.4
   //   });
   // });
-  
+
   const [index, setIndex] = React.useState(0);
 
   useEffect(() => {
@@ -77,9 +77,9 @@ const ImageCarousel = () => {
             bottom: "0",
             zIndex: 0
           }}
-          ref={el => {
-            image = el;
-          }}
+          // ref={el => {
+          //   image = el;
+          // }}
         />
       ))}
     </Gallery>

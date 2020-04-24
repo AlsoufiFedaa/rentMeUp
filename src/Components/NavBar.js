@@ -2,12 +2,36 @@ import React, { Component } from "react";
 import { FaAlignRight } from "react-icons/fa";
 import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
+import * as firebase from "firebase";
+
+import { AuthContext } from "../Components/auth";
+
 class NavBar extends Component {
   state = {
     isOPen: false
   };
+  static contextType = AuthContext;
   handleToggle = () => {
     this.setState({ isOPen: !this.state.isOPen });
+  };
+  SignOut = () => {
+    const { currentUser } = this.context;
+    console.log(currentUser);
+
+    if (currentUser) {
+      return firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log("sign out ");
+          alert("sign out successfully");
+        })
+        .catch(function(error) {
+          console.log("An error happened.");
+        });
+    } else {
+      return alert("Log In first");
+    }
   };
   render() {
     return (
@@ -33,6 +57,14 @@ class NavBar extends Component {
             </li>
             <li>
               <Link to="/contactUs"> Contact</Link>
+            </li>
+            <li>
+              <Link to="/Feedbacks"> Feedbacks</Link>
+            </li>
+            <li className="singOut">
+              <Link to="/" onClick={this.SignOut}>
+                Sign Out
+              </Link>
             </li>
           </ul>
         </div>

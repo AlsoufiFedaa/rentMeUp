@@ -1,7 +1,7 @@
 import Title from "../Components/Title";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo1.png";
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import { Redirect } from "react-router";
 import * as firebase from "firebase";
 import { AuthContext } from "../Components/auth";
@@ -64,7 +64,7 @@ class LogIn extends Component {
                 className="form-control"
                 required
               />
-              <label className="sl" className="sl" htmlFor="firstName">
+              <label className="sl" htmlFor="firstName">
                 Email
               </label>
             </div>
@@ -79,7 +79,7 @@ class LogIn extends Component {
                 className="form-control"
                 required
               />
-              <label className="sl" className="sl" htmlFor="firstName">
+              <label className="sl" htmlFor="firstName">
                 Password
               </label>
             </div>
