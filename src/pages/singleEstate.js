@@ -1,21 +1,35 @@
 import React, { Component } from "react";
-
+import ChatModal from "../Components/ChatModal";
 import { Link } from "react-router-dom";
 import Title from "../Components/Title";
+import * as firebase from "firebase";
+
 // import * as firebase from "firebase";
 class SingleEstate extends Component {
   state = {
-    listOfImages: []
+    listOfImages: [],
+    item: {}
   };
 
-  // const { listOfImages } = this.state;
-  // listOfImages.push(url);
-  // this.setState({ listOfImages });
-  //   });
-  // };
+  componentDidMount() {
+    console.log("props", this.props);
+    let { item } = this.state;
+    const id = this.props.match.params.id;
+    firebase
+      .firestore()
+      .collection("estates")
+      .doc(id)
+      .get()
+      .then(querySnapshot => {
+        console.log(querySnapshot.data());
+        item = querySnapshot.data();
+        this.setState({ item });
+      });
+    console.log("single", this.state.item);
+  }
 
   render() {
-    const { item } = this.props.location.params;
+    const { item } = this.state;
     console.log(item);
 
     return (
@@ -24,17 +38,18 @@ class SingleEstate extends Component {
         <section className="single-room">
           <div style={{ alignItems: "center" }}>
             <div className="images">
-              {item.url.map((item, i) => {
-                return (
-                  <img
-                    className="singleImage"
-                    src={item || "http://via.placeholder.com/400x300"}
-                    alt="Uploaded images"
-                    height="300"
-                    width="400"
-                  />
-                );
-              })}
+              {item.url &&
+                item.url.map((item, i) => {
+                  return (
+                    <img
+                      className="singleImage"
+                      src={item || "http://via.placeholder.com/400x300"}
+                      alt="Uploaded images"
+                      height="300"
+                      width="400"
+                    />
+                  );
+                })}
             </div>
           </div>
           <div className="data">
@@ -79,6 +94,7 @@ class SingleEstate extends Component {
             </article>
           </div>
         </section>
+        <ChatModal item={item} />
         <Link to="/MainContainer" className="btn-primary">
           Back To The Map
         </Link>

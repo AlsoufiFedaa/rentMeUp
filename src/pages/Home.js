@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <>
       <Hero>
-        <Banner title="Welcome">
+        <Banner title="Welcome" subtitle="This website helps you find your next home!">
           <Link to="/SignUP" className="btn-primary">
             Sign Up
           </Link>

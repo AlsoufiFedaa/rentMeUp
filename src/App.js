@@ -3,7 +3,6 @@ import "./App.scss";
 import React from "react";
 import Contact from "./pages/cotact";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
 import SignUP from "./pages/signUP";
 import AddContainer from "./pages/addContainer";
 import MainContainer from "./pages/mapContainer";
@@ -29,11 +28,11 @@ function App() {
           <Route exact path="/contactUs" component={Contact} />
           <Route exact path="/SignUP" component={SignUP} />
           <Route exact path="/LogIn" component={LogIn} />
-          <PrivateRoute exact path="/Profile" component={Profile} />
-          <PrivateRoute exact path="/HomeLogged" component={HomeLogged} />
-          <PrivateRoute exact path="/MainContainer" component={MainContainer} />
-          <PrivateRoute exact path="/AddPropery" component={AddContainer} />
-          <Route exact path="/SingleEstate" component={SingleEstate} />
+
+          <Route exact path="/HomeLogged" component={HomeLogged} />
+          <Route exact path="/MainContainer" component={MainContainer} />
+          <Route exact path="/AddPropery" component={AddContainer} />
+          <Route exact path="/SingleEstate/:id" component={SingleEstate} />
           <Route component={Error} />
         </Switch>
       </div>

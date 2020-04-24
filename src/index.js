@@ -2,14 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 // import './index.css';
 
-import {BrowserRouter as Router} from "react-router-dom";
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 import * as firebase from "firebase";
 import "firebase/firestore";
-import 'firebase/storage'
-import AOS from 'aos'; 
-
+import "firebase/storage";
 
 var firebaseConfig = {
   apiKey: "AIzaSyD47xlalTqy3QK4fFgfD9jImnI5prteLfw",
@@ -24,9 +22,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-
 firebase.analytics();
-AOS.init()
 
 
 ReactDOM.render(
