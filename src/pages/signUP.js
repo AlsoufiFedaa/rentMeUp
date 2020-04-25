@@ -27,20 +27,23 @@ class SignUP extends Component {
         console.error(errorCode, errorMessage);
 
         // ...
-      })
-      .then(function() {
-        db.collection("users")
-          .add({
-            name: Name,
-            mobile: Mobile
-          })
+      });
 
-          .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-          })
-          .catch(function(error) {
-            console.error("Error adding document: ", error);
-          });
+    setTimeout(() => {
+      console.log("wait!");
+    }, 7000);
+    setTimeout(() => {
+      console.log("wait!");
+    }, 7000);
+
+    const user = firebase.auth().currentUser;
+    console.log("user", user.uid);
+
+    db.collection("users")
+      .doc(user.uid)
+      .set({ email: user.email, uid: user.uid, mobile: Mobile, name: Name })
+      .catch(function(error) {
+        console.error(error);
       });
   };
 
@@ -80,8 +83,8 @@ class SignUP extends Component {
                 defaultValue={this.state.Name}
                 onChange={this.handleNameChange}
                 type="text"
-                name="firstName"
-                id="firstName"
+                name="Name"
+                id="Name"
                 className="form-control"
                 required
               />
@@ -95,8 +98,8 @@ class SignUP extends Component {
                 defaultValue={this.state.Email}
                 onChange={this.handleEmailChange}
                 type="email"
-                name="firstName"
-                id="firstName"
+                name="Email"
+                id="Email"
                 className="form-control"
                 required
               />
@@ -110,8 +113,8 @@ class SignUP extends Component {
                 defaultValue={this.state.Password}
                 onChange={this.handlePasswordChange}
                 type="password"
-                name="firstName"
-                id="firstName"
+                name="Password"
+                id="password"
                 className="form-control"
                 required
               />
@@ -124,8 +127,8 @@ class SignUP extends Component {
                 defaultValue={this.state.Mobile}
                 onChange={this.handleMobileChange}
                 type="text"
-                name="firstName"
-                id="firstName"
+                name="Mobile"
+                id="Mobile"
                 className="form-control"
                 required
               />
