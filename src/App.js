@@ -29,10 +29,10 @@ function App() {
           <Route exact path="/SignUP" component={SignUP} />
           <Route exact path="/LogIn" component={LogIn} />
 
-          <Route exact path="/HomeLogged" component={HomeLogged} />
-          <Route exact path="/MainContainer" component={MainContainer} />
-          <Route exact path="/AddPropery" component={AddContainer} />
-          <Route exact path="/SingleEstate/:id" component={SingleEstate} />
+          <PrivateRoute exact path="/HomeLogged" component={HomeLogged} />
+          <PrivateRoute exact path="/MainContainer" component={MainContainer} />
+          <PrivateRoute exact path="/AddPropery" component={AddContainer} />
+          <PrivateRoute exact path="/SingleEstate/:id" component={SingleEstate} />
           <Route component={Error} />
         </Switch>
       </div>

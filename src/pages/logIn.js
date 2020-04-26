@@ -73,7 +73,7 @@ class LogIn extends Component {
               <input
                 defaultValue={this.state.Password}
                 onChange={this.handlePasswordChange}
-                type="text"
+                type="password"
                 name="firstName"
                 id="firstName"
                 className="form-control"
@@ -84,7 +84,11 @@ class LogIn extends Component {
               </label>
             </div>
 
-            <Link to="/mainMap" className="btn-primary" onClick={this.signin}>
+            <Link
+              to="/HomeLogged"
+              className="btn-primary"
+              onClick={this.signin}
+            >
               {" "}
               Log In
             </Link>

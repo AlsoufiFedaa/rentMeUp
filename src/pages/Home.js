@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Hero from "../Components/Hero";
 import Banner from "../Components/Banner";
 import { Link } from "react-router-dom";
@@ -18,7 +18,10 @@ const Home = () => {
   return (
     <>
       <Hero>
-        <Banner title="Welcome" subtitle="This website helps you find your next home!">
+        <Banner
+          title="Welcome"
+          subtitle="This website helps you find your next home!"
+        >
           <Link to="/SignUP" className="btn-primary">
             Sign Up
           </Link>

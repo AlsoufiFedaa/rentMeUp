@@ -3,6 +3,7 @@ import Map from "./mainMap";
 import FilterEstates from "./filterEstates";
 import { Link } from "react-router-dom";
 import { InfoWindow, Marker } from "react-google-maps";
+import { AuthContext } from "../Components/auth";
 
 import * as firebase from "firebase";
 
@@ -22,7 +23,7 @@ class MapContainer extends Component {
     downtown: false,
     overLookingSea: false
   };
-
+  static contextType = AuthContext;
   async componentDidMount() {
     const { estates } = this.state;
     const snapshot = await firebase
@@ -185,6 +186,8 @@ class MapContainer extends Component {
   };
 
   render() {
+    const { currentUser } = this.context;
+    console.log(currentUser);
     return (
       <div>
         <FilterEstates

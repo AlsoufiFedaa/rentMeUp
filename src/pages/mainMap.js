@@ -15,7 +15,7 @@ class MainMap extends Component {
         </GoogleMap>
       ))
     );
-    let map;
+    let map ;
     return (map = (
       <AsyncMap
         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0&libraries=places"
