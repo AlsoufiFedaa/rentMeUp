@@ -153,7 +153,6 @@ class MapContainer extends Component {
               >
                 <div className="infoWin">
                   <h4 className="infotype"> {item.type}</h4>
-
                   <img
                     alt="50*50"
                     src={item.url[0]}
@@ -168,12 +167,14 @@ class MapContainer extends Component {
                     {item.street}
                   </span>
                   <h4 className="infoprice"> {item.price}</h4>
+                        
                   <Link
-                    style={{ marginLeft: 35, marginTop: 0 }}
-                    to={{ pathname: "/SingleEstate", params: { item } }}
-                    className="btn-primary"
+                    to={{
+                      pathname: `/SingleEstate/${item.id}`
+                    }}
+                    className="btn-add"
                   >
-                    More
+                                          More                     
                   </Link>
                 </div>
               </InfoWindow>

@@ -94,7 +94,7 @@ class SingleEstate extends Component {
             </article>
           </div>
         </section>
-        <ChatModal item={item} />
+
         <Link to="/MainContainer" className="btn-primary">
           Back To The Map
         </Link>
