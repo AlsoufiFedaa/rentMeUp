@@ -4,7 +4,6 @@ import Card from "../Components/Card";
 import Title from "../Components/Title";
 
 import * as firebase from "firebase";
-import Rating from "react-rating";
 
 class Feedbacks extends Component {
   state = {

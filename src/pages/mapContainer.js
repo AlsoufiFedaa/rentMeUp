@@ -150,11 +150,10 @@ class MapContainer extends Component {
               <InfoWindow
                 onClose={this.onInfoWindowClose}
                 position={{ lat: item.lat + 0.067, lng: item.lng }}
-                style={{ width: 150, height: 150 }}
+                style={{ width: 80, height: 150 }}
               >
                 <div className="infoWin">
                   <h4 className="infotype"> {item.type}</h4>
-
                   <img
                     alt="50*50"
                     src={item.url[0]}
@@ -169,12 +168,15 @@ class MapContainer extends Component {
                     {item.street}
                   </span>
                   <h4 className="infoprice"> {item.price}</h4>
+                        
                   <Link
-                    style={{ marginLeft: 35, marginTop: 0 }}
-                    to={{ pathname: "/SingleEstate", params: { item } }}
-                    className="btn-primary"
+                    to={{
+                      pathname: `/SingleEstate/${item.id}`
+                    }}
+                    style={{ marginTop: 0, marginLeft: 0}}
+                    className="btn-add"
                   >
-                    More
+                                          More                     
                   </Link>
                 </div>
               </InfoWindow>

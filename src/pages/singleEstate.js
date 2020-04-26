@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ChatModal from "../Components/ChatModal";
+
 import { Link } from "react-router-dom";
 import Title from "../Components/Title";
 import * as firebase from "firebase";
@@ -47,6 +47,7 @@ class SingleEstate extends Component {
                       alt="Uploaded images"
                       height="300"
                       width="400"
+                      key={i}
                     />
                   );
                 })}
@@ -94,7 +95,7 @@ class SingleEstate extends Component {
             </article>
           </div>
         </section>
-        <ChatModal item={item} />
+
         <Link to="/MainContainer" className="btn-primary">
           Back To The Map
         </Link>
