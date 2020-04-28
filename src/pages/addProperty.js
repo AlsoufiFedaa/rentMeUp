@@ -127,7 +127,7 @@ class AddProperty extends Component {
       }
     }
   };
- 
+
   onPlaceSelected = place => {
     console.log("place", place);
     const address = place.formatted_address,
@@ -214,6 +214,57 @@ class AddProperty extends Component {
 
   /* gets images from currentUser's pc*/
 
+  onMarkerDragEnd = event => {
+    let newLat = event.latLng.lat(),
+      newLng = event.latLng.lng();
+    console.log(newLat, newLng);
+    const { markerPosition } = this.state;
+    this.setState({ markerPosition: { lat: newLat, lng: newLng } });
+
+    Geocode.fromLatLng(newLat, newLng).then(
+      response => {
+        console.log(response);
+        const address = response.results[0].formatted_address,
+          addressArray = response.results[0].address_components,
+          city = this.getCity(addressArray),
+          area = this.getArea(addressArray),
+          state = this.getState(addressArray);
+        this.setState({
+          address: address ? address : "",
+          area: area ? area : "",
+          city: city ? city : "",
+          state: state ? state : "",
+          markerPosition: {
+            lat: newLat,
+            lng: newLng
+          },
+          mapPosition: {
+            lat: newLat,
+            lng: newLng
+          }
+        });
+        console.log("city", this.state.city);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+    //getting user's detials
+    const { currentUser } = this.context;
+
+    let { UserDetials } = this.state;
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(currentUser.uid)
+      .get()
+      .then(querySnapshot => {
+        UserDetials = querySnapshot.data();
+        this.setState({ UserDetials });
+      });
+    console.log(this.state.UserDetials);
+  };
   upLoadImage = () => {
     let { downloadURLs } = this.state;
     var uploadTask = firebase.storage().ref();
