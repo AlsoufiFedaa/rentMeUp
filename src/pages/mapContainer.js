@@ -20,7 +20,10 @@ class MapContainer extends Component {
     maxspace: 0,
     roomNum: 1,
     downtown: false,
-    overLookingSea: false
+    overLookingSea: false,
+    prev_infowindow: 0,
+    newEstates: [],
+    query: firebase.firestore().collection("estates")
   };
 
   async componentDidMount() {
@@ -34,7 +37,7 @@ class MapContainer extends Component {
       let data = doc.data();
 
       data.id = doc.id;
-      // collection[doc.id] = doc.data();
+
       estates.push(data);
       this.setState({ estates });
       this.setState({ sortedEstates: this.state.estates });
@@ -68,7 +71,9 @@ class MapContainer extends Component {
       overLookingSea,
       downtown,
       // tempEstates,
-      sortedEstates
+      sortedEstates,
+      newEstates,
+      query
     } = this.state;
     //all estates
     console.log(this.state.estates);
@@ -90,72 +95,158 @@ class MapContainer extends Component {
     roomNum = parseInt(roomNum);
     price = parseInt(price);
     console.log("state", type, city, street);
-    const db = firebase.firestore();
 
-    if (
-      (city !== "all") &
-      (type !== "all")
-      //  &
-      // (roomNum !== 3) &
-      // (street !== "") &
-      // (price !== minprice)
-    ) {
-      db.collection("estates")
-        .where("type", "==", type)
+    if (city !== "all") {
+      query = query
         .where("city", "==", city)
-        // .where("roomNum", "==", roomNum)
-        .where("street", "==", street)
-        // .where("downtown", "==", downtown)
-        // .where("overLookingSea", "==", overLookingSea)
-        // .where("price", "==", price)
-        // .where("space", "in", [minspace, maxspace])
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            let item = doc.data();
-            item.id = doc.id;
+            let data = doc.data();
 
-            this.state.sortedEstates.push(item);
+            data.id = doc.id;
+            newEstates.push(data);
+            this.setState({ newEstates });
+            this.setState({ sortedEstates: newEstates });
+            this.setState({ newEstates: [] });
           });
         });
-      this.setState({ sortedEstates });
-      console.log(sortedEstates);
-      // this.setState({ sortedEstates: this.state.tempEstates });
     }
-    //filtering by type
+    if (type !== "all") {
+      query = query
+        .where("type", "==", type)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            let data = doc.data();
+
+            data.id = doc.id;
+            newEstates.push(data);
+            this.setState({ newEstates });
+            this.setState({ sortedEstates: newEstates });
+            this.setState({ newEstates: [] });
+          });
+          console.log("sorted", this.state.newEstates);
+        });
+    }
   };
 
   openInfo = i => {
+    const { prev_infowindow } = this.state;
     const { sortedEstates } = this.state;
     sortedEstates[i].isOpen = true;
+
     this.setState(sortedEstates);
+    if (this.state.prev_infowindow != i) {
+      sortedEstates[prev_infowindow].isOpen = false;
+      this.setState({ prev_infowindow: i });
+    }
+    this.setState({ prev_infowindow: i });
   };
 
   displayMarkers = () => {
     console.log(this.state.sortedEstates, "sortedEstates");
-    return this.state.sortedEstates.map((item, index) => {
+    console.log("lenght", this.state.sortedEstates.length == "object");
+    if (this.state.sortedEstates.length != "undefined") {
+      return this.state.sortedEstates.map((item, index) => {
+        return (
+          <>
+            {/*Marker*/}
+
+            <Marker
+              onClick={() => this.openInfo(index)}
+              google={this.props.google}
+              name={item.city}
+              draggable={false}
+              position={{ lat: item.lat + 0.0018, lng: item.lng }}
+              icon={{
+                url: require("../assets/Webp.net-resizeimage.png"),
+                scaledSize: new window.google.maps.Size(35, 35)
+              }}
+            >
+              {/* <img
+              alt="50*50"
+              src={require("../assets/Webp.net-resizeimage.png")}
+              width="50"
+              height="50"
+            /> */}
+              {item.isOpen && (
+                <InfoWindow
+                  onClose={this.onInfoWindowClose}
+                  position={{ lat: item.lat + 0.067, lng: item.lng }}
+                  style={{ width: 150, height: 150 }}
+                >
+                  <div className="infoWin">
+                    <h4 className="infotype"> {item.type}</h4>
+                    <img
+                      alt="50*50"
+                      src={item.url[0]}
+                      width="50"
+                      height="50"
+                      className="imageInfo"
+                    />
+                    <span
+                      style={{ padding: 0, margin: 0 }}
+                      className="infoStreet"
+                    >
+                      {item.street}
+                    </span>
+                    <h4 className="infoprice"> {item.price}</h4>
+                          
+                    <Link
+                      to={{
+                        pathname: `/SingleEstate/${item.id}`
+                      }}
+                      className="btn-add"
+                    >
+                                            More                     
+                    </Link>
+                  </div>
+                </InfoWindow>
+              )}
+            </Marker>
+          </>
+        );
+      });
+    } else {
       return (
         <>
           {/*Marker*/}
 
           <Marker
-            onClick={() => this.openInfo(index)}
+            onClick={() => this.openInfo(this.state.sortedEstates.index)}
             google={this.props.google}
-            name={item.city}
+            name={this.state.sortedEstates.city}
             draggable={false}
-            position={{ lat: item.lat + 0.0018, lng: item.lng }}
+            position={{
+              lat: this.state.sortedEstates.lat + 0.0018,
+              lng: this.state.sortedEstates.lng
+            }}
+            icon={{
+              url: require("../assets/Webp.net-resizeimage.png"),
+              scaledSize: new window.google.maps.Size(35, 35)
+            }}
           >
-            {item.isOpen && (
+            {/* <img
+            alt="50*50"
+            src={require("../assets/Webp.net-resizeimage.png")}
+            width="50"
+            height="50"
+          /> */}
+            {this.state.sortedEstates.isOpen && (
               <InfoWindow
                 onClose={this.onInfoWindowClose}
-                position={{ lat: item.lat + 0.067, lng: item.lng }}
+                position={{
+                  lat: this.state.sortedEstates.lat + 0.067,
+                  lng: this.state.sortedEstates.lng
+                }}
                 style={{ width: 150, height: 150 }}
               >
                 <div className="infoWin">
-                  <h4 className="infotype"> {item.type}</h4>
+                  <h4 className="infotype"> {this.state.sortedEstates.type}</h4>
                   <img
                     alt="50*50"
-                    src={item.url[0]}
+                    src={this.state.sortedEstates.url[0]}
                     width="50"
                     height="50"
                     className="imageInfo"
@@ -164,13 +255,16 @@ class MapContainer extends Component {
                     style={{ padding: 0, margin: 0 }}
                     className="infoStreet"
                   >
-                    {item.street}
+                    {this.state.sortedEstates.street}
                   </span>
-                  <h4 className="infoprice"> {item.price}</h4>
+                  <h4 className="infoprice">
+                    {" "}
+                    {this.state.sortedEstates.price}
+                  </h4>
                         
                   <Link
                     to={{
-                      pathname: `/SingleEstate/${item.id}`
+                      pathname: `/SingleEstate/${this.state.sortedEstates.id}`
                     }}
                     className="btn-add"
                   >
@@ -182,7 +276,7 @@ class MapContainer extends Component {
           </Marker>
         </>
       );
-    });
+    }
   };
 
   render() {
