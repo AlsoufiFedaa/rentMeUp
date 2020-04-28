@@ -574,6 +574,27 @@ h6 {
   text-align: center;
   margin-left: 35px;
 }
+.infobtn {
+  margin-left: 0px;
+  margin-top: 0px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  align-self: center;
+  color: var(--mainBlack);
+  background: var(--primaryColor);
+  padding: 0.4rem 0.9rem;
+  border: 3px solid var(--primaryColor);
+  border-radius: 10%;
+  transition: var(--mainTransition);
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 219px;
+}
+.infobtn:hover {
+  background: transparent;
+  color: var(--primaryColor);
+}
 
 .estate {
   flex-direction: row;

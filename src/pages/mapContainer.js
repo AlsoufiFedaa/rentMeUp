@@ -241,7 +241,7 @@ class MapContainer extends Component {
                   lat: this.state.sortedEstates.lat + 0.067,
                   lng: this.state.sortedEstates.lng
                 }}
-                style={{ width: 150, height: 150 }}
+                style={{ width: 80, height: 150 }}
               >
                 <div className="infoWin">
                   <h4 className="infotype"> {this.state.sortedEstates.type}</h4>
@@ -267,10 +267,9 @@ class MapContainer extends Component {
                     to={{
                       pathname: `/SingleEstate/${this.state.sortedEstates.id}`
                     }}
-                    style={{ marginTop: 0, marginLeft: 0 }}
-                    className="btn-add"
+                    className="infobtn"
                   >
-                                          More                     
+                    More                     
                   </Link>
                 </div>
               </InfoWindow>

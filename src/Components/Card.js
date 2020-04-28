@@ -9,12 +9,25 @@ const Card = ({ property }) => {
 
   return (
     <div id={`card-${index}`} className="card">
-      <div className="details">
+      <div
+        style={{
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+        className="details"
+      >
         <span className="index">{index + 1}</span>
-        <img src={userPic} width="190" height="170" alt="user" />
-        <h4>{name}</h4>
+        <img
+          style={{ marginTop: 20 }}
+          src={userPic}
+          width="100"
+          height="100"
+          alt="user"
+        />
+        <h4 style={{ marginTop: 20 }}>{name}</h4>
         <p className="location">{massage}</p>
         <Rating
+          style={{ marginTop: 18, marginLeft: 10 }}
           emptySymbol={
             <img
               src={emptyStar}
