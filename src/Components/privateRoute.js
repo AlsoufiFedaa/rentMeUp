@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   setTimeout(() => {
     console.log("waiting!");
   }, 7000);
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = localStorage.getItem("currentUser");
   return (
     <Route
       {...rest}
