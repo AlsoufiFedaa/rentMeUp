@@ -148,128 +148,65 @@ class MapContainer extends Component {
   displayMarkers = () => {
     console.log(this.state.sortedEstates, "sortedEstates");
     console.log("lenght", this.state.sortedEstates.length == "object");
-    if (this.state.sortedEstates.length != "undefined") {
-      return this.state.sortedEstates.map((item, index) => {
-        return (
-          <>
-            {/*Marker*/}
 
-            <Marker
-              onClick={() => this.openInfo(index)}
-              google={this.props.google}
-              name={item.city}
-              draggable={false}
-              position={{ lat: item.lat + 0.0018, lng: item.lng }}
-              icon={{
-                url: require("../assets/Webp.net-resizeimage.png"),
-                scaledSize: new window.google.maps.Size(35, 35)
-              }}
-            >
-              {/* <img
-              alt="50*50"
-              src={require("../assets/Webp.net-resizeimage.png")}
-              width="50"
-              height="50"
-            /> */}
-              {item.isOpen && (
-                <InfoWindow
-                  onClose={this.onInfoWindowClose}
-                  position={{ lat: item.lat + 0.067, lng: item.lng }}
-                  style={{ width: 150, height: 150 }}
-                >
-                  <div className="infoWin">
-                    <h4 className="infotype"> {item.type}</h4>
-                    <img
-                      alt="50*50"
-                      src={item.url[0]}
-                      width="50"
-                      height="50"
-                      className="imageInfo"
-                    />
-                    <span
-                      style={{ padding: 0, margin: 0 }}
-                      className="infoStreet"
-                    >
-                      {item.street}
-                    </span>
-                    <h4 className="infoprice"> {item.price}</h4>
-                          
-                    <Link
-                      to={{
-                        pathname: `/SingleEstate/${item.id}`
-                      }}
-                      className="btn-add"
-                    >
-                                            More                     
-                    </Link>
-                  </div>
-                </InfoWindow>
-              )}
-            </Marker>
-          </>
-        );
-      });
-    } else {
+    return this.state.sortedEstates.map((item, index) => {
       return (
         <>
           {/*Marker*/}
 
           <Marker
-            onClick={() => this.openInfo(this.state.sortedEstates.index)}
+            onClick={() => this.openInfo(index)}
             google={this.props.google}
-            name={this.state.sortedEstates.city}
+            name={item.city}
             draggable={false}
-            position={{
-              lat: this.state.sortedEstates.lat + 0.0018,
-              lng: this.state.sortedEstates.lng
-            }}
+            position={{ lat: item.lat + 0.0018, lng: item.lng }}
             icon={{
               url: require("../assets/Webp.net-resizeimage.png"),
               scaledSize: new window.google.maps.Size(35, 35)
             }}
           >
             {/* <img
-            alt="50*50"
-            src={require("../assets/Webp.net-resizeimage.png")}
-            width="50"
-            height="50"
-          /> */}
-            {this.state.sortedEstates.isOpen && (
+              alt="50*50"
+              src={require("../assets/Webp.net-resizeimage.png")}
+              width="50"
+              height="50"
+            /> */}
+            {item.isOpen && (
               <InfoWindow
                 onClose={this.onInfoWindowClose}
-                position={{
-                  lat: this.state.sortedEstates.lat + 0.067,
-                  lng: this.state.sortedEstates.lng
-                }}
-                style={{ width: 80, height: 150 }}
+                position={{ lat: item.lat + 0.067, lng: item.lng }}
               >
-                <div className="infoWin">
-                  <h4 className="infotype"> {this.state.sortedEstates.type}</h4>
+                <div
+                  style={{
+                    padding: 3,
+                    width: 150
+                    // height: 150
+                  }}
+                  className="infoWfin"
+                >
+                  <h4 className="infotype"> {item.type}</h4>
                   <img
                     alt="50*50"
-                    src={this.state.sortedEstates.url[0]}
-                    width="50"
-                    height="50"
+                    src={item.url[0]}
+                    width="145"
+                    height="60"
                     className="imageInfo"
                   />
                   <span
                     style={{ padding: 0, margin: 0 }}
                     className="infoStreet"
                   >
-                    {this.state.sortedEstates.street}
+                    {item.street}
                   </span>
-                  <h4 className="infoprice">
-                    {" "}
-                    {this.state.sortedEstates.price}
-                  </h4>
+                  <h4 className="infoprice"> {item.price}</h4>
                         
                   <Link
                     to={{
-                      pathname: `/SingleEstate/${this.state.sortedEstates.id}`
+                      pathname: `/SingleEstate/${item.id}`
                     }}
                     className="infobtn"
                   >
-                    More                     
+                    More
                   </Link>
                 </div>
               </InfoWindow>
@@ -277,7 +214,7 @@ class MapContainer extends Component {
           </Marker>
         </>
       );
-    }
+    });
   };
 
   render() {
