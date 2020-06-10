@@ -25,6 +25,7 @@ class NavBar extends Component {
         .then(function() {
           console.log("sign out ");
           alert("sign out successfully");
+          localStorage.clear()
         })
         .catch(function(error) {
           console.log("An error happened.");

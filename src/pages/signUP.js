@@ -32,9 +32,7 @@ class SignUP extends Component {
     setTimeout(() => {
       console.log("wait!");
     }, 7000);
-    setTimeout(() => {
-      console.log("wait!");
-    }, 7000);
+ 
 
     const user = firebase.auth().currentUser;
     console.log("user", user.uid);
