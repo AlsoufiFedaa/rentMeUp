@@ -15,15 +15,25 @@ class MainMap extends Component {
         </GoogleMap>
       ))
     );
-    let map ;
-    return (map = (
+    // let map;
+    // return (map = (
+    //   <AsyncMap
+    //     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+    //     // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBULzIYzPa6iu71pBykX_a9E8vseUOf91Y&libraries=places"
+    //     loadingElement={<div style={{ height: `100%` }} />}
+    //     containerElement={<div style={{ height: this.props.height }} />}
+    //     mapElement={<div style={{ height: `100%` }} />}
+    //   />
+    // ));
+    return (
       <AsyncMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0&libraries=places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+        // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBULzIYzPa6iu71pBykX_a9E8vseUOf91Y&libraries=places"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: this.props.height }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
-    ));
+    );
   }
 }
 
