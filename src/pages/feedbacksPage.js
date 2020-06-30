@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import data from "./data";
-import Card from "../Components/Card";
-import Title from "../Components/Title";
+// import Card from "../Components/Card";
+// import Title from "../Components/Title";
+import Card from "react-bootstrap/Card";
 
+import Columns from "react-columns";
+import Rating from "react-rating";
+import userPic from "../assets/userPic.png";
+import emptyStar from "../assets/star-empty.png";
+import fullStar from "../assets/PngItem_3174427.png";
 import * as firebase from "firebase";
 
 class Feedbacks extends Component {
   state = {
     feedbacks: [],
     properties: data.properties,
-    property: data.properties[0]
+    property: data.properties[0],
   };
 
   async componentDidMount() {
@@ -19,7 +25,7 @@ class Feedbacks extends Component {
       .collection("FeedBacks")
       .get();
     const collection = {};
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc) => {
       collection[doc.id] = doc.data();
 
       feedbacks.push(collection[doc.id]);
@@ -39,11 +45,22 @@ class Feedbacks extends Component {
     // }
   }
 
+  queries = [
+    {
+      columns: 2,
+      query: "min-width: 550px",
+    },
+    {
+      columns: 3,
+      query: "min-width: 1000px",
+    },
+  ];
+
   nextProperty = () => {
     const newIndex = this.state.property.index + 1;
     const { properties } = this.state;
     this.setState({
-      property: properties[newIndex]
+      property: properties[newIndex],
     });
     console.log(this.state.property);
   };
@@ -52,7 +69,7 @@ class Feedbacks extends Component {
     const newIndex = this.state.property.index - 1;
     const { properties } = this.state;
     this.setState({
-      property: properties[newIndex]
+      property: properties[newIndex],
     });
     console.log(this.state.property);
   };
@@ -63,7 +80,7 @@ class Feedbacks extends Component {
     return (
       <div className="feed" style={{ marginTop: "70px" }}>
         <div className="page">
-          <section>
+          {/* <section>
             <Title title="Feedbacks!" />
             <div style={{ textAlign: "center" }}>
               <button
@@ -97,7 +114,68 @@ class Feedbacks extends Component {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
+
+          <Columns
+            queries={this.queries}
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            {this.state.feedbacks.map((data, i) => {
+              return (
+                <Card
+                  bg="light"
+                  text="dark"
+                  className="text-center"
+                  style={{
+                    marginLeft: "20px",
+                    marginTop: "10px",
+                    justifyContent: "center",
+                    borderColor:'#af9a7d',
+                    borderWidth:'4px'
+                  }}
+                  key={i}
+                  border="secondary"
+                >
+                  <Card.Img variant="top" src={userPic} />
+                  <Card.Body>
+                    <Card.Title
+                      text="dark"
+                      style={{ textAlign: "center", fontWeight: "bold" }}
+                    >
+                      {data.name}
+                    </Card.Title>
+                    <Card.Text> {data.massage}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <Rating
+                      emptySymbol={
+                        <img
+                          src={emptyStar}
+                          className="icon"
+                          width="30"
+                          height="30"
+                          alt="Emptystar"
+                        />
+                      }
+                      initialRating={data.rating}
+                      fullSymbol={
+                        <img
+                          src={fullStar}
+                          className="icon"
+                          width="30"
+                          height="30"
+                          alt="Fullstar"
+                        />
+                      }
+                      readonly
+                    />
+                  </Card.Footer>
+                </Card>
+              );
+            })}
+          </Columns>
         </div>
       </div>
     );

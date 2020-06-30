@@ -18,18 +18,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
   });
-  // function useLocalStorage(localItem) {
-  //   const { loc, setState } = useState(localStorage.getItem(localItem));
-  //   function setLoc(newItem) {
-  //     localStorage.setItem(localItem, newItem);
-  //     setState(newItem);
-  //   }
-  //   return [loc, setLoc];
-  // }
-  // const [currentUser, setCurrentUser] = useLocalStorage("user");
-  // useEffect(() => {
-  //   firebase.auth().onAuthStateChanged(setCurrentUser);
-  // }, []);
+
   return (
     <AuthContext.Provider
       value={{
