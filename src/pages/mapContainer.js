@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import Map from "./mainMap";
-import FilterEstates from "./filterEstates";
-import { Link } from "react-router-dom";
-import { InfoWindow, Marker } from "react-google-maps";
-import { AuthContext } from "../Components/auth";
+import React, { Component } from 'react';
+import Map from './mainMap';
+import FilterEstates from './filterEstates';
+import { Link } from 'react-router-dom';
+import { Marker, Popup } from 'react-map-gl';
+import { AuthContext } from '../Components/auth';
 
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 class MapContainer extends Component {
   state = {
     estates: [],
     sortedEstates: [],
-    type: "all",
-    city: "",
-    street: "",
+    type: 'all',
+    city: '',
+    street: '',
     price: 100,
     minprice: 0,
     maxprice: 0,
@@ -24,17 +24,17 @@ class MapContainer extends Component {
     overLookingSea: false,
     prev_infowindow: 0,
     newEstates: [],
-    query: firebase.firestore().collection("estates")
+    query: firebase.firestore().collection('estates'),
   };
   static contextType = AuthContext;
   async componentDidMount() {
     const { estates } = this.state;
     const snapshot = await firebase
       .firestore()
-      .collection("estates")
+      .collection('estates')
       .get();
 
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc) => {
       let data = doc.data();
 
       data.id = doc.id;
@@ -44,14 +44,14 @@ class MapContainer extends Component {
       this.setState({ sortedEstates: this.state.estates });
     });
 
-    let maxprice = Math.max(...this.state.estates.map(item => item.price));
-    let maxspace = Math.max(...this.state.estates.map(item => item.space));
+    let maxprice = Math.max(...this.state.estates.map((item) => item.price));
+    let maxspace = Math.max(...this.state.estates.map((item) => item.space));
     this.setState({ maxprice, maxspace });
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const target = event.target;
-    const value = target.type === "radio" ? target.checked : target.value;
+    const value = target.type === 'radio' ? target.checked : target.value;
     const name = event.target.name;
     this.setState({ [name]: value }, () => {
       this.filterEstates();
@@ -74,35 +74,35 @@ class MapContainer extends Component {
       // tempEstates,
       sortedEstates,
       newEstates,
-      query
+      query,
     } = this.state;
     //all estates
     console.log(this.state.estates);
 
     console.log(
-      "type",
+      'type',
       type,
-      "city",
+      'city',
       city,
-      "rooms",
+      'rooms',
       roomNum,
-      "street",
+      'street',
       street,
       overLookingSea,
-      "down",
+      'down',
       downtown
     );
     // convert to integer
     roomNum = parseInt(roomNum);
     price = parseInt(price);
-    console.log("state", type, city, street);
+    console.log('state', type, city, street);
 
-    if (city !== "all") {
+    if (city !== 'all') {
       query = query
-        .where("city", "==", city)
+        .where('city', '==', city)
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             let data = doc.data();
 
             data.id = doc.id;
@@ -113,12 +113,12 @@ class MapContainer extends Component {
           });
         });
     }
-    if (type !== "all") {
+    if (type !== 'all') {
       query = query
-        .where("type", "==", type)
+        .where('type', '==', type)
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             let data = doc.data();
 
             data.id = doc.id;
@@ -127,15 +127,17 @@ class MapContainer extends Component {
             this.setState({ sortedEstates: newEstates });
             this.setState({ newEstates: [] });
           });
-          console.log("sorted", this.state.newEstates);
+          console.log('sorted', this.state.newEstates);
         });
     }
   };
 
-  openInfo = i => {
+  openInfo = (i) => {
     const { prev_infowindow } = this.state;
     const { sortedEstates } = this.state;
     sortedEstates[i].isOpen = true;
+    console.log(sortedEstates[i]);
+    console.log('clicked');
 
     this.setState(sortedEstates);
     if (this.state.prev_infowindow != i) {
@@ -146,8 +148,8 @@ class MapContainer extends Component {
   };
 
   displayMarkers = () => {
-    console.log(this.state.sortedEstates, "sortedEstates");
-    console.log("lenght", this.state.sortedEstates.length == "object");
+    console.log(this.state.sortedEstates, 'sortedEstates');
+    console.log('lenght', this.state.sortedEstates.length == 'object');
 
     return this.state.sortedEstates.map((item, index) => {
       return (
@@ -155,32 +157,39 @@ class MapContainer extends Component {
           {/*Marker*/}
 
           <Marker
-            onClick={() => this.openInfo(index)}
-            google={this.props.google}
-            name={item.city}
-            draggable={false}
-            position={{ lat: item.lat + 0.0018, lng: item.lng }}
-            icon={{
-              url: require("../assets/Webp.net-resizeimage.png"),
-              scaledSize: new window.google.maps.Size(35, 35)
-            }}
+            latitude={item.lat}
+            longitude={item.lng}
+            key={`marker ${item.index}`}
           >
-            {/* <img
-              alt="50*50"
-              src={require("../assets/Webp.net-resizeimage.png")}
-              width="50"
-              height="50"
-            /> */}
+            <button
+              style={{
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+
+                this.openInfo(index);
+              }}
+            >
+              <img
+                src={require('../assets/Webp.net-resizeimage.png')}
+                width={25}
+                alt={'estate'}
+              />
+            </button>
+
             {item.isOpen && (
-              <InfoWindow
+              <Popup
                 onClose={this.onInfoWindowClose}
-                position={{ lat: item.lat + 0.067, lng: item.lng }}
+                latitude={item.lat}
+                longitude={item.lng}
               >
                 <div
                   style={{
                     padding: 3,
-                    width: 150
-                    // height: 150
+                    width: 150,
+                    height: 150,
                   }}
                   className="infoWfin"
                 >
@@ -202,14 +211,14 @@ class MapContainer extends Component {
                         
                   <Link
                     to={{
-                      pathname: `/SingleEstate/${item.id}`
+                      pathname: `/SingleEstate/${item.id}`,
                     }}
                     className="infobtn"
                   >
                     More
                   </Link>
                 </div>
-              </InfoWindow>
+              </Popup>
             )}
           </Marker>
         </>
