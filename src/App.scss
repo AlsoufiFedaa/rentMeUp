@@ -95,7 +95,7 @@ h6 {
 }
 
 .btn-add {
-  margin-left: 150px;
+  margin-left: 300px;
   margin-top: 55px;
   display: inline-block;
   text-decoration: none;
@@ -233,7 +233,7 @@ h6 {
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
   z-index: 100;
-  margin-top: 205.7px;
+  margin-top: 15px;
 }
 .banner h1 {
   font-size: 2.5rem;
@@ -1066,5 +1066,8 @@ $i: 0;
 .labelFilter {
   color: #000;
   margin-left: 40px;
+}
+#top {
+  font-family: "Podkova";
 }
 /* #endregion */

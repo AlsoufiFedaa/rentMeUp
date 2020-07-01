@@ -9,7 +9,6 @@ const images = [image1, image2, image3, image4];
 let timer;
 
 const ImageCarousel = () => {
-
   const [index, setIndex] = React.useState(0);
 
   useEffect(() => {
@@ -57,7 +56,6 @@ const ImageCarousel = () => {
             bottom: "0",
             zIndex: 0
           }}
-       
         />
       ))}
     </Gallery>

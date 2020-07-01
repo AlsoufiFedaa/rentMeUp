@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+### SreentShots
+![](images/signUp.png)![](images/logIn.png)![](images/Home[1].png)
+![](images/Home[2].png)![](images/add[1].png)![](images/add[2].png)
+![](images/add[3].png)![](images/filter.png)![](images/map.png)
+![](images/singleEstate[1].png)![](images/singleEstate[2].png)![](images/contactUs.png)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
