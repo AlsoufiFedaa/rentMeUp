@@ -95,7 +95,7 @@ h6 {
 }
 
 .btn-add {
-  margin-left: 150px;
+  margin-left: 300px;
   margin-top: 55px;
   display: inline-block;
   text-decoration: none;
@@ -105,7 +105,7 @@ h6 {
   background: var(--primaryColor);
   padding: 0.4rem 0.9rem;
   border: 3px solid var(--primaryColor);
-  border-radius: 10%;
+
   transition: var(--mainTransition);
   text-transform: uppercase;
   cursor: pointer;
@@ -233,7 +233,7 @@ h6 {
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
   z-index: 100;
-  margin-top: 205.7px;
+  margin-top: 15px;
 }
 .banner h1 {
   font-size: 2.5rem;
@@ -583,9 +583,9 @@ h6 {
   margin-left: 35px;
 }
 .infobtn {
-  margin-left: 20px;
+  margin-left: 30px;
   margin-top: 0px;
-  display: inline-block;
+  // display: inline-block;
   text-decoration: none;
   font-weight: bold;
   align-self: center;
@@ -1078,5 +1078,8 @@ $i: 0;
 .labelFilter {
   color: #000;
   margin-left: 40px;
+}
+#top {
+  font-family: "Podkova";
 }
 /* #endregion */

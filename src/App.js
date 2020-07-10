@@ -15,6 +15,8 @@ import AuthProvider from "./Components/auth";
 import PrivateRoute from "./Components/privateRoute";
 import HomeLogged from "./pages/homeLogged";
 import Feedbacks from "./pages/feedbacksPage";
+import Podkova from "../src/assets/fonts/Podkova-VariableFont_wght.ttf"
+
 // import Fire from "./pages/ClassFire";
 function App() {
   return (
