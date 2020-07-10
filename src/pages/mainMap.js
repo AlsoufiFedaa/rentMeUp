@@ -1,39 +1,40 @@
 import React, { Component } from "react";
 import { withGoogleMap, GoogleMap, withScriptjs } from "react-google-maps";
+import Map, { NavigationControl, GeolocateControl } from "react-map-gl";
 
+const mapbox_token =
+  "pk.eyJ1IjoiYWxzb3VmaWZlZGFhIiwiYSI6ImNrYXduYmI2aTA3YTkyeG16OHBwbDNzdDUifQ.ZxjTEapzP3bpUpR4-ZtvVw";
 class MainMap extends Component {
+  state = {
+    viewport: {
+      width: "100wv",
+      height: "100vh",
+      zoom: 10,
+
+      latitude: 31.4547,
+      longitude: 34.4088
+    }
+  };
+
   render() {
-    const AsyncMap = withScriptjs(
-      withGoogleMap(props => (
-        <GoogleMap
-          google={this.props.google}
-          defaultZoom={8}
-          defaultCenter={{ lat: 31.3547, lng: 34.3088 }}
-          style={{ width: "100%", height: "210px" }}
-        >
-          {this.props.displayMarkers()}
-        </GoogleMap>
-      ))
-    );
-    // let map;
-    // return (map = (
-    //   <AsyncMap
-    //     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    //     // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBULzIYzPa6iu71pBykX_a9E8vseUOf91Y&libraries=places"
-    //     loadingElement={<div style={{ height: `100%` }} />}
-    //     containerElement={<div style={{ height: this.props.height }} />}
-    //     mapElement={<div style={{ height: `100%` }} />}
-    //   />
-    // ));
-    return (
-      <AsyncMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-        // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBULzIYzPa6iu71pBykX_a9E8vseUOf91Y&libraries=places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: this.props.height }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
-    );
+    const { viewport } = this.state;
+
+    let map;
+    return (map = (
+      <Map
+        {...viewport}
+        mapStyle="mapbox://styles/mapbox/light-v10"
+        //"mapbox://styles/alsoufifedaa/ckb7spkum0h761io0nsihnbuj"
+        mapboxApiAccessToken={mapbox_token}
+        onViewportChange={viewport => {
+          this.setState({ viewport: viewport });
+        }}
+      >
+        {/* <GeolocateControl /> */}
+        {/* <NavigationControl showCompass={true} showZoom={true}  mapStyle={{back}}/> */}
+        {this.props.displayMarkers()}
+      </Map>
+    ));
   }
 }
 

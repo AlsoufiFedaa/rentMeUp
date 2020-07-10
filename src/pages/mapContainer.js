@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Map from "./mainMap";
 import FilterEstates from "./filterEstates";
 import { Link } from "react-router-dom";
-import { InfoWindow, Marker } from "react-google-maps";
+import { Marker, Popup } from "react-map-gl";
 import { AuthContext } from "../Components/auth";
 
 import * as firebase from "firebase";
@@ -59,6 +59,7 @@ class MapContainer extends Component {
     });
   };
   filterEstates = () => {
+    
     let {
       type,
       city,
@@ -136,6 +137,8 @@ class MapContainer extends Component {
     const { prev_infowindow } = this.state;
     const { sortedEstates } = this.state;
     sortedEstates[i].isOpen = true;
+    console.log(sortedEstates[i]);
+    console.log("clicked");
 
     this.setState(sortedEstates);
     if (this.state.prev_infowindow != i) {
@@ -155,63 +158,69 @@ class MapContainer extends Component {
           {/*Marker*/}
 
           <Marker
-            onClick={() => this.openInfo(index)}
-            google={this.props.google}
-            name={item.city}
-            draggable={false}
-            position={{ lat: item.lat + 0.0018, lng: item.lng }}
-            icon={{
-              url: require("../assets/Webp.net-resizeimage.png"),
-              scaledSize: new window.google.maps.Size(35, 35)
-            }}
+            latitude={item.lat}
+            longitude={item.lng}
+            offsetTop={-34.38}
+            offsetLeft={-14.5}
+            key={`marker ${item.index}`}
           >
-            {/* <img
-              alt="50*50"
-              src={require("../assets/Webp.net-resizeimage.png")}
-              width="50"
-              height="50"
-            /> */}
-            {item.isOpen && (
-              <InfoWindow
-                onClose={this.onInfoWindowClose}
-                position={{ lat: item.lat + 0.067, lng: item.lng }}
-              >
-                <div
-                  style={{
-                    padding: 3,
-                    width: 150
-                    // height: 150
-                  }}
-                  className="infoWfin"
-                >
-                  <h4 className="infotype"> {item.type}</h4>
-                  <img
-                    alt="50*50"
-                    src={item.url[0]}
-                    width="145"
-                    height="60"
-                    className="imageInfo"
-                  />
-                  <span
-                    style={{ padding: 0, margin: 0 }}
-                    className="infoStreet"
-                  >
-                    {item.street}
-                  </span>
-                  <h4 className="infoprice"> {item.price}</h4>
-                        
-                  <Link
-                    to={{
-                      pathname: `/SingleEstate/${item.id}`
-                    }}
-                    className="infobtn"
-                  >
-                    More
-                  </Link>
-                </div>
-              </InfoWindow>
-            )}
+            <button
+              style={{
+                backgroundColor: "transparent",
+                borderColor: "transparent"
+              }}
+              onClick={e => {
+                e.preventDefault();
+
+                this.openInfo(index);
+              }}
+            >
+              <img
+                src={require("../assets/Webp.net-resizeimage.png")}
+                width={50}
+                alt={"estate"}
+              />
+            </button>
           </Marker>
+          {item.isOpen && (
+            <Popup
+              onClose={this.onInfoWindowClose}
+              latitude={item.lat + 0.009}
+              longitude={item.lng + 0.009}
+            >
+              <div
+                style={{
+                  padding: 3,
+                  width: 150,
+                  height: 196,
+                  alignItems: "center"
+                }}
+                className="infoWfin"
+              >
+                <h4 className="infotype"> {item.type}</h4>
+                <img
+                  alt="50*50"
+                  src={item.url[0]}
+                  width="145"
+                  height="60"
+                  className="imageInfo"
+                />
+                <span style={{ padding: 0, margin: 0 }} className="infoStreet">
+                  {item.street}
+                </span>
+                <h4 className="infoprice"> {item.price}</h4>
+
+                <Link
+                  to={{
+                    pathname: `/SingleEstate/${item.id}`
+                  }}
+                  className="infobtn"
+                >
+                  More
+                </Link>
+              </div>
+            </Popup>
+          )}
         </>
       );
     });
