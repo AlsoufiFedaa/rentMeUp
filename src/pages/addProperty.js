@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import Title from "../Components/Title";
-import { Link } from "react-router-dom";
-import * as firebase from "firebase";
-import "firebase/storage";
+import React, { Component } from 'react';
+import Title from '../Components/Title';
+import { Link } from 'react-router-dom';
+import * as firebase from 'firebase';
+import 'firebase/storage';
 import {
   withGoogleMap,
   GoogleMap,
   withScriptjs,
-  Marker
-} from "react-google-maps";
-import Geocode from "react-geocode";
-import Autocomplete from "react-google-autocomplete";
-import { AuthContext } from "../Components/auth";
-Geocode.setApiKey("AIzaSyA2loHLnnXg7c8A9LzTpkJ_N-kKvYlmO4s");
+  Marker,
+} from 'react-google-maps';
+import Geocode from 'react-geocode';
+import Autocomplete from 'react-google-autocomplete';
+import { AuthContext } from '../Components/auth';
+Geocode.setApiKey('AIzaSyA2loHLnnXg7c8A9LzTpkJ_N-kKvYlmO4s');
 Geocode.enableDebug();
 class AddProperty extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: "all",
-      address: "",
-      city: "",
-      area: "",
-      street: "",
-      UserDetials: "",
+      type: 'all',
+      address: '',
+      city: '',
+      area: '',
+      street: '',
+      UserDetials: '',
 
       mapPosition: {
         lat: this.props.center.lat,
-        lng: this.props.center.lng
+        lng: this.props.center.lng,
       },
       markerPosition: {
         lat: this.props.center.lat,
-        lng: this.props.center.lng
+        lng: this.props.center.lng,
       },
       price: 100,
       space: 0,
@@ -39,7 +39,7 @@ class AddProperty extends Component {
       downtown: false,
       overLookingSea: false,
       selectedFile: null,
-      downloadURLs: []
+      downloadURLs: [],
     };
   }
   static contextType = AuthContext;
@@ -50,22 +50,22 @@ class AddProperty extends Component {
       this.state.mapPosition.lat,
       this.state.mapPosition.lng
     ).then(
-      response => {
-        console.log("responseAdd", response);
+      (response) => {
+        console.log('responseAdd', response);
         const address = response.results[0].formatted_address,
           addressArray = response.results[0].address_components,
           city = this.getCity(addressArray),
           area = this.getArea(addressArray);
 
-        console.log("city", city, area);
+        console.log('city', city, area);
 
         this.setState({
-          address: address ? address : "",
-          area: area ? area : "",
-          city: city ? city : ""
+          address: address ? address : '',
+          area: area ? area : '',
+          city: city ? city : '',
         });
       },
-      error => {
+      (error) => {
         console.error(error);
       }
     );
@@ -93,12 +93,12 @@ class AddProperty extends Component {
 	 *
 
 	 */
-  getCity = addressArray => {
-    let city = "";
+  getCity = (addressArray) => {
+    let city = '';
     for (let i = 0; i < addressArray.length; i++) {
       if (
         addressArray[i].types[0] &&
-        "administrative_area_level_2" === addressArray[i].types[0]
+        'administrative_area_level_2' === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
         return city;
@@ -111,14 +111,14 @@ class AddProperty extends Component {
    * @param addressArray
    * @return {string}
    */
-  getArea = addressArray => {
-    let area = "";
+  getArea = (addressArray) => {
+    let area = '';
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
         for (let j = 0; j < addressArray[i].types.length; j++) {
           if (
-            "sublocality_level_1" === addressArray[i].types[j] ||
-            "locality" === addressArray[i].types[j]
+            'sublocality_level_1' === addressArray[i].types[j] ||
+            'locality' === addressArray[i].types[j]
           ) {
             area = addressArray[i].long_name;
             return area;
@@ -128,8 +128,8 @@ class AddProperty extends Component {
     }
   };
 
-  onPlaceSelected = place => {
-    console.log("place", place);
+  onPlaceSelected = (place) => {
+    console.log('place', place);
     const address = place.formatted_address,
       addressArray = place.address_components,
       city = this.getCity(addressArray),
@@ -138,31 +138,31 @@ class AddProperty extends Component {
       lngValue = place.geometry.location.lng();
     // Set these values in the state.
     this.setState({
-      address: address ? address : "",
-      area: area ? area : "",
-      city: city ? city : "",
+      address: address ? address : '',
+      area: area ? area : '',
+      city: city ? city : '',
 
       markerPosition: {
         lat: latValue,
-        lng: lngValue
+        lng: lngValue,
       },
       mapPosition: {
         lat: latValue,
-        lng: lngValue
-      }
+        lng: lngValue,
+      },
     });
   };
   /* used to get values from different inputs and set then in the state*/
-  handleChange = event => {
+  handleChange = (event) => {
     const target = event.target;
-    const value = target.type === "radio" ? target.checked : target.value;
+    const value = target.type === 'radio' ? target.checked : target.value;
     const id = event.target.id;
     this.setState({ [id]: value });
   };
 
   /* hadles the selected images by currentUser*/
 
-  handleChangeImage = e => {
+  handleChangeImage = (e) => {
     {
       if (e.target.files) {
         const selectedFile = e.target.files;
@@ -187,7 +187,7 @@ class AddProperty extends Component {
 
     var db = firebase.firestore();
 
-    db.collection("estates")
+    db.collection('estates')
       .add({
         type: this.state.type,
         name: name,
@@ -202,19 +202,19 @@ class AddProperty extends Component {
         overLookingSea: this.state.overLookingSea,
         url: downloadURLs,
         lat: this.state.markerPosition.lat,
-        lng: this.state.markerPosition.lng
+        lng: this.state.markerPosition.lng,
       })
       .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+        console.log('Document written with ID: ', docRef.id);
       })
       .catch(function(error) {
-        console.error("Error adding document: ", error);
+        console.error('Error adding document: ', error);
       });
   };
 
   /* gets images from currentUser's pc*/
 
-  onMarkerDragEnd = event => {
+  onMarkerDragEnd = (event) => {
     let newLat = event.latLng.lat(),
       newLng = event.latLng.lng();
     console.log(newLat, newLng);
@@ -222,7 +222,7 @@ class AddProperty extends Component {
     this.setState({ markerPosition: { lat: newLat, lng: newLng } });
 
     Geocode.fromLatLng(newLat, newLng).then(
-      response => {
+      (response) => {
         console.log(response);
         const address = response.results[0].formatted_address,
           addressArray = response.results[0].address_components,
@@ -230,22 +230,22 @@ class AddProperty extends Component {
           area = this.getArea(addressArray),
           state = this.getState(addressArray);
         this.setState({
-          address: address ? address : "",
-          area: area ? area : "",
-          city: city ? city : "",
-          state: state ? state : "",
+          address: address ? address : '',
+          area: area ? area : '',
+          city: city ? city : '',
+          state: state ? state : '',
           markerPosition: {
             lat: newLat,
-            lng: newLng
+            lng: newLng,
           },
           mapPosition: {
             lat: newLat,
-            lng: newLng
-          }
+            lng: newLng,
+          },
         });
-        console.log("city", this.state.city);
+        console.log('city', this.state.city);
       },
-      error => {
+      (error) => {
         console.error(error);
       }
     );
@@ -256,10 +256,10 @@ class AddProperty extends Component {
     let { UserDetials } = this.state;
     firebase
       .firestore()
-      .collection("users")
+      .collection('users')
       .doc(currentUser.uid)
       .get()
-      .then(querySnapshot => {
+      .then((querySnapshot) => {
         UserDetials = querySnapshot.data();
         this.setState({ UserDetials });
       });
@@ -269,12 +269,12 @@ class AddProperty extends Component {
     let { downloadURLs } = this.state;
     var uploadTask = firebase.storage().ref();
 
-    Object.keys(this.state.selectedFile).map(key => {
+    Object.keys(this.state.selectedFile).map((key) => {
       uploadTask
         .child(`images/${this.state.selectedFile[key].name}`)
         .put(this.state.selectedFile[key])
-        .then(snapshot =>
-          snapshot.ref.getDownloadURL().then(downloadURL => {
+        .then((snapshot) =>
+          snapshot.ref.getDownloadURL().then((downloadURL) => {
             downloadURLs.push(downloadURL);
             this.setState({ downloadURLs });
           })
@@ -285,42 +285,42 @@ class AddProperty extends Component {
 
   render() {
     const AsyncMap = withScriptjs(
-      withGoogleMap(props => (
+      withGoogleMap((props) => (
         <GoogleMap
           google={this.props.google}
           defaultZoom={this.props.zoom}
           defaultCenter={{
             lat: this.state.mapPosition.lat,
-            lng: this.state.mapPosition.lng
+            lng: this.state.mapPosition.lng,
           }}
         >
           {/*Marker*/}
           <Marker
             google={this.props.google}
-            name={"Dolores park"}
+            name={'Dolores park'}
             draggable={true}
             onDragEnd={this.onMarkerDragEnd}
             position={{
               lat: this.state.markerPosition.lat,
-              lng: this.state.markerPosition.lng
+              lng: this.state.markerPosition.lng,
             }}
           />
           <Marker />
           {/* For Auto complete Search Box */}
           <Autocomplete
             style={{
-              width: "40%",
-              height: "40px",
-              paddingLeft: "16px",
-              marginTop: "2px",
-              marginBottom: "20px",
-              border: "none",
-              borderBottom: "2px solid #af9a7d",
-              background: "transparent"
+              width: '40%',
+              height: '40px',
+              paddingLeft: '16px',
+              marginTop: '2px',
+              marginBottom: '20px',
+              border: 'none',
+              borderBottom: '2px solid #af9a7d',
+              background: 'transparent',
             }}
             calssName="AutoComplete"
             onPlaceSelected={this.onPlaceSelected}
-            types={["(regions)"]}
+            types={['(regions)']}
           />
         </GoogleMap>
       ))
@@ -328,7 +328,7 @@ class AddProperty extends Component {
     let map;
     if (this.props.center.lat !== undefined) {
       map = (
-        <div style={{ marginTop: 150, textAlign: "center" }}>
+        <div style={{ marginTop: 150, textAlign: 'center' }}>
           <form>
             <div className="addForm">
               <Title title="Add Property" />
@@ -419,10 +419,10 @@ class AddProperty extends Component {
                     id="selectedFile"
                     style={{
                       opacity: 0,
-                      position: "absolute",
+                      position: 'absolute',
                       top: 1297,
-                      overflow: "hidden",
-                      zIndex: 20
+                      overflow: 'hidden',
+                      zIndex: 20,
                     }}
                     accept="image/*"
                     onChange={this.handleChangeImage}
@@ -430,10 +430,10 @@ class AddProperty extends Component {
                   />
                   <button
                     className="btn "
-                    style={{ position: "relative", zIndex: 19 }}
+                    style={{ position: 'relative', zIndex: 19 }}
                     type="button"
                   >
-                    {" "}
+                    {' '}
                     Choose images
                   </button>
                   <button
@@ -448,7 +448,7 @@ class AddProperty extends Component {
                   {this.state.downloadURLs.map((item, index) => {
                     return (
                       <img
-                        src={item || "http://via.placeholder.com/40x30"}
+                        src={item || 'http://via.placeholder.com/40x30'}
                         alt="Uploaded images"
                         height="100"
                         width="100"
@@ -480,14 +480,14 @@ class AddProperty extends Component {
                     <label htmlFor="overLookingSea">overLookingSea</label>
                   </div>
                 </div>
-                <div style={{ justifyContent: "center", marginTop: 20 }}>
+                <div style={{ justifyContent: 'center', marginTop: 20 }}>
                   <Link
                     to="/MainContainer"
                     className="btn-primary"
                     onClick={() => this.addPropertyToMap()}
                   >
-                    {" "}
-                    Add Property
+                    {' '}
+                    Add Estate
                   </Link>
                 </div>
               </div>

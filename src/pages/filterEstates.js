@@ -1,10 +1,10 @@
-import React from "react";
-import Title from "../Components/Title";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Title from '../Components/Title';
+import { Link } from 'react-router-dom';
 
 // get all unique values
 const getUnique = (items, value) => {
-  return [...new Set(items.map(item => item[value]))];
+  return [...new Set(items.map((item) => item[value]))];
 };
 const FilterEstates = ({
   handleChange,
@@ -19,60 +19,60 @@ const FilterEstates = ({
   minspace,
   maxspace,
   downtown,
-  overLookingSea
+  overLookingSea,
 }) => {
   //get cities
-  let cities = getUnique(estates, "city");
+  let cities = getUnique(estates, 'city');
   //add all
-  cities = ["all", ...cities]; //add all and whatever you have in types
+  cities = ['all', ...cities]; //add all and whatever you have in types
 
   //map to render jsx
   cities = cities.map((item, index) => {
     return (
-      <option value={item} key={index}>
+      <option value={item} key={index} className="opt">
         {item}
       </option>
     );
   });
   //get streets
-  let streets = getUnique(estates, "street");
+  let streets = getUnique(estates, 'street');
   //add all
-  streets = ["all", ...streets]; //add all and whatever you have in types
+  streets = ['all', ...streets]; //add all and whatever you have in types
   //map to render jsx
   streets = streets.map((item, index) => {
     return (
-      <option value={item} key={index}>
+      <option value={item} key={index} className="opt">
         {item}
       </option>
     );
   });
   //get types
-  let types = getUnique(estates, "type");
+  let types = getUnique(estates, 'type');
   //add all
-  types = ["all", ...types]; //add all and whatever you have in types
+  types = ['all', ...types]; //add all and whatever you have in types
   //map to render jsx
   types = types.map((item, index) => {
     return (
-      <option value={item} key={index}>
-        {item}{" "}
+      <option value={item} key={index} className="opt">
+        {item}{' '}
       </option>
     );
   });
-  let roomsNumber = getUnique(estates, "roomNum");
+  let roomsNumber = getUnique(estates, 'roomNum');
   roomsNumber = roomsNumber.map((item, index) => {
     return (
-      <option value={item} key={index}>
-        {item}{" "}
+      <option value={item} key={index} className="opt">
+        {item}{' '}
       </option>
     );
   });
   return (
     <section className="filter-container">
-      <Title title="Seach Estates" />
+      <Title title="Search Estates" />
       <form className="filter-form">
         {/* SelectType  */}
         <div className="form-group">
-          <label style={{ color: "#000", marginLeft: 40 }} htmlFor="type">
+          <label style={{ color: '#000', marginLeft: 40 }} htmlFor="type">
             Type
           </label>
           <select
@@ -89,7 +89,7 @@ const FilterEstates = ({
         {/* select City  */}
 
         <div className="form-group">
-          <label style={{ color: "#000", marginLeft: 40 }} htmlFor="City">
+          <label style={{ color: '#000', marginLeft: 40 }} htmlFor="City">
             City
           </label>
           <select
@@ -106,7 +106,7 @@ const FilterEstates = ({
         {/* select street  */}
 
         <div className="form-group">
-          <label style={{ color: "#000", marginLeft: 40 }} htmlFor="street">
+          <label style={{ color: '#000', marginLeft: 40 }} htmlFor="street">
             Street
           </label>
           <select
@@ -123,7 +123,7 @@ const FilterEstates = ({
 
         {/* SelectNum */}
         <div className="form-group">
-          <label style={{ color: "#000", marginLeft: 40 }} htmlFor="roomNum">
+          <label style={{ color: '#000', marginLeft: 40 }} htmlFor="roomNum">
             Rooms
           </label>
           <select
@@ -140,7 +140,7 @@ const FilterEstates = ({
         {/* EndNum */}
         {/* estate price */}
         <div className="form-group">
-          <label style={{ color: "#000", marginLeft: 40 }} htmlFor="price">
+          <label style={{ color: '#000', marginLeft: 40 }} htmlFor="price">
             Price {price}₪
           </label>
           <input
@@ -159,7 +159,7 @@ const FilterEstates = ({
         {/* estate space */}
         <div className="form-group">
           <label
-            style={{ color: "#000", marginLeft: 40, marginBottom: 15 }}
+            style={{ color: '#000', marginLeft: 40, marginBottom: 15 }}
             htmlFor="space"
           >
             space
@@ -195,7 +195,7 @@ const FilterEstates = ({
               onChange={handleChange}
             />
             <label
-              style={{ color: "#000", marginLeft: 20, marginTop: 20 }}
+              style={{ color: '#000', marginLeft: 20, marginTop: 20 }}
               htmlFor="downtown"
             >
               downtown
@@ -210,7 +210,7 @@ const FilterEstates = ({
               onChange={handleChange}
             />
             <label
-              style={{ color: "#000", marginLeft: 20 }}
+              style={{ color: '#000', marginLeft: 20 }}
               htmlFor="overLookingSea"
             >
               overLookingSea
@@ -219,8 +219,8 @@ const FilterEstates = ({
         </div>
 
         <div>
-          <Link to="/AddPropery" className="btn-add">
-            Add Your Propery
+          <Link to="/AddPropery" className="btn-primary">
+            Add Estate
           </Link>
         </div>
       </form>

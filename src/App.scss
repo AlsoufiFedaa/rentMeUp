@@ -288,6 +288,7 @@ h6 {
   max-width: 100%;
 }
 /* end of Title */
+
 // ImageCarousel
 .container {
   width: 100vw;
@@ -465,6 +466,13 @@ h6 {
   grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
   grid-row-gap: 2rem;
   grid-column-gap: 40px;
+}
+.opt{ 
+  font-size: 1rem;
+  letter-spacing: var(--mainSpacing);
+  
+  margin-bottom: 1rem;
+  margin-top: 10px;
 }
 .wrapper {
   position: absolute;
@@ -648,11 +656,15 @@ h6 {
 .form-control {
   position: relative;
   height: 50px;
-  font-size: 20px;
   border: none;
   border-bottom: 1px solid #555;
   border-radius: 0;
   transition: 0.5s ease-in-out;
+  font-size: 1rem;
+  letter-spacing: var(--mainSpacing);
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  margin-top: 10px;
 }
 .form-control:focus {
   box-shadow: none;
