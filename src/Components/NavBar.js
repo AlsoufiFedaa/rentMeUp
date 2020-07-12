@@ -6,24 +6,51 @@ import * as firebase from "firebase";
 
 import { AuthContext } from "../Components/auth";
 
+// const Up = () => {
+//   firebase.auth().onAuthStateChanged(user => {
+//     if (user) {
+//       return (
+//         <div className="uName">
+//           <img
+//             style={{ height: 30, width: 30, alignSelf: "center" }}
+//             src={require("../assets/userPic.png")}
+//           />
+//           <h4
+//             style={{
+//               marginLeft: 10,
+//               marginTop: 25
+//             }}
+//           >
+//             {this.state.name}
+//           </h4>
+//         </div>
+//       );
+//     } else {
+//       return <div></div>;
+//     }
+//   });
+// };
 class NavBar extends Component {
   state = {
     isOPen: false,
-    name: ""
+    name: "",
+    loggedin: null
   };
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User logged in already or has just logged in.
         console.log(user.uid);
+        this.setState({ loggedin: true });
         firebase
           .firestore()
           .collection("users")
           .doc(user.uid)
           .get()
           .then(doc => {
-            console.log(doc.data(), "name ogf uesr");
             this.setState({ name: doc.data().name });
+            console.log(doc.data(), "name ogf uesr");
           })
           .catch(function(error) {
             console.log("Error getting documents: ", error);
@@ -32,24 +59,9 @@ class NavBar extends Component {
         console.log("not logged in ");
         // User not logged in or has just logged out.
       }
-      // let uid = firebase.auth().currentUser.uid;
-      // if ((uid = null)) {
-      //   console.log("hi");
-      // } else {
-      //   firebase
-      //     .firestore()
-      //     .collection("users")
-      //     .doc(uid)
-      //     .get()
-      //     .then(doc => {
-      //       alert(doc.date().name);
-      //       let name;
-      //       this.setState({
-      //         name: doc.date().name
-      //       });
-      //     });
     });
   }
+
   static contextType = AuthContext;
   handleToggle = () => {
     this.setState({ isOPen: !this.state.isOPen });
@@ -75,6 +87,27 @@ class NavBar extends Component {
     }
   };
   render() {
+    let info;
+    if (this.state.loggedin) {
+      info = (
+        <div className="uName">
+          <img
+            style={{ height: 30, width: 30, alignSelf: "center" }}
+            src={require("../assets/userPic.png")}
+          />
+          <h4
+            style={{
+              marginLeft: 10,
+              marginTop: 25
+            }}
+          >
+            {this.state.name}
+          </h4>
+        </div>
+      );
+    } else {
+      info = <div></div>;
+    }
     return (
       <nav className="navbar">
         <div className="nav-center">
@@ -108,20 +141,7 @@ class NavBar extends Component {
               </Link>
             </li>
           </ul>
-          <div className="uName">
-            <img
-              style={{ height: 30, width: 30, alignSelf: "center" }}
-              src={require("../assets/userPic.png")}
-            />
-            <h4
-              style={{
-                marginLeft: 10,
-                marginTop: 25
-              }}
-            >
-              {this.state.name}
-            </h4>
-          </div>
+          <div>{info}</div>
         </div>
         <div></div>
       </nav>

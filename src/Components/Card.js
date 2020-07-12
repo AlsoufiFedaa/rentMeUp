@@ -8,7 +8,8 @@ const Card = ({ property }) => {
   const { index, massage, rating, name } = property;
 
   return (
-    <div id={`card-${index}`} className="card">
+    <div id={`card-${index}`} className="card"
+    style={{borderRadius:25}}>
       <div
         style={{
           alignItems: "center",
@@ -16,7 +17,7 @@ const Card = ({ property }) => {
         }}
         className="details"
       >
-        <span className="index">{index + 1}</span>
+        {/* <span className="index">{index + 1}</span> */}
         <img
           style={{ marginTop: 20 }}
           src={userPic}
