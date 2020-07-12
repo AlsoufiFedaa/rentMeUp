@@ -16,6 +16,7 @@
   --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
 }
 /* globals */
+
 body {
   padding-top: 66px;
   color: var(--mainBlack);
@@ -69,6 +70,13 @@ h6 {
   margin-top: 40px;
 }
 
+.uName {
+  display: flex;
+  justify-self: flex-end;
+  flex-direction: row;
+  align-items: center;
+  // margin-left: 8rem;
+}
 .btn-primary:hover {
   background: transparent;
   color: var(--primaryColor);

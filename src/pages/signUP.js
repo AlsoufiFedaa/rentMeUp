@@ -3,6 +3,7 @@ import Title from "../Components/Title";
 import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
+import { withRouter } from "react-router-dom";
 
 class SignUP extends Component {
   state = {
@@ -32,17 +33,20 @@ class SignUP extends Component {
     setTimeout(() => {
       console.log("wait!");
     }, 7000);
- 
 
     const user = firebase.auth().currentUser;
     console.log("user", user.uid);
 
-    db.collection("users")
+    db
+      .collection("users")
       .doc(user.uid)
       .set({ email: user.email, uid: user.uid, mobile: Mobile, name: Name })
       .catch(function(error) {
         console.error(error);
-      });
+      }).then = () => {
+      this.props.history.push("/HomeLogged");
+      console.log("###loginn###");
+    };
   };
 
   handleNameChange = e => {
@@ -136,7 +140,6 @@ class SignUP extends Component {
             </div>
 
             <Link
-              to="/HomeLogged"
               className="btn-primary"
               onClick={this.addUser}
             >

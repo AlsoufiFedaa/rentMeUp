@@ -8,8 +8,48 @@ import { AuthContext } from "../Components/auth";
 
 class NavBar extends Component {
   state = {
-    isOPen: false
+    isOPen: false,
+    name: ""
   };
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User logged in already or has just logged in.
+        console.log(user.uid);
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(user.uid)
+          .get()
+          .then(doc => {
+            console.log(doc.data(), "name ogf uesr");
+            this.setState({ name: doc.data().name });
+          })
+          .catch(function(error) {
+            console.log("Error getting documents: ", error);
+          });
+      } else {
+        console.log("not logged in ");
+        // User not logged in or has just logged out.
+      }
+      // let uid = firebase.auth().currentUser.uid;
+      // if ((uid = null)) {
+      //   console.log("hi");
+      // } else {
+      //   firebase
+      //     .firestore()
+      //     .collection("users")
+      //     .doc(uid)
+      //     .get()
+      //     .then(doc => {
+      //       alert(doc.date().name);
+      //       let name;
+      //       this.setState({
+      //         name: doc.date().name
+      //       });
+      //     });
+    });
+  }
   static contextType = AuthContext;
   handleToggle = () => {
     this.setState({ isOPen: !this.state.isOPen });
@@ -25,7 +65,7 @@ class NavBar extends Component {
         .then(function() {
           console.log("sign out ");
           alert("sign out successfully");
-          localStorage.clear()
+          localStorage.clear();
         })
         .catch(function(error) {
           console.log("An error happened.");
@@ -68,7 +108,22 @@ class NavBar extends Component {
               </Link>
             </li>
           </ul>
+          <div className="uName">
+            <img
+              style={{ height: 30, width: 30, alignSelf: "center" }}
+              src={require("../assets/userPic.png")}
+            />
+            <h4
+              style={{
+                marginLeft: 10,
+                marginTop: 25
+              }}
+            >
+              {this.state.name}
+            </h4>
+          </div>
         </div>
+        <div></div>
       </nav>
     );
   }

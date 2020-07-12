@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
         setCurrentUser(localStorage.getItem("currentUser"));
 
       console.log("using local");
-    }
+    } 
   }, []);
   useEffect(() => {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo1.png";
 import React, { Component } from "react";
 import { Redirect } from "react-router";
+
 import * as firebase from "firebase";
 import { AuthContext } from "../Components/auth";
-
+import { withRouter } from "react-router-dom";
 class LogIn extends Component {
   state = {
     Email: "",
@@ -22,9 +23,12 @@ class LogIn extends Component {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(errorCode, errorMessage);
+        alert(errorCode, errorMessage);
         // ...
-      });
+      }).then = () => {
+      this.props.history.push("/HomeLogged");
+      console.log("###loginn###");
+    };
   };
 
   handleEmailChange = e => {
@@ -43,7 +47,7 @@ class LogIn extends Component {
     console.log(currentUser);
 
     if (currentUser) {
-      return <Redirect to="/MainContainer" />;
+      return <Redirect to="/HomeLogged" />;
     }
     return (
       <div>
@@ -84,12 +88,7 @@ class LogIn extends Component {
               </label>
             </div>
 
-            <Link
-              to="/HomeLogged"
-              className="btn-primary"
-              onClick={this.signin}
-            >
-              {" "}
+            <Link className="btn-primary" onClick={this.signin}>
               Log In
             </Link>
           </div>
