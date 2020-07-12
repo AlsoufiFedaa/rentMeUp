@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import data from "./data";
-// import Card from "../Components/Card";
-// import Title from "../Components/Title";
-import Card from "react-bootstrap/Card";
+import React, { Component } from 'react';
+import data from './data';
+import Card from '../Components/Card';
+import Title from '../Components/Title';
+// import Card from 'react-bootstrap/Card';
 
-import Columns from "react-columns";
-import Rating from "react-rating";
-import userPic from "../assets/userPic.png";
-import emptyStar from "../assets/star-empty.png";
-import fullStar from "../assets/PngItem_3174427.png";
-import * as firebase from "firebase";
+// import Columns from 'react-columns';
+// import Rating from 'react-rating';
+// import userPic from '../assets/userPic.png';
+// import emptyStar from '../assets/star-empty.png';
+// import fullStar from '../assets/PngItem_3174427.png';
+import * as firebase from 'firebase';
 
 class Feedbacks extends Component {
   state = {
@@ -22,39 +22,30 @@ class Feedbacks extends Component {
     let { feedbacks, properties, property } = this.state;
     const snapshot = await firebase
       .firestore()
-      .collection("FeedBacks")
+      .collection('FeedBacks')
       .get();
     const collection = {};
+    let index = 0;
     snapshot.forEach((doc) => {
       collection[doc.id] = doc.data();
-
+      collection[doc.id].index = index;
       feedbacks.push(collection[doc.id]);
       this.setState({ feedbacks });
+      index = index + 1;
     });
 
-    feedbacks.reverse();
+    console.log(feedbacks);
 
     this.setState({ properties: feedbacks });
-    this.setState({ property: this.state.properties[0] });
-    // {
-    //   feedbacks.map(item =>
-    //     item.index == 0
-    //       ? this.setState({ property: item })
-    //       : console.log("not ")
-    //   );
-    // }
+    //this.setState({ property: this.state.properties[0] });
+    {
+      feedbacks.map((item) =>
+        item.index == 0
+          ? this.setState({ property: item })
+          : console.log('not ')
+      );
+    }
   }
-
-  queries = [
-    {
-      columns: 2,
-      query: "min-width: 550px",
-    },
-    {
-      columns: 3,
-      query: "min-width: 1000px",
-    },
-  ];
 
   nextProperty = () => {
     const newIndex = this.state.property.index + 1;
@@ -62,7 +53,6 @@ class Feedbacks extends Component {
     this.setState({
       property: properties[newIndex],
     });
-    console.log(this.state.property);
   };
 
   prevProperty = () => {
@@ -71,18 +61,17 @@ class Feedbacks extends Component {
     this.setState({
       property: properties[newIndex],
     });
-    console.log(this.state.property);
   };
 
   render() {
     const { properties, property } = this.state;
 
     return (
-      <div className="feed" style={{ marginTop: "70px" }}>
+      <div className="feed" style={{ marginTop: '70px' }}>
         <div className="page">
-          {/* <section>
+          <section>
             <Title title="Feedbacks!" />
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: 'center' }}>
               <button
                 onClick={() => this.prevProperty()}
                 disabled={property.index === 0}
@@ -106,17 +95,17 @@ class Feedbacks extends Component {
                 className="cards-slider-wrapper"
                 style={{
                   transform: `translateX(-${property.index *
-                    (100 / properties.length)}%)`
+                    (100 / properties.length)}%)`,
                 }}
               >
-                {properties.map(property => (
+                {properties.map((property) => (
                   <Card property={property} />
                 ))}
               </div>
             </div>
-          </div> */}
+          </div>
 
-          <Columns
+          {/* <Columns
             queries={this.queries}
             style={{
               justifyContent: "center",
@@ -175,7 +164,7 @@ class Feedbacks extends Component {
                 </Card>
               );
             })}
-          </Columns>
+          </Columns> */}
         </div>
       </div>
     );
