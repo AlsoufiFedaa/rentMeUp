@@ -37,7 +37,7 @@ class Feedbacks extends Component {
     console.log(feedbacks);
 
     this.setState({ properties: feedbacks });
-    //this.setState({ property: this.state.properties[0] });
+
     {
       feedbacks.map((item) =>
         item.index == 0

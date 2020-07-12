@@ -1,22 +1,20 @@
-import React, { Component } from "react";
-import Title from "../Components/Title";
-import logo from "../assets/logo1.png";
-import { Link } from "react-router-dom";
-import * as firebase from "firebase";
-
+import React, { Component } from 'react';
+import Title from '../Components/Title';
+import logo from '../assets/logo1.png';
+import { Link } from 'react-router-dom';
+import * as firebase from 'firebase';
+import { withRouter } from 'react-router-dom';
 class SignUP extends Component {
   state = {
-    Name: "",
-    Email: "",
-    Password: "",
-    Mobile: ""
+    Name: '',
+    Email: '',
+    Password: '',
+    Mobile: '',
   };
-
   addUser = () => {
     const { Name, Email, Password, Mobile } = this.state;
     console.log(Name, Email, Password, Mobile);
     const db = firebase.firestore();
-
     firebase
       .auth()
       .createUserWithEmailAndPassword(Email, Password)
@@ -25,56 +23,52 @@ class SignUP extends Component {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorCode, errorMessage);
-
         // ...
       });
-
     setTimeout(() => {
-      console.log("wait!");
+      console.log('wait!');
     }, 7000);
- 
-
     const user = firebase.auth().currentUser;
-    console.log("user", user.uid);
-
-    db.collection("users")
+    console.log('user', user.uid);
+    db
+      .collection('users')
       .doc(user.uid)
       .set({ email: user.email, uid: user.uid, mobile: Mobile, name: Name })
       .catch(function(error) {
         console.error(error);
-      });
+      }).then = () => {
+      this.props.history.push('/HomeLogged');
+      console.log('###loginn###');
+    };
   };
-
-  handleNameChange = e => {
+  handleNameChange = (e) => {
     this.setState({
-      Name: e.target.value
+      Name: e.target.value,
     });
   };
-  handleEmailChange = e => {
+  handleEmailChange = (e) => {
     this.setState({
-      Email: e.target.value
+      Email: e.target.value,
     });
   };
-  handlePasswordChange = e => {
+  handlePasswordChange = (e) => {
     this.setState({
-      Password: e.target.value
+      Password: e.target.value,
     });
   };
-  handleMobileChange = e => {
+  handleMobileChange = (e) => {
     this.setState({
-      Mobile: e.target.value
+      Mobile: e.target.value,
     });
   };
-
   render() {
     return (
       <div>
         <div
           className="nav-header"
-          style={{ marginTop: "40px", marginLeft: "25%" }}
+          style={{ marginTop: '40px', marginLeft: '25%' }}
         >
           <Title title="SignUp" />
-
           <div className="singUp">
             <div className="form-groupp">
               <input
@@ -90,7 +84,6 @@ class SignUP extends Component {
                 Name
               </label>
             </div>
-
             <div className="form-groupp">
               <input
                 defaultValue={this.state.Email}
@@ -105,7 +98,6 @@ class SignUP extends Component {
                 Email
               </label>
             </div>
-
             <div className="form-groupp">
               <input
                 defaultValue={this.state.Password}
@@ -134,12 +126,7 @@ class SignUP extends Component {
                 Mobile
               </label>
             </div>
-
-            <Link
-              to="/HomeLogged"
-              className="btn-primary"
-              onClick={this.addUser}
-            >
+            <Link className="btn-primary" onClick={this.addUser}>
               Sign Up
             </Link>
           </div>

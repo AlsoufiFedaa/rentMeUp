@@ -1,15 +1,16 @@
-import Title from "../Components/Title";
-import { Link } from "react-router-dom";
-import logo from "../assets/logo1.png";
-import React, { Component } from "react";
-import { Redirect } from "react-router";
-import * as firebase from "firebase";
-import { AuthContext } from "../Components/auth";
+import Title from '../Components/Title';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo1.png';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 
+import * as firebase from 'firebase';
+import { AuthContext } from '../Components/auth';
+import { withRouter } from 'react-router-dom';
 class LogIn extends Component {
   state = {
-    Email: "",
-    Password: ""
+    Email: '',
+    Password: '',
   };
   static contextType = AuthContext;
   signin = () => {
@@ -22,19 +23,22 @@ class LogIn extends Component {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(errorCode, errorMessage);
+        alert(errorCode, errorMessage);
         // ...
-      });
+      }).then = () => {
+      this.props.history.push('/HomeLogged');
+      console.log('###loginn###');
+    };
   };
 
-  handleEmailChange = e => {
+  handleEmailChange = (e) => {
     this.setState({
-      Email: e.target.value
+      Email: e.target.value,
     });
   };
-  handlePasswordChange = e => {
+  handlePasswordChange = (e) => {
     this.setState({
-      Password: e.target.value
+      Password: e.target.value,
     });
   };
 
@@ -43,13 +47,13 @@ class LogIn extends Component {
     console.log(currentUser);
 
     if (currentUser) {
-      return <Redirect to="/MainContainer" />;
+      return <Redirect to="/HomeLogged" />;
     }
     return (
       <div>
         <div
           className="nav-header"
-          style={{ marginTop: "40px", marginLeft: "25%" }}
+          style={{ marginTop: '40px', marginLeft: '25%' }}
         >
           <Title title="LogIn" />
 
@@ -84,12 +88,7 @@ class LogIn extends Component {
               </label>
             </div>
 
-            <Link
-              to="/HomeLogged"
-              className="btn-primary"
-              onClick={this.signin}
-            >
-              {" "}
+            <Link className="btn-primary" onClick={this.signin}>
               Log In
             </Link>
           </div>

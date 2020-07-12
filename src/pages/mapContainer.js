@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import Map from "./mainMap";
-import FilterEstates from "./filterEstates";
-import { Link } from "react-router-dom";
-import { Marker, Popup } from "react-map-gl";
-import { AuthContext } from "../Components/auth";
+import React, { Component } from 'react';
+import Map from './mainMap';
+import FilterEstates from './filterEstates';
+import { Link } from 'react-router-dom';
+import { Marker, Popup } from 'react-map-gl';
+import { AuthContext } from '../Components/auth';
 
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 class MapContainer extends Component {
   state = {
     estates: [],
     sortedEstates: [],
-    type: "all",
-    city: "",
-    street: "",
+    type: 'all',
+    city: 'all',
+    street: 'all',
     price: 100,
     minprice: 0,
     maxprice: 0,
@@ -24,17 +24,17 @@ class MapContainer extends Component {
     overLookingSea: false,
     prev_infowindow: 0,
     newEstates: [],
-    query: firebase.firestore().collection("estates")
+    query: firebase.firestore().collection('estates'),
   };
   static contextType = AuthContext;
   async componentDidMount() {
     const { estates } = this.state;
     const snapshot = await firebase
       .firestore()
-      .collection("estates")
+      .collection('estates')
       .get();
 
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc) => {
       let data = doc.data();
 
       data.id = doc.id;
@@ -44,14 +44,14 @@ class MapContainer extends Component {
       this.setState({ sortedEstates: this.state.estates });
     });
 
-    let maxprice = Math.max(...this.state.estates.map(item => item.price));
-    let maxspace = Math.max(...this.state.estates.map(item => item.space));
+    let maxprice = Math.max(...this.state.estates.map((item) => item.price));
+    let maxspace = Math.max(...this.state.estates.map((item) => item.space));
     this.setState({ maxprice, maxspace });
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const target = event.target;
-    const value = target.type === "radio" ? target.checked : target.value;
+    const value = target.type === 'radio' ? target.checked : target.value;
     const name = event.target.name;
     this.setState({ [name]: value }, () => {
       this.filterEstates();
@@ -59,86 +59,60 @@ class MapContainer extends Component {
     });
   };
   filterEstates = () => {
-    
     let {
       type,
       city,
       street,
-      // minprice,
-      // maxspace,
+
       price,
-      // minspace,
-      // maxprice,
+
       roomNum,
-      overLookingSea,
-      downtown,
-      // tempEstates,
+
       sortedEstates,
       newEstates,
-      query
+      query,
     } = this.state;
-    //all estates
-    console.log(this.state.estates);
 
-    console.log(
-      "type",
-      type,
-      "city",
-      city,
-      "rooms",
-      roomNum,
-      "street",
-      street,
-      overLookingSea,
-      "down",
-      downtown
-    );
     // convert to integer
-    roomNum = parseInt(roomNum);
+
     price = parseInt(price);
-    console.log("state", type, city, street);
+    console.log('state', type, city, street, roomNum);
 
-    if (city !== "all") {
-      query = query
-        .where("city", "==", city)
+    if (city !== 'all' && type !== 'all' && street !== 'all' && roomNum !== 1) {
+      query
+        .where('city', '==', city)
+        .where('type', '==', type)
+        .where('street', '==', street)
+        .where('roomNum', '==', roomNum)
+
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          console.log(querySnapshot);
+          querySnapshot.forEach((doc) => {
             let data = doc.data();
 
             data.id = doc.id;
             newEstates.push(data);
             this.setState({ newEstates });
+            console.log('newstate');
             this.setState({ sortedEstates: newEstates });
-            this.setState({ newEstates: [] });
           });
         });
     }
-    if (type !== "all") {
-      query = query
-        .where("type", "==", type)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            let data = doc.data();
-
-            data.id = doc.id;
-            newEstates.push(data);
-            this.setState({ newEstates });
-            this.setState({ sortedEstates: newEstates });
-            this.setState({ newEstates: [] });
-          });
-          console.log("sorted", this.state.newEstates);
-        });
+    {
+      this.state.newEstates && price
+        ? (newEstates = this.state.newEstates.filter(
+            (item) => item.price >= price
+          ))
+        : console.log('no Filtering');
     }
+    this.setState({ sortedEstates: newEstates });
   };
 
-  openInfo = i => {
+  openInfo = (i) => {
     const { prev_infowindow } = this.state;
     const { sortedEstates } = this.state;
     sortedEstates[i].isOpen = true;
-    console.log(sortedEstates[i]);
-    console.log("clicked");
 
     this.setState(sortedEstates);
     if (this.state.prev_infowindow != i) {
@@ -149,9 +123,6 @@ class MapContainer extends Component {
   };
 
   displayMarkers = () => {
-    console.log(this.state.sortedEstates, "sortedEstates");
-    console.log("lenght", this.state.sortedEstates.length == "object");
-
     return this.state.sortedEstates.map((item, index) => {
       return (
         <>
@@ -166,19 +137,19 @@ class MapContainer extends Component {
           >
             <button
               style={{
-                backgroundColor: "transparent",
-                borderColor: "transparent"
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
               }}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
 
                 this.openInfo(index);
               }}
             >
               <img
-                src={require("../assets/Webp.net-resizeimage.png")}
+                src={require('../assets/Webp.net-resizeimage.png')}
                 width={50}
-                alt={"estate"}
+                alt={'estate'}
               />
             </button>
           </Marker>
@@ -193,7 +164,7 @@ class MapContainer extends Component {
                   padding: 3,
                   width: 150,
                   height: 196,
-                  alignItems: "center"
+                  alignItems: 'center',
                 }}
                 className="infoWfin"
               >
@@ -212,7 +183,7 @@ class MapContainer extends Component {
 
                 <Link
                   to={{
-                    pathname: `/SingleEstate/${item.id}`
+                    pathname: `/SingleEstate/${item.id}`,
                   }}
                   className="infobtn"
                 >
@@ -228,7 +199,7 @@ class MapContainer extends Component {
 
   render() {
     const { currentUser } = this.context;
-    console.log(currentUser);
+
     return (
       <div>
         <FilterEstates

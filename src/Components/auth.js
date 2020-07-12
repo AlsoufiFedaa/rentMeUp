@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from "react";
-import * as firebase from "firebase";
+import React, { useEffect, useState } from 'react';
+import * as firebase from 'firebase';
 export const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    if (!localStorage.getItem("currentUser")) {
+    if (!localStorage.getItem('currentUser')) {
       firebase.auth().onAuthStateChanged(setCurrentUser);
     } else {
-      localStorage.getItem("currentUser") &&
-        setCurrentUser(localStorage.getItem("currentUser"));
+      localStorage.getItem('currentUser') &&
+        setCurrentUser(localStorage.getItem('currentUser'));
 
-      console.log("using local");
+      console.log('using local');
     }
   }, []);
   useEffect(() => {
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    {
+      if (currentUser !== null) {
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      }
+    }
   });
 
   return (
     <AuthContext.Provider
       value={{
-        currentUser
+        currentUser,
       }}
     >
       {children}
