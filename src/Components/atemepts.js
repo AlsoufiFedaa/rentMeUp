@@ -4,12 +4,34 @@
 //   console.error('Sign Out Error', error);
 // });
 
-
 // var Rating = require('react-rating');
 //<Rating rating={4} total={5}/>
-// rating={2} total={5} interactive={false} 
+// rating={2} total={5} interactive={false}
 
-
+// const Up = () => {
+//   firebase.auth().onAuthStateChanged(user => {
+//     if (user) {
+//       return (
+//         <div className="uName">
+//           <img
+//             style={{ height: 30, width: 30, alignSelf: "center" }}
+//             src={require("../assets/userPic.png")}
+//           />
+//           <h4
+//             style={{
+//               marginLeft: 10,
+//               marginTop: 25
+//             }}
+//           >
+//             {this.state.name}
+//           </h4>
+//         </div>
+//       );
+//     } else {
+//       return <div></div>;
+//     }
+//   });
+// };
 //  filterEstates = () => {
 //   let {
 //     type,

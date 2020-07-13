@@ -1,45 +1,95 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { FaAlignRight } from 'react-icons/fa';
 import logo from '../assets/logo1.png';
 import { Link } from 'react-router-dom';
 import * as firebase from 'firebase';
 import { AuthContext } from '../Components/auth';
 import { withRouter } from 'react-router-dom';
-// const Up = () => {
-//   firebase.auth().onAuthStateChanged(user => {
-//     if (user) {
-//       return (
-//         <div className="uName">
-//           <img
-//             style={{ height: 30, width: 30, alignSelf: "center" }}
-//             src={require("../assets/userPic.png")}
-//           />
-//           <h4
-//             style={{
-//               marginLeft: 10,
-//               marginTop: 25
-//             }}
-//           >
-//             {this.state.name}
-//           </h4>
-//         </div>
-//       );
-//     } else {
-//       return <div></div>;
-//     }
-//   });
-// };
+
+// import { ReactComponent as CaretIcon } from "./icons/caret.svg";
+import userP from '../assets/user1.png';
+import home from '../assets/home.png';
+import logOut from '../assets/logOut.png';
+
+import { ReactComponent as CogIcon } from '../assets/icons/cog.svg';
+import { ReactComponent as ChevronIcon } from '../assets/icons/chevron.svg';
+function DropdownMenu() {
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const SignOut = () => {
+    console.log('here we go');
+
+    if (currentUser) {
+      return firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log('sign out ');
+          alert('sign out successfully');
+          localStorage.clear();
+          window.location.reload();
+          setCurrentUser(null);
+        })
+        .catch(function(error) {
+          console.log('An error happened.');
+        });
+    } else {
+      return alert('Log In first');
+    }
+  };
+  function DropdownItem(props) {
+    return (
+      <Link to="/" onClick={props.function}>
+        <a href="/" className="menu-item">
+          <span className="icon-button">{props.leftIcon}</span>
+          {props.children}
+        </a>
+      </Link>
+    );
+  }
+
+  return (
+    <div className="dropdown">
+      <div className="menu">
+        <DropdownItem leftIcon={<img src={userP} height={20} />}>
+          My Profile
+        </DropdownItem>
+        <DropdownItem leftIcon={<img src={home} height={20} />}>
+          All Estates
+        </DropdownItem>
+
+        <DropdownItem
+          leftIcon={<CogIcon />}
+          rightIcon={<ChevronIcon />}
+          goToMenu="settings"
+        >
+          Messages
+        </DropdownItem>
+
+        <DropdownItem
+          leftIcon={<img src={logOut} height={20} />}
+          rightIcon={<ChevronIcon />}
+          goToMenu="animals"
+          function={SignOut}
+        >
+          Sign Out
+        </DropdownItem>
+      </div>
+    </div>
+  );
+}
 class NavBar extends Component {
   state = {
     isOPen: false,
     name: '',
     loggedin: null,
+    openD: false,
   };
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User logged in already or has just logged in.
-        console.log(user.uid);
+
         this.setState({ loggedin: true });
         firebase
           .firestore()
@@ -59,52 +109,41 @@ class NavBar extends Component {
       }
     });
   }
-  static contextType = AuthContext;
+
   handleToggle = () => {
     this.setState({ isOPen: !this.state.isOPen });
   };
-  SignOut = () => {
-    const { currentUser, setCurrentUser } = this.context;
 
-    if (currentUser) {
-      return firebase
-        .auth()
-        .signOut()
-        .then(function() {
-          console.log('sign out ');
-          window.location.reload(false);
-          alert('sign out successfully');
-
-          localStorage.clear();
-          this.props.history.push('/');
-          setCurrentUser(null);
-          console.log(currentUser);
-        })
-        .catch(function(error) {
-          console.log('An error happened.');
-        });
-    } else {
-      return alert('Log In first');
-    }
-  };
   render() {
+    let drop;
+    if (this.state.openD) {
+      drop = <DropdownMenu />;
+    } else {
+      drop = <div></div>;
+    }
+
     let info;
     if (this.state.loggedin) {
       info = (
-        <div className="uName">
+        <button
+          className="uName"
+          onClick={() => this.setState({ openD: !this.state.openD })}
+        >
           <img
-            style={{ height: 30, width: 30, alignSelf: 'center' }}
+            style={{ height: 30, width: 45, alignSelf: 'center' }}
             src={require('../assets/userPic.png')}
           />
           <h4
             style={{
               marginLeft: 10,
               marginTop: 25,
+              marginRight: 20,
             }}
           >
             {this.state.name}
           </h4>
-        </div>
+          {drop}
+        </button>
       );
     } else {
       info = <div></div>;
@@ -136,17 +175,13 @@ class NavBar extends Component {
             <li>
               <Link to="/Feedbacks"> Feedbacks</Link>
             </li>
-            <li className="singOut">
-              <Link onClick={this.SignOut} to="/">
-                Sign Out
-              </Link>
-            </li>
           </ul>
-          <div>{info}</div>
+          {info}
         </div>
         <div></div>
       </nav>
     );
   }
 }
+
 export default NavBar;

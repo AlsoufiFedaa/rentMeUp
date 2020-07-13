@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import data from './data';
 import Card from '../Components/Card';
 import Title from '../Components/Title';
-// import Card from 'react-bootstrap/Card';
 
-// import Columns from 'react-columns';
-// import Rating from 'react-rating';
-// import userPic from '../assets/userPic.png';
-// import emptyStar from '../assets/star-empty.png';
-// import fullStar from '../assets/PngItem_3174427.png';
 import * as firebase from 'firebase';
 
 class Feedbacks extends Component {
@@ -38,6 +32,7 @@ class Feedbacks extends Component {
 
     this.setState({ properties: feedbacks });
 
+    //this.setState({ property: this.state.properties[0] });
     {
       feedbacks.map((item) =>
         item.index == 0

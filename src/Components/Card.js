@@ -4,11 +4,12 @@ import Rating from "react-rating";
 import userPic from "../assets/userPic.png";
 import emptyStar from "../assets/star-empty.png";
 import fullStar from "../assets/PngItem_3174427.png";
+import { withRouter } from "react-router-dom";
 const Card = ({ property }) => {
   const { index, massage, rating, name } = property;
 
   return (
-    <div id={`card-${index}`} className="card">
+    <div id={`card-${index}`} className="card" style={{ borderRadius: 25 }}>
       <div
         style={{
           alignItems: "center",
@@ -16,11 +17,11 @@ const Card = ({ property }) => {
         }}
         className="details"
       >
-        <span className="index">{index + 1}</span>
+        {/* <span className="index">{index + 1}</span> */}
         <img
           style={{ marginTop: 20 }}
           src={userPic}
-          width="100"
+          width="150"
           height="100"
           alt="user"
         />

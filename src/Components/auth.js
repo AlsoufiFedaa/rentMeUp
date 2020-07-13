@@ -16,10 +16,8 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
   useEffect(() => {
-    {
-      if (currentUser !== null) {
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      }
+    if (currentUser !== null) {
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
     }
   });
 
