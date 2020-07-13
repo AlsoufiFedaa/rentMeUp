@@ -123,31 +123,31 @@ class NavBar extends Component {
   }
 }
 
-const SignOut = () => {
-  const { currentUser, setCurrentUser } = this.context;
-  console.log(
-    "dsfyhfujnksdfgysduijnkldsyauinjkfayusdinklfayudsbijnkfayudsbijxnk  "
-  );
-
-  if (currentUser) {
-    return firebase
-      .auth()
-      .signOut()
-      .then(function() {
-        console.log("sign out ");
-        alert("sign out successfully");
-        localStorage.clear();
-        this.props.history.push("/");
-        setCurrentUser(null);
-      })
-      .catch(function(error) {
-        console.log("An error happened.");
-      });
-  } else {
-    return alert("Log In first");
-  }
-};
 function DropdownMenu() {
+  const SignOut = () => {
+    const { currentUser, setCurrentUser } = this.context;
+    console.log(
+      "dsfyhfujnksdfgysduijnkldsyauinjkfayusdinklfayudsbijnkfayudsbijxnk  "
+    );
+
+    if (currentUser) {
+      return firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log("sign out ");
+          alert("sign out successfully");
+          localStorage.clear();
+          this.props.history.push("/");
+          setCurrentUser(null);
+        })
+        .catch(function(error) {
+          console.log("An error happened.");
+        });
+    } else {
+      return alert("Log In first");
+    }
+  };
   function DropdownItem(props) {
     return (
       <a href="#" className="menu-item">
@@ -175,7 +175,7 @@ function DropdownMenu() {
           Settings
         </DropdownItem>
         <DropdownItem
-          onClick={this.signOut}
+          onClick={signOut}
           leftIcon={<img src={logOut} height={20} />}
           rightIcon={<ChevronIcon />}
           goToMenu="animals"
