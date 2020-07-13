@@ -71,12 +71,17 @@ h6 {
 }
 
 .uName {
+  height: 77px;
+  background-color: #f1f2f2;
   display: flex;
   justify-self: flex-end;
   flex-direction: row;
-  align-items: center;
-  // margin-left: 8rem;
-  margin-top: 20px;
+  align-content: center;
+  align-self: center;
+  margin-right: 50px;
+  padding: 4px;
+  border-radius: 40px;
+  // margin-top: 20px;
 }
 .btn-primary:hover {
   background: transparent;
@@ -181,7 +186,7 @@ h6 {
   color: rgb(83, 42, 3);
   transition: var(--mainTransition);
   text-align: center;
-  font-size: 15px;
+  font-size: 18px;
   font-family: fantasy;
   font-weight: 550;
   letter-spacing: var(--mainSpacing);
@@ -203,11 +208,13 @@ h6 {
     margin: 0 auto;
     display: flex;
     margin-top: 0px;
+    justify-content: space-between;
   }
   .nav-links {
     height: auto;
     display: flex;
-    margin-left: 8rem;
+    margin-left: 3.7rem;
+    justify-self: center;
     margin-top: 37px;
   }
   .nav-links a {
@@ -936,113 +943,113 @@ $i: 0;
 .cards-slider.active-slide-0 #card-0 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-1 #card-1 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-2 #card-2 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-3 #card-3 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-4 #card-4 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-5 #card-5 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-6 #card-6 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-7 #card-7 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-8 #card-8 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-9 #card-9 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-10 #card-10 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-11 #card-11 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-12 #card-12 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-13 #card-13 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-14 #card-14 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .cards-slider.active-slide-15 #card-15 {
   opacity: 1;
   transform: scale(1);
-  background-color: #f3f3f3;
-  border-color: #f3f3f3;
+  background-color: #bcbec0;
+  border-color: #bcbec0;
 }
 
 .col {
@@ -1092,3 +1099,121 @@ $i: 0;
   font-family: "Podkova";
 }
 /* #endregion */
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.nav-item {
+  width: calc(var(--nav-size) * 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon Button */
+.icon-button {
+  --button-size: calc(var(--nav-size) * 0.5);
+  width: 35px;
+  height: 35px;
+  background-color: #bcbec0;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+.icon-button:hover {
+  filter: brightness(1.2);
+}
+
+.icon-button svg {
+  fill: var(--text-color);
+  width: 20px;
+  height: 20px;
+}
+
+/* Dropdown Menu */
+
+.dropdown {
+  position: absolute;
+  top: 95px;
+  width: 300px;
+  transform: translateX(-45%);
+  background-color: #e6e7e8;
+  // border: #bcbec0;
+  // border-width: 5px;
+  border-radius: 25px;
+  padding: 1rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  transition: #f1f2f2;
+  padding: 0.5rem;
+}
+
+.menu-item .icon-button {
+  margin-right: 1rem;
+}
+
+.menu-item .icon-button:hover {
+  filter: none;
+}
+
+.menu-item:hover {
+  background-color: #f1f2f2;
+}
+
+.icon-right {
+  margin-left: auto;
+}
+
+/* CSSTransition classes  */
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-primary-exit {
+  position: absolute;
+}
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}

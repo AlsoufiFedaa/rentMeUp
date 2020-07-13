@@ -13,16 +13,19 @@ const AuthProvider = ({ children }) => {
         setCurrentUser(localStorage.getItem("currentUser"));
 
       console.log("using local");
-    } 
+    }
   }, []);
   useEffect(() => {
+    // if (currentUser !== null) {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    // }
   });
 
   return (
     <AuthContext.Provider
       value={{
-        currentUser
+        currentUser,
+        setCurrentUser
       }}
     >
       {children}
