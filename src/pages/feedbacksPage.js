@@ -1,15 +1,21 @@
-import React, { Component } from "react";
-import data from "./data";
-import Card from "../Components/Card";
-import Title from "../Components/Title";
+import React, { Component } from 'react';
+import data from './data';
+import Card from '../Components/Card';
+import Title from '../Components/Title';
+// import Card from 'react-bootstrap/Card';
 
-import * as firebase from "firebase";
+// import Columns from 'react-columns';
+// import Rating from 'react-rating';
+// import userPic from '../assets/userPic.png';
+// import emptyStar from '../assets/star-empty.png';
+// import fullStar from '../assets/PngItem_3174427.png';
+import * as firebase from 'firebase';
 
 class Feedbacks extends Component {
   state = {
     feedbacks: [],
     properties: data.properties,
-    property: data.properties[ 0 ]
+    property: data.properties[0],
   };
 
   async componentDidMount() {
@@ -19,10 +25,11 @@ class Feedbacks extends Component {
       .collection('FeedBacks')
       .get();
     const collection = {};
-    snapshot.forEach(doc => {
-      collection[ doc.id ] = doc.data();
-
-      feedbacks.push(collection[ doc.id ]);
+    let index = 0;
+    snapshot.forEach((doc) => {
+      collection[doc.id] = doc.data();
+      collection[doc.id].index = index;
+      feedbacks.push(collection[doc.id]);
       this.setState({ feedbacks });
       index = index + 1;
     });
@@ -30,7 +37,6 @@ class Feedbacks extends Component {
     console.log(feedbacks);
 
     this.setState({ properties: feedbacks });
-<<<<<<< HEAD
 
     {
       feedbacks.map((item) =>
@@ -41,23 +47,11 @@ class Feedbacks extends Component {
     }
   }
 
-=======
-    this.setState({ property: this.state.properties[ 0 ] });
-    // {
-    //   feedbacks.map(item =>
-    //     item.index == 0
-    //       ? this.setState({ property: item })
-    //       : console.log("not ")
-    //   );
-    // }
-  }
-
->>>>>>> b881823a235999e11688e27daac7d790859886dc
   nextProperty = () => {
     const newIndex = this.state.property.index + 1;
     const { properties } = this.state;
     this.setState({
-      property: properties[ newIndex ]
+      property: properties[newIndex],
     });
   };
 
@@ -65,7 +59,7 @@ class Feedbacks extends Component {
     const newIndex = this.state.property.index - 1;
     const { properties } = this.state;
     this.setState({
-      property: properties[ newIndex ]
+      property: properties[newIndex],
     });
   };
 
@@ -110,6 +104,67 @@ class Feedbacks extends Component {
               </div>
             </div>
           </div>
+
+          {/* <Columns
+            queries={this.queries}
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            {this.state.feedbacks.map((data, i) => {
+              return (
+                <Card
+                  bg="light"
+                  text="dark"
+                  className="text-center"
+                  style={{
+                    marginLeft: "20px",
+                    marginTop: "10px",
+                    justifyContent: "center",
+                    borderColor:'#af9a7d',
+                    borderWidth:'4px'
+                  }}
+                  key={i}
+                  border="secondary"
+                >
+                  <Card.Img variant="top" src={userPic} />
+                  <Card.Body>
+                    <Card.Title
+                      text="dark"
+                      style={{ textAlign: "center", fontWeight: "bold" }}
+                    >
+                      {data.name}
+                    </Card.Title>
+                    <Card.Text> {data.massage}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <Rating
+                      emptySymbol={
+                        <img
+                          src={emptyStar}
+                          className="icon"
+                          width="30"
+                          height="30"
+                          alt="Emptystar"
+                        />
+                      }
+                      initialRating={data.rating}
+                      fullSymbol={
+                        <img
+                          src={fullStar}
+                          className="icon"
+                          width="30"
+                          height="30"
+                          alt="Fullstar"
+                        />
+                      }
+                      readonly
+                    />
+                  </Card.Footer>
+                </Card>
+              );
+            })}
+          </Columns> */}
         </div>
       </div>
     );

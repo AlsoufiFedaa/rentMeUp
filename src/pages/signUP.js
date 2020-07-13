@@ -4,7 +4,6 @@ import logo from '../assets/logo1.png';
 import { Link } from 'react-router-dom';
 import * as firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
-
 class SignUP extends Component {
   state = {
     Name: '',
@@ -31,11 +30,6 @@ class SignUP extends Component {
     }, 7000);
     const user = firebase.auth().currentUser;
     console.log('user', user.uid);
-    db.collection('users');
-
-    const user = firebase.auth().currentUser;
-    console.log('user', user.uid);
-
     db
       .collection('users')
       .doc(user.uid)
@@ -132,7 +126,6 @@ class SignUP extends Component {
                 Mobile
               </label>
             </div>
-
             <Link className="btn-primary" onClick={this.addUser}>
               Sign Up
             </Link>
