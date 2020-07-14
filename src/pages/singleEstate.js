@@ -1,49 +1,49 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import { Link } from "react-router-dom";
-import Title from "../Components/Title";
-import * as firebase from "firebase";
+import { Link } from 'react-router-dom';
+import Title from '../Components/Title';
+import * as firebase from 'firebase';
 
 // import * as firebase from "firebase";
 class SingleEstate extends Component {
   state = {
     listOfImages: [],
-    item: {}
+    item: {},
   };
 
   componentDidMount() {
-    console.log("props", this.props);
+    console.log('props', this.props);
     let { item } = this.state;
     const id = this.props.match.params.id;
     firebase
       .firestore()
-      .collection("estates")
+      .collection('estates')
       .doc(id)
       .get()
-      .then(querySnapshot => {
+      .then((querySnapshot) => {
         console.log(querySnapshot.data());
         item = querySnapshot.data();
         this.setState({ item });
       });
-    console.log("single", this.state.item);
+    console.log('single', this.state.item);
   }
 
   render() {
     const { item } = this.state;
-    console.log(item);
+    console.log('item', item);
 
     return (
       <div>
         <Title title="Images Gallery" />
         <section className="single-room">
-          <div style={{ alignItems: "center" }}>
+          <div style={{ alignItems: 'center' }}>
             <div className="images">
               {item.url &&
                 item.url.map((item, i) => {
                   return (
                     <img
                       className="singleImage"
-                      src={item || "http://via.placeholder.com/400x300"}
+                      src={item || 'http://via.placeholder.com/400x300'}
                       alt="Uploaded images"
                       height="300"
                       width="400"
@@ -57,7 +57,7 @@ class SingleEstate extends Component {
             <article className="desc">
               <h3> Details</h3>
               <p>
-                {" "}
+                {' '}
                 Driveway parking as well as plenty of street parking.
                 <br />
                 The garage (300 sq ft) was converted to a bonus room that was
@@ -98,6 +98,14 @@ class SingleEstate extends Component {
 
         <Link to="/MainContainer" className="btn-primary">
           Back To The Map
+        </Link>
+        <Link
+          to={{
+            pathname: `/Chat/${item.userUid}`,
+          }}
+          className="btn-primary"
+        >
+          Message
         </Link>
       </div>
     );

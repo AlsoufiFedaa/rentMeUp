@@ -11,8 +11,8 @@ import userP from '../assets/user1.png';
 import home from '../assets/home.png';
 import logOut from '../assets/logOut.png';
 
-import { ReactComponent as CogIcon } from '../assets/icons/cog.svg';
-import { ReactComponent as ChevronIcon } from '../assets/icons/chevron.svg';
+import { ReactComponent as CogIcon } from '../assets/icons/messenger.svg';
+import { ReactComponent as ChevronIcon } from '../assets/icons/messenger.svg';
 function DropdownMenu() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const SignOut = () => {
@@ -38,7 +38,7 @@ function DropdownMenu() {
   };
   function DropdownItem(props) {
     return (
-      <Link to="/" onClick={props.function}>
+      <Link to={props.link} onClick={props.function}>
         <a href="/" className="menu-item">
           <span className="icon-button">{props.leftIcon}</span>
           {props.children}
@@ -53,15 +53,14 @@ function DropdownMenu() {
         <DropdownItem leftIcon={<img src={userP} height={20} />}>
           My Profile
         </DropdownItem>
-        <DropdownItem leftIcon={<img src={home} height={20} />}>
+        <DropdownItem
+          leftIcon={<img src={home} height={20} />}
+          link="YourEstates"
+        >
           All Estates
         </DropdownItem>
 
-        <DropdownItem
-          leftIcon={<CogIcon />}
-          rightIcon={<ChevronIcon />}
-          goToMenu="settings"
-        >
+        <DropdownItem leftIcon={<CogIcon />} goToMenu="settings" link="Chat">
           Messages
         </DropdownItem>
 
@@ -70,6 +69,7 @@ function DropdownMenu() {
           rightIcon={<ChevronIcon />}
           goToMenu="animals"
           function={SignOut}
+          link="/"
         >
           Sign Out
         </DropdownItem>
@@ -98,7 +98,6 @@ class NavBar extends Component {
           .get()
           .then((doc) => {
             this.setState({ name: doc.data().name });
-            console.log(doc.data(), 'name ogf uesr');
           })
           .catch(function(error) {
             console.log('Error getting documents: ', error);

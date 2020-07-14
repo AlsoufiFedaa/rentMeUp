@@ -13,7 +13,7 @@ class SignUP extends Component {
   };
   addUser = () => {
     const { Name, Email, Password, Mobile } = this.state;
-    console.log(Name, Email, Password, Mobile);
+
     const db = firebase.firestore();
     firebase
       .auth()
@@ -27,19 +27,21 @@ class SignUP extends Component {
       });
     setTimeout(() => {
       console.log('wait!');
-    }, 7000);
-    const user = firebase.auth().currentUser;
-    console.log('user', user.uid);
-    db
-      .collection('users')
-      .doc(user.uid)
-      .set({ email: user.email, uid: user.uid, mobile: Mobile, name: Name })
-      .catch(function(error) {
-        console.error(error);
-      }).then = () => {
-      this.props.history.push('/HomeLogged');
-      console.log('###loginn###');
-    };
+    }, 100000);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        db
+          .collection('users')
+          .doc(user.uid)
+          .set({ email: user.email, uid: user.uid, mobile: Mobile, name: Name })
+          .catch(function(error) {
+            console.error(error);
+          }).then = () => {
+          console.log('###loginn###');
+          this.props.history.push('/HomeLogged');
+        };
+      }
+    });
   };
   handleNameChange = (e) => {
     this.setState({

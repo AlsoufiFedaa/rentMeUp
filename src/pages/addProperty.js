@@ -189,6 +189,7 @@ class AddProperty extends Component {
 
     db.collection('estates')
       .add({
+        userUid: currentUser.uid,
         type: this.state.type,
         name: name,
         email: email,
