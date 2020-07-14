@@ -183,4 +183,70 @@ class NavBar extends Component {
   }
 }
 
+<<<<<<< HEAD
+=======
+function DropdownMenu() {
+  const SignOut = () => {
+    const { currentUser, setCurrentUser } = this.context;
+    console.log(
+      "dsfyhfujnksdfgysduijnkldsyauinjkfayusdinklfayudsbijnkfayudsbijxnk  "
+    );
+
+    if (currentUser) {
+      return firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log("sign out ");
+          alert("sign out successfully");
+          localStorage.clear();
+          this.props.history.push("/");
+          setCurrentUser(null);
+        })
+        .catch(function(error) {
+          console.log("An error happened.");
+        });
+    } else {
+      return alert("Log In first");
+    }
+  };
+  function DropdownItem(props) {
+    return (
+      <a href="#" className="menu-item">
+        <span className="icon-button">{props.leftIcon}</span>
+        {props.children}
+      </a>
+    );
+  }
+
+  return (
+    <div className="dropdown">
+      <div className="menu">
+        <DropdownItem leftIcon={<img src={userP} height={20} />}>
+          My Profile
+        </DropdownItem>
+        <DropdownItem leftIcon={<img src={home} height={20} />}>
+          All Estates
+        </DropdownItem>
+
+        <DropdownItem
+          leftIcon={<CogIcon />}
+          rightIcon={<ChevronIcon />}
+          goToMenu="settings"
+        >
+          Settings
+        </DropdownItem>
+        <DropdownItem
+          onClick={signOut}
+          leftIcon={<img src={logOut} height={20} />}
+          rightIcon={<ChevronIcon />}
+          goToMenu="animals"
+        >
+          Sign Out
+        </DropdownItem>
+      </div>
+    </div>
+  );
+}
+>>>>>>> db81edaef46edcc5d03b103b483f818e19d9d897
 export default NavBar;
