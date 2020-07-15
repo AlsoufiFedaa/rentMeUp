@@ -150,10 +150,10 @@ function DropdownMenu() {
   };
   function DropdownItem(props) {
     return (
-      <a href="#" className="menu-item">
+      <div className="menu-item" onClick={props.onClick}>
         <span className="icon-button">{props.leftIcon}</span>
         {props.children}
-      </a>
+      </div>
     );
   }
 
@@ -175,7 +175,7 @@ function DropdownMenu() {
           Settings
         </DropdownItem>
         <DropdownItem
-          onClick={signOut}
+          onClick={SignOut}
           leftIcon={<img src={logOut} height={20} />}
           rightIcon={<ChevronIcon />}
           goToMenu="animals"
