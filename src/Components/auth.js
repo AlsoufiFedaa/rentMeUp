@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import * as firebase from 'firebase';
-import ReactLoading from 'react-loading';
 
 export const AuthContext = React.createContext();
 const AuthProvider = ({ children }) => {

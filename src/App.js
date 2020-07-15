@@ -16,7 +16,7 @@ import PrivateRoute from './Components/privateRoute';
 import HomeLogged from './pages/homeLogged';
 import Feedbacks from './pages/feedbacksPage';
 import Chat from './chat/chat';
-import Podkova from '../src/assets/fonts/Podkova-VariableFont_wght.ttf';
+// import Podkova from '../src/assets/fonts/Podkova-VariableFont_wght.ttf';
 import YourEstates from './pages/allEstates';
 // import Fire from "./pages/ClassFire";
 function App() {

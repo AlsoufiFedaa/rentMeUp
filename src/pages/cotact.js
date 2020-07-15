@@ -1,36 +1,35 @@
-import React, { Component } from "react";
-import Title from "../Components/Title";
-import logo from "../assets/logo1.png";
-import { Link } from "react-router-dom";
-import * as firebase from "firebase";
-import Rating from "react-rating";
-import emptyStar from "../assets/star-empty.png";
-import fullStar from "../assets/PngItem_3174427.png";
+import React, { Component } from 'react';
+import Title from '../Components/Title';
+import logo from '../assets/logo1.png';
+import { Link } from 'react-router-dom';
+import * as firebase from 'firebase';
+import Rating from 'react-rating';
+import emptyStar from '../assets/star-empty.png';
+import fullStar from '../assets/PngItem_3174427.png';
 
 class Contact extends Component {
   state = {
-    Name: "",
-    Email: "",
-    Subejact: "",
-    Massage: "",
-    feed: "",
-    rating: "",
-    lastIndex: -1
+    Name: '',
+    Email: '',
+    Subejact: '',
+    Massage: '',
+    feed: '',
+    rating: '',
+    lastIndex: -1,
   };
   async componentDidMount() {
-    let { lastIndex } = this.state;
     const snapshot = await firebase
       .firestore()
-      .collection("FeedBacks")
+      .collection('FeedBacks')
       .get();
     const collection = {};
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc) => {
       collection[doc.id] = doc.data();
       let newIndex = collection[doc.id].index;
       if (newIndex > this.state.lastIndex) {
         this.setState({ lastIndex: newIndex });
       }
-      console.log("if", this.state.lastIndex);
+      console.log('if', this.state.lastIndex);
     });
   }
   addUser = () => {
@@ -38,52 +37,52 @@ class Contact extends Component {
 
     const db = firebase.firestore();
 
-    console.log(Name, Email, Massage, Subejact, "firebase", lastIndex);
+    console.log(Name, Email, Massage, Subejact, 'firebase', lastIndex);
 
-    db.collection("FeedBacks")
+    db.collection('FeedBacks')
       .add({
         name: Name,
         email: Email,
         subejact: Subejact,
         massage: Massage,
         rating: rating,
-        index: lastIndex + 1
+        index: lastIndex + 1,
       })
 
       .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+        console.log('Document written with ID: ', docRef.id);
       })
       .catch(function(error) {
-        console.error("Error adding document: ", error);
+        console.error('Error adding document: ', error);
       });
   };
 
-  handleNameChange = e => {
+  handleNameChange = (e) => {
     this.setState({
-      Name: e.target.value
+      Name: e.target.value,
     });
   };
-  handleEmailChange = e => {
+  handleEmailChange = (e) => {
     this.setState({
-      Email: e.target.value
+      Email: e.target.value,
     });
   };
-  handleSubejactChange = e => {
+  handleSubejactChange = (e) => {
     this.setState({
-      Subejact: e.target.value
+      Subejact: e.target.value,
     });
   };
-  handleMassageChange = e => {
+  handleMassageChange = (e) => {
     this.setState({
-      Massage: e.target.value
+      Massage: e.target.value,
     });
   };
-  handleFeedChange = e => {
+  handleFeedChange = (e) => {
     this.setState({
-      feed: e.target.value
+      feed: e.target.value,
     });
   };
-  handleRatingChange = rating => {
+  handleRatingChange = (rating) => {
     this.setState({ rating: rating });
   };
 
@@ -92,41 +91,41 @@ class Contact extends Component {
       <div>
         <div
           className="nav-header"
-          style={{ marginTop: "45px", marginLeft: "25%" }}
+          style={{ marginTop: '45px', marginLeft: '25%' }}
         >
           <Title title="Contact US" />
-      <div className="contactForm">
-          <div className="singUp">
-            <div className="form-groupp">
-              <input
-                defaultValue={this.state.Name}
-                onChange={this.handleNameChange}
-                type="text"
-                name="firstName"
-                id="firstName"
-                className="form-control"
-                required
-              />
-              <label className="sl" htmlFor="firstName">
-                Name
-              </label>
-            </div>
+          <div className="contactForm">
+            <div className="singUp">
+              <div className="form-groupp">
+                <input
+                  defaultValue={this.state.Name}
+                  onChange={this.handleNameChange}
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  className="form-control"
+                  required
+                />
+                <label className="sl" htmlFor="firstName">
+                  Name
+                </label>
+              </div>
 
-            <div className="form-groupp">
-              <input
-                defaultValue={this.state.Email}
-                onChange={this.handleEmailChange}
-                type="email"
-                name="firstName"
-                id="firstName"
-                className="form-control"
-                required
-              />
-              <label className="sl" htmlFor="firstName">
-                Email
-              </label>
-            </div>
-            {/* 
+              <div className="form-groupp">
+                <input
+                  defaultValue={this.state.Email}
+                  onChange={this.handleEmailChange}
+                  type="email"
+                  name="firstName"
+                  id="firstName"
+                  className="form-control"
+                  required
+                />
+                <label className="sl" htmlFor="firstName">
+                  Email
+                </label>
+              </div>
+              {/* 
             <div className="form-groupp">
               <input
                 defaultValue={this.state.Subejact}
@@ -155,55 +154,54 @@ class Contact extends Component {
                 Massage
               </label>
             </div> */}
-            <div className="form-groupp">
-              <input
-                defaultValue={this.state.feed}
-                onChange={this.handleFeedChange}
-                type="text"
-                name="firstName"
-                id="firstName"
-                className="form-control"
-                required
-              />
-              <label className="sl" htmlFor="firstName">
-                Your Feedback
-              </label>
-            </div>
-            <div className="form-groupp">
-              <h3>Rate Us!</h3>{" "}
-              <Rating
-                emptySymbol={
-                  <img
-                    src={emptyStar}
-                    className="icon"
-                    width="30"
-                    height="30"
-                    alt="Emptystar"
-                  />
-                }
-                initialRating={this.state.rating}
-                fullSymbol={
-                  <img
-                    src={fullStar}
-                    className="icon"
-                    width="30"
-                    height="30"
-                    alt="Fullstar"
-                  />
-                }
-                onChange={this.handleRatingChange}
-              />
-            </div>
+              <div className="form-groupp">
+                <input
+                  defaultValue={this.state.feed}
+                  onChange={this.handleFeedChange}
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  className="form-control"
+                  required
+                />
+                <label className="sl" htmlFor="firstName">
+                  Your Feedback
+                </label>
+              </div>
+              <div className="form-groupp">
+                <h3>Rate Us!</h3>{' '}
+                <Rating
+                  emptySymbol={
+                    <img
+                      src={emptyStar}
+                      className="icon"
+                      width="30"
+                      height="30"
+                      alt="Emptystar"
+                    />
+                  }
+                  initialRating={this.state.rating}
+                  fullSymbol={
+                    <img
+                      src={fullStar}
+                      className="icon"
+                      width="30"
+                      height="30"
+                      alt="Fullstar"
+                    />
+                  }
+                  onChange={this.handleRatingChange}
+                />
+              </div>
 
-            <Link
-              to="/MainContainer"
-              className="btn-primary"
-              onClick={this.addUser}
-            >
-
-              Submit
-            </Link>
-          </div>
+              <Link
+                to="/MainContainer"
+                className="btn-primary"
+                onClick={this.addUser}
+              >
+                Submit
+              </Link>
+            </div>
           </div>
           <div className="imgSL">
             <img className="IMsl" src={logo} alt="rentmeUp" />

@@ -41,15 +41,20 @@ class AllEstates extends React.Component {
     });
   }
   render() {
-    const { currentUser } = this.context;
-
     let userEstate = this.state.estates.filter(
       (item) => item.userUid === firebase.auth().currentUser.uid
     );
-    console.log(userEstate);
-    let estates = userEstate.map((estate, index) => {
-      return <Estate estate={estate} key={index} />;
-    });
+
+    let estates;
+    if (userEstate.length > 0) {
+      estates = userEstate.map((estate, index) => {
+        return <Estate estate={estate} key={index} />;
+      });
+    } else {
+      estates = (
+        <Title title="You don't have any estates currently add some and they will appear here" />
+      );
+    }
     return (
       <div>
         <section className="featured-rooms">

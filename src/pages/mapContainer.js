@@ -68,7 +68,6 @@ class MapContainer extends Component {
 
       roomNum,
 
-      sortedEstates,
       newEstates,
       query,
     } = this.state;
@@ -115,7 +114,7 @@ class MapContainer extends Component {
     sortedEstates[i].isOpen = true;
 
     this.setState(sortedEstates);
-    if (this.state.prev_infowindow != i) {
+    if (this.state.prev_infowindow !== i) {
       sortedEstates[prev_infowindow].isOpen = false;
       this.setState({ prev_infowindow: i });
     }
@@ -125,7 +124,7 @@ class MapContainer extends Component {
   displayMarkers = () => {
     return this.state.sortedEstates.map((item, index) => {
       return (
-        <>
+        <div key={index}>
           {/*Marker*/}
 
           <Marker
@@ -133,7 +132,7 @@ class MapContainer extends Component {
             longitude={item.lng}
             offsetTop={-34.38}
             offsetLeft={-14.5}
-            key={`marker ${item.index}`}
+            key={index}
           >
             <button
               style={{
@@ -158,6 +157,7 @@ class MapContainer extends Component {
               onClose={this.onInfoWindowClose}
               latitude={item.lat + 0.009}
               longitude={item.lng + 0.009}
+              key={index}
             >
               <div
                 style={{
@@ -192,14 +192,12 @@ class MapContainer extends Component {
               </div>
             </Popup>
           )}
-        </>
+        </div>
       );
     });
   };
 
   render() {
-    const { currentUser } = this.context;
-
     return (
       <div>
         <FilterEstates

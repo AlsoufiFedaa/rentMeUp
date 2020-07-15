@@ -72,7 +72,7 @@ h6 {
 
 .uName {
   height: 77px;
-  background-color: #f1f2f2;
+  background: var(--offWhite);
   display: flex;
   justify-self: flex-end;
   flex-direction: row;
@@ -80,7 +80,13 @@ h6 {
   align-self: center;
   margin-right: 50px;
   padding: 4px;
-  border-radius: 40px;
+ 
+  border: none;
+ 
+  
+ 
+
+
   // margin-top: 20px;
 }
 .btn-primary:hover {
@@ -421,12 +427,12 @@ h6 {
   padding: 5rem 0;
 }
 .featured-rooms-center {
-  width: 70vw;
+  width: 80vw;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   grid-row-gap: 2rem;
-  grid-column-gap: 50px;
+  grid-column-gap: 40px;
 }
 @media screen and (min-width: 776px) {
   .featured-rooms-center {
@@ -453,9 +459,10 @@ h6 {
 .img-container {
   position: relative;
 }
-.img-container img {
+.room img {
   width: 100%;
   display: block;
+ height: 300px;
   transition: var(--mainTransition);
 }
 .price-top {
@@ -486,7 +493,6 @@ h6 {
 .img-container:hover .price-top {
   opacity: 0;
 }
-
 .room-info {
   background: var(--darkGrey);
   text-transform: capitalize;

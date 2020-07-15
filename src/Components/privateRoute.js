@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { AuthContext } from './auth';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   setTimeout(() => {}, 7000);

@@ -128,7 +128,11 @@ class SignUP extends Component {
                 Mobile
               </label>
             </div>
-            <Link className="btn-primary" onClick={this.addUser}>
+            <Link
+              className="btn-primary"
+              onClick={this.addUser}
+              to="/HomeLogged"
+            >
               Sign Up
             </Link>
           </div>

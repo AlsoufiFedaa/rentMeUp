@@ -1,17 +1,13 @@
 import React from 'react';
 const Estate = ({ estate }) => {
-  const { city, street, price, type, url } = estate;
-
+  const { city, price, type, url } = estate;
+  console.log(city, price, type, url[0]);
   return (
     <article className="room">
-      <div className="img-container">
-        <img src={url[0]} alt="estate" />
-        <div className="price-top">
-          <h6> ${price}</h6>
-          <p> {type}</p>
-        </div>
-      </div>
-      <p className="room-info">{city}</p> 
+      <img src={url[0]} alt="estate" objectFit="contain" />
+      <p className="room-info">
+        {type} - {city} - ${price}
+      </p>
     </article>
   );
 };
