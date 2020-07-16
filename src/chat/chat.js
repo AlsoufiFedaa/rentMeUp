@@ -15,6 +15,7 @@ class Chat extends React.Component {
 
       isLoading: true,
     };
+
     this.listUser = [];
 
     this.currentUserId = '';
@@ -65,8 +66,18 @@ class Chat extends React.Component {
       this.setState({ isLoading: false });
     }
     console.log(this.listUser);
+
+    if (!!this.props.match.params.userUid) {
+      const activeUser = this.listUser.find(
+        (item) => item.data().uid === this.props.match.params.userUid
+      );
+      console.log('active', activeUser);
+      this.setState({ currentPeerUser: activeUser.data() });
+      console.log(this.state.currentPeerUser);
+    }
   };
   renderListUser = () => {
+    console.log('i am working');
     if (this.listUser.length > 0 && this.currentUserId) {
       let viewListUser = [];
       this.listUser.forEach((item, index) => {
@@ -94,14 +105,6 @@ class Chat extends React.Component {
               </div>
             </button>
           );
-          if (
-            !!this.props.match.params.userUid &&
-            item.data().uid === this.props.match.params.userUid
-          ) {
-            this.setState({ currentPeerUser: item.data() });
-          } else {
-            return null;
-          }
         }
       });
       return viewListUser;
@@ -117,7 +120,7 @@ class Chat extends React.Component {
         <div className="viewBoard">
           {this.state.currentPeerUser ? (
             <ChatBoard
-              currentPeerUser={this.state.currentPeerUser.uid}
+              currentPeerUser={this.state.currentPeerUser}
               currentUserId={this.currentUserId}
             />
           ) : (

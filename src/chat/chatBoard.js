@@ -48,11 +48,11 @@ export default class ChatBoard extends Component {
     this.setState({ isLoading: true });
     if (
       this.hashString(this.props.currentUserId) <=
-      this.hashString(this.currentPeerUser)
+      this.hashString(this.currentPeerUser.uid)
     ) {
-      this.groupChatId = `${this.props.currentUserId}-${this.currentPeerUser}`;
+      this.groupChatId = `${this.props.currentUserId}-${this.currentPeerUser.uid}`;
     } else {
-      this.groupChatId = `${this.currentPeerUser}-${this.props.currentUserId}`;
+      this.groupChatId = `${this.currentPeerUser.uid}-${this.props.currentUserId}`;
     }
 
     // Get history and listen new data added
@@ -87,7 +87,7 @@ export default class ChatBoard extends Component {
 
     const itemMessage = {
       idFrom: this.props.currentUserId,
-      idTo: this.currentPeerUser,
+      idTo: this.currentPeerUser.uid,
       timestamp: timestamp,
       content: content.trim(),
       type: type,
