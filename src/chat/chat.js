@@ -71,13 +71,12 @@ class Chat extends React.Component {
       const activeUser = this.listUser.find(
         (item) => item.data().uid === this.props.match.params.userUid
       );
-      console.log('active', activeUser);
+      console.log('active', activeUser.data().name);
       this.setState({ currentPeerUser: activeUser.data() });
       console.log(this.state.currentPeerUser);
     }
   };
   renderListUser = () => {
-    console.log('i am working');
     if (this.listUser.length > 0 && this.currentUserId) {
       let viewListUser = [];
       this.listUser.forEach((item, index) => {

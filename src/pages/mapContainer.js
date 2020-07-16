@@ -19,7 +19,7 @@ class MapContainer extends Component {
     maxprice: 0,
     minspace: 0,
     maxspace: 0,
-    roomNum: 1,
+    roomNum: 4,
     downtown: false,
     overLookingSea: false,
     prev_infowindow: 0,

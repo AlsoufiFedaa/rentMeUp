@@ -407,7 +407,7 @@ class AddProperty extends Component {
                     type="number"
                     placeholder="rooms"
                     defaultValue={this.state.roomNum}
-                    onChange={this.handleChange}
+                    onChange={() => this.handleChange}
                     id="roomNum"
                   />
                 </div>
