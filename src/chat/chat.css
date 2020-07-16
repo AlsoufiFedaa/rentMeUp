@@ -6,10 +6,9 @@
 }
 .viewListUser {
   overflow-y: scroll;
-  max-height: 90vh;
+  max-height: 84vh;
   padding-top: 10px;
   padding-bottom: 10px;
-
 }
 .viewLoading {
   position: absolute;
@@ -47,6 +46,9 @@
   padding: 10px;
   align-items: center;
   justify-content: center;
+}
+.viewWrapItem:hover {
+  background-color: #f1f2f2;
 }
 
 .viewWrapItemFocused {
@@ -89,5 +91,5 @@
 .viewBoard {
   display: flex;
   flex: 1;
-  max-height: 90vh;
+  max-height: 84vh;
 }

@@ -66,13 +66,13 @@ h6 {
   text-transform: uppercase;
   cursor: pointer;
   margin-left: 30px;
-
+  margin-right: 9px;
   margin-top: 40px;
 }
 
 .uName {
   height: 77px;
-  background: var(--offWhite);
+  background-color: #f1f2f2;
   display: flex;
   justify-self: flex-end;
   flex-direction: row;
@@ -80,12 +80,7 @@ h6 {
   align-self: center;
   margin-right: 50px;
   padding: 4px;
- 
-  border: none;
- 
-  
- 
-
+  border-radius: 40px;
 
   // margin-top: 20px;
 }
@@ -462,7 +457,7 @@ h6 {
 .room img {
   width: 100%;
   display: block;
- height: 300px;
+  height: 300px;
   transition: var(--mainTransition);
 }
 .price-top {
@@ -885,6 +880,26 @@ h6 {
     font-weight: bold;
   }
 }
+.uPro {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  align-self: center;
+  border: 3px #e6e6e6 solid;
+  display: flex;
+  background-color: #e7e7e7;
+  padding: 10px;
+  flex-direction: column;
+  height: 380px;
+  width: 50%;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 25%;
+  border-radius: 2%;
+  margin-bottom: 50px;
+  &:hover {
+    background-color: #f3f3f3;
+    border-color: #f3f3f3;
+  }
+}
 
 /* #endregion */
 
@@ -1304,4 +1319,24 @@ a {
 .menu-secondary-exit-active {
   transform: translateX(110%);
   transition: all var(--speed) ease;
+}
+.DATA {
+  margin-top: 50px;
+}
+.uImg {
+  height: 120px;
+  margin-top: 30px;
+  width: 120px;
+  border-radius: 50%;
+  background-color:var(--primaryColor);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.buttonG {
+  display: flex;
+  width: 100%;
+  margin-bottom: 50px;
+  // margin-right: 50px;
+  flex-direction: row-reverse;
 }

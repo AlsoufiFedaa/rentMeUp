@@ -12,7 +12,7 @@ export default class WelcomeBoard extends Component {
           alt="icon avatar"
         />
         <span className="textDesciptionWelcome">
-          Here you can find your messages please keep the chat short and for the
+           Here you can find your messages please keep the chat short and for the
           purpose of renting/buying.
         </span>
       </div>

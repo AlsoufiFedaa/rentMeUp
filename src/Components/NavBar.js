@@ -1,39 +1,39 @@
-import React, { Component, useContext } from 'react';
-import { FaAlignRight } from 'react-icons/fa';
-import logo from '../assets/logo1.png';
-import { Link } from 'react-router-dom';
-import * as firebase from 'firebase';
-import { AuthContext } from '../Components/auth';
-import { withRouter } from 'react-router-dom';
+import React, { Component, useContext } from "react";
+import { FaAlignRight } from "react-icons/fa";
+import logo from "../assets/logo1.png";
+import { Link } from "react-router-dom";
+import * as firebase from "firebase";
+import { AuthContext } from "../Components/auth";
+import { withRouter } from "react-router-dom";
 
 // import { ReactComponent as CaretIcon } from "./icons/caret.svg";
-import userP from '../assets/user1.png';
-import home from '../assets/home.png';
-import logOut from '../assets/logOut.png';
+import userP from "../assets/user1.png";
+import home from "../assets/home.png";
+import logOut from "../assets/logOut.png";
 
-import { ReactComponent as CogIcon } from '../assets/icons/messenger.svg';
-import { ReactComponent as ChevronIcon } from '../assets/icons/messenger.svg';
+import { ReactComponent as CogIcon } from "../assets/icons/messenger.svg";
+import { ReactComponent as ChevronIcon } from "../assets/icons/messenger.svg";
 function DropdownMenu() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const SignOut = () => {
-    console.log('here we go');
+    console.log("here we go");
 
     if (currentUser) {
       return firebase
         .auth()
         .signOut()
         .then(function() {
-          console.log('sign out ');
-          alert('sign out successfully');
+          console.log("sign out ");
+          alert("sign out successfully");
           localStorage.clear();
           window.location.reload();
           setCurrentUser(null);
         })
         .catch(function(error) {
-          console.log('An error happened.');
+          console.log("An error happened.");
         });
     } else {
-      return alert('Log In first');
+      return alert("Log In first");
     }
   };
   function DropdownItem(props) {
@@ -50,7 +50,10 @@ function DropdownMenu() {
   return (
     <div className="dropdown">
       <div className="menu">
-        <DropdownItem leftIcon={<img src={userP} height={20} alt="profile" />}>
+        <DropdownItem
+          link="Profile"
+          leftIcon={<img src={userP} height={20} alt="profile" />}
+        >
           My Profile
         </DropdownItem>
         <DropdownItem
@@ -80,30 +83,30 @@ function DropdownMenu() {
 class NavBar extends Component {
   state = {
     isOPen: false,
-    name: '',
+    name: "",
     loggedin: null,
-    openD: false,
+    openD: false
   };
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User logged in already or has just logged in.
 
         this.setState({ loggedin: true });
         firebase
           .firestore()
-          .collection('users')
+          .collection("users")
           .doc(user.uid)
           .get()
-          .then((doc) => {
+          .then(doc => {
             this.setState({ name: doc.data().name });
           })
           .catch(function(error) {
-            console.log('Error getting documents: ', error);
+            console.log("Error getting documents: ", error);
           });
       } else {
-        console.log('not logged in ');
+        console.log("not logged in ");
         // User not logged in or has just logged out.
       }
     });
@@ -129,15 +132,15 @@ class NavBar extends Component {
           onClick={() => this.setState({ openD: !this.state.openD })}
         >
           <img
-            style={{ height: 30, width: 45, alignSelf: 'center' }}
-            src={require('../assets/userPic.png')}
+            style={{ height: 30, width: 45, alignSelf: "center" }}
+            src={require("../assets/userPic.png")}
             alt="userpic"
           />
           <h4
             style={{
               marginLeft: 10,
               marginTop: 25,
-              marginRight: 20,
+              marginRight: 20
             }}
           >
             {this.state.name}
@@ -164,7 +167,7 @@ class NavBar extends Component {
             </button>
           </div>
           <ul
-            className={this.state.isOPen ? 'nav-links show-nav' : 'nav-links'}
+            className={this.state.isOPen ? "nav-links show-nav" : "nav-links"}
           >
             <li>
               <Link to="/"> Home</Link>
