@@ -66,7 +66,7 @@ h6 {
   text-transform: uppercase;
   cursor: pointer;
   margin-left: 30px;
-
+  margin-right: 9px;
   margin-top: 40px;
 }
 
@@ -81,6 +81,7 @@ h6 {
   margin-right: 50px;
   padding: 4px;
   border-radius: 40px;
+
   // margin-top: 20px;
 }
 .btn-primary:hover {
@@ -415,6 +416,88 @@ h6 {
   background: transparent;
   background: var(--primaryColor);
 }
+/* featured rooms */
+
+.featured-rooms {
+  padding: 5rem 0;
+}
+.featured-rooms-center {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 40px;
+}
+@media screen and (min-width: 776px) {
+  .featured-rooms-center {
+    width: 90vw;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  }
+}
+@media screen and (min-width: 992px) {
+  .featured-rooms-center {
+    width: 95vw;
+    max-width: 1170px;
+  }
+}
+/* end pf featured rooms */
+/* room */
+.room {
+  box-shadow: var(--lightShadow);
+  transition: var(--mainTransition);
+}
+.room:hover {
+  box-shadow: var(--darkShadow);
+}
+
+.img-container {
+  position: relative;
+}
+.room img {
+  width: 100%;
+  display: block;
+  height: 300px;
+  transition: var(--mainTransition);
+}
+.price-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--mainWhite);
+  padding: 0.3rem 0.6rem 0.5rem;
+  border-bottom-right-radius: 1rem;
+  font-size: 0.5rem;
+  text-align: center;
+  transition: var(--mainTransition);
+}
+.price-top h6 {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: var(--mainSpacing);
+}
+
+.img-container:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+.img-container:hover img {
+  opacity: 0.3;
+}
+.img-container:hover .price-top {
+  opacity: 0;
+}
+.room-info {
+  background: var(--darkGrey);
+  text-transform: capitalize;
+  padding: 0.5rem 0;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: var(--mainSpacing);
+}
+/* end of room  */
+
 /* single room*/
 
 .single-room {
@@ -795,6 +878,26 @@ h6 {
     margin: 0;
     padding: 10px 0;
     font-weight: bold;
+  }
+}
+.uPro {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  align-self: center;
+  border: 3px #e6e6e6 solid;
+  display: flex;
+  background-color: #e7e7e7;
+  padding: 10px;
+  flex-direction: column;
+  height: 380px;
+  width: 50%;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 25%;
+  border-radius: 2%;
+  margin-bottom: 50px;
+  &:hover {
+    background-color: #f3f3f3;
+    border-color: #f3f3f3;
   }
 }
 
@@ -1216,4 +1319,24 @@ a {
 .menu-secondary-exit-active {
   transform: translateX(110%);
   transition: all var(--speed) ease;
+}
+.DATA {
+  margin-top: 50px;
+}
+.uImg {
+  height: 120px;
+  margin-top: 30px;
+  width: 120px;
+  border-radius: 50%;
+  background-color:var(--primaryColor);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.buttonG {
+  display: flex;
+  width: 100%;
+  margin-bottom: 50px;
+  // margin-right: 50px;
+  flex-direction: row-reverse;
 }

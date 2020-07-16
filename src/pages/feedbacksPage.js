@@ -1,17 +1,15 @@
+import React, { Component } from 'react';
+import data from './data';
+import Card from '../Components/Card';
+import Title from '../Components/Title';
 
-import React, { Component } from "react";
-import data from "./data";
-import Card from "../Components/Card";
-import Title from "../Components/Title";
-
-import * as firebase from "firebase";
-
+import * as firebase from 'firebase';
 
 class Feedbacks extends Component {
   state = {
     feedbacks: [],
     properties: data.properties,
-    property: data.properties[ 0 ]
+    property: data.properties[0],
   };
 
   async componentDidMount() {
@@ -21,13 +19,11 @@ class Feedbacks extends Component {
       .collection('FeedBacks')
       .get();
     const collection = {};
-
     let index = 0;
     snapshot.forEach((doc) => {
       collection[doc.id] = doc.data();
       collection[doc.id].index = index;
       feedbacks.push(collection[doc.id]);
-
       this.setState({ feedbacks });
       index = index + 1;
     });
@@ -39,19 +35,18 @@ class Feedbacks extends Component {
     //this.setState({ property: this.state.properties[0] });
     {
       feedbacks.map((item) =>
-        item.index == 0
+        item.index === 0
           ? this.setState({ property: item })
           : console.log('not ')
       );
     }
-
   }
 
   nextProperty = () => {
     const newIndex = this.state.property.index + 1;
     const { properties } = this.state;
     this.setState({
-      property: properties[ newIndex ]
+      property: properties[newIndex],
     });
   };
 
@@ -59,7 +54,7 @@ class Feedbacks extends Component {
     const newIndex = this.state.property.index - 1;
     const { properties } = this.state;
     this.setState({
-      property: properties[ newIndex ]
+      property: properties[newIndex],
     });
   };
 

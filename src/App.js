@@ -15,8 +15,10 @@ import AuthProvider from "./Components/auth";
 import PrivateRoute from "./Components/privateRoute";
 import HomeLogged from "./pages/homeLogged";
 import Feedbacks from "./pages/feedbacksPage";
-import Podkova from "../src/assets/fonts/Podkova-VariableFont_wght.ttf"
-
+import Chat from "./chat/chat";
+import Profile from "./pages/profile";
+// import Podkova from '../src/assets/fonts/Podkova-VariableFont_wght.ttf';
+import YourEstates from "./pages/allEstates";
 // import Fire from "./pages/ClassFire";
 function App() {
   return (
@@ -34,7 +36,19 @@ function App() {
           <PrivateRoute exact path="/HomeLogged" component={HomeLogged} />
           <PrivateRoute exact path="/MainContainer" component={MainContainer} />
           <PrivateRoute exact path="/AddPropery" component={AddContainer} />
-          <PrivateRoute exact path="/SingleEstate/:id" component={SingleEstate} />
+          <PrivateRoute exact path="/YourEstates" component={YourEstates} />
+          <PrivateRoute exact path="/Profile" component={Profile} />
+
+          <PrivateRoute
+            exact
+            path={["/Chat/:userUid", "/Chat"]}
+            component={Chat}
+          />
+          <PrivateRoute
+            exact
+            path="/SingleEstate/:id"
+            component={SingleEstate}
+          />
           <Route component={Error} />
         </Switch>
       </div>

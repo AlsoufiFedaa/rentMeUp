@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { FaAlignRight } from "react-icons/fa";
 import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
@@ -11,9 +11,75 @@ import userP from "../assets/user1.png";
 import home from "../assets/home.png";
 import logOut from "../assets/logOut.png";
 
-import { ReactComponent as CogIcon } from "../assets/icons/cog.svg";
-import { ReactComponent as ChevronIcon } from "../assets/icons/chevron.svg";
+import { ReactComponent as CogIcon } from "../assets/icons/messenger.svg";
+import { ReactComponent as ChevronIcon } from "../assets/icons/messenger.svg";
+function DropdownMenu() {
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const SignOut = () => {
+    console.log("here we go");
 
+    if (currentUser) {
+      return firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log("sign out ");
+          alert("sign out successfully");
+          localStorage.clear();
+          window.location.reload();
+          setCurrentUser(null);
+        })
+        .catch(function(error) {
+          console.log("An error happened.");
+        });
+    } else {
+      return alert("Log In first");
+    }
+  };
+  function DropdownItem(props) {
+    return (
+      <Link to={props.link} onClick={props.function}>
+        <a href="/" className="menu-item">
+          <span className="icon-button">{props.leftIcon}</span>
+          {props.children}
+        </a>
+      </Link>
+    );
+  }
+
+  return (
+    <div className="dropdown">
+      <div className="menu">
+        <DropdownItem
+          link="Profile"
+          leftIcon={<img src={userP} height={20} alt="profile" />}
+        >
+          My Profile
+        </DropdownItem>
+        <DropdownItem
+          leftIcon={<img src={home} height={20} alt="homes" />}
+          link="YourEstates"
+        >
+          All Estates
+        </DropdownItem>
+
+        <DropdownItem leftIcon={<CogIcon />} goToMenu="settings" link="Chat">
+          Messages
+        </DropdownItem>
+
+        <DropdownItem
+          leftIcon={<img src={logOut} height={20} alt="sign out" />}
+          rightIcon={<ChevronIcon />}
+          goToMenu="animals"
+          function={SignOut}
+          link="/"
+        >
+          Sign Out
+        </DropdownItem>
+      </div>
+    </div>
+  );
+}
 class NavBar extends Component {
   state = {
     isOPen: false,
@@ -26,7 +92,7 @@ class NavBar extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User logged in already or has just logged in.
-        console.log(user.uid);
+
         this.setState({ loggedin: true });
         firebase
           .firestore()
@@ -35,7 +101,6 @@ class NavBar extends Component {
           .get()
           .then(doc => {
             this.setState({ name: doc.data().name });
-            console.log(doc.data(), "name ogf uesr");
           })
           .catch(function(error) {
             console.log("Error getting documents: ", error);
@@ -47,7 +112,6 @@ class NavBar extends Component {
     });
   }
 
-  static contextType = AuthContext;
   handleToggle = () => {
     this.setState({ isOPen: !this.state.isOPen });
   };
@@ -70,6 +134,7 @@ class NavBar extends Component {
           <img
             style={{ height: 30, width: 45, alignSelf: "center" }}
             src={require("../assets/userPic.png")}
+            alt="userpic"
           />
           <h4
             style={{
@@ -86,7 +151,6 @@ class NavBar extends Component {
     } else {
       info = <div></div>;
     }
-
     return (
       <nav className="navbar">
         <div className="nav-center">
@@ -123,67 +187,4 @@ class NavBar extends Component {
   }
 }
 
-function DropdownMenu() {
-  const SignOut = () => {
-    const { currentUser, setCurrentUser } = this.context;
-    console.log(
-      "dsfyhfujnksdfgysduijnkldsyauinjkfayusdinklfayudsbijnkfayudsbijxnk  "
-    );
-
-    if (currentUser) {
-      return firebase
-        .auth()
-        .signOut()
-        .then(function() {
-          console.log("sign out ");
-          alert("sign out successfully");
-          localStorage.clear();
-          this.props.history.push("/");
-          setCurrentUser(null);
-        })
-        .catch(function(error) {
-          console.log("An error happened.");
-        });
-    } else {
-      return alert("Log In first");
-    }
-  };
-  function DropdownItem(props) {
-    return (
-      <div className="menu-item" onClick={props.onClick}>
-        <span className="icon-button">{props.leftIcon}</span>
-        {props.children}
-      </div>
-    );
-  }
-
-  return (
-    <div className="dropdown">
-      <div className="menu">
-        <DropdownItem leftIcon={<img src={userP} height={20} />}>
-          My Profile
-        </DropdownItem>
-        <DropdownItem leftIcon={<img src={home} height={20} />}>
-          All Estates
-        </DropdownItem>
-
-        <DropdownItem
-          leftIcon={<CogIcon />}
-          rightIcon={<ChevronIcon />}
-          goToMenu="settings"
-        >
-          Settings
-        </DropdownItem>
-        <DropdownItem
-          onClick={SignOut}
-          leftIcon={<img src={logOut} height={20} />}
-          rightIcon={<ChevronIcon />}
-          goToMenu="animals"
-        >
-          Sign Out
-        </DropdownItem>
-      </div>
-    </div>
-  );
-}
 export default NavBar;

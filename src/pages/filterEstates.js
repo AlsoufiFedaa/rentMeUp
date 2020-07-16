@@ -156,68 +156,6 @@ const FilterEstates = ({
         </div>
         {/* end of price */}
 
-        {/* estate space */}
-        <div className="form-group">
-          <label
-            style={{ color: '#000', marginLeft: 40, marginBottom: 15 }}
-            htmlFor="space"
-          >
-            space
-          </label>
-          <div className="size-inputs">
-            <input
-              type="number"
-              name="minspace"
-              id="space"
-              value={minspace}
-              onChange={handleChange}
-              className="size-input"
-            />
-            <input
-              type="number"
-              name="maxspace"
-              id="space"
-              value={maxspace}
-              onChange={handleChange}
-              className="size-input"
-            />
-          </div>
-        </div>
-        {/* end of space */}
-        {/* extras */}
-        <div className="form-group">
-          <div className="single-extra">
-            <input
-              type="checkbox"
-              name="downtown"
-              id="downtown"
-              checked={downtown}
-              onChange={handleChange}
-            />
-            <label
-              style={{ color: '#000', marginLeft: 20, marginTop: 20 }}
-              htmlFor="downtown"
-            >
-              downtown
-            </label>
-          </div>
-          <div className="single-extra">
-            <input
-              type="checkbox"
-              name="overLookingSea"
-              id="overLookingSea"
-              checked={overLookingSea}
-              onChange={handleChange}
-            />
-            <label
-              style={{ color: '#000', marginLeft: 20 }}
-              htmlFor="overLookingSea"
-            >
-              overLookingSea
-            </label>
-          </div>
-        </div>
-
         <div>
           <Link to="/AddPropery" className="btn-primary">
             Add Estate

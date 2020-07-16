@@ -30,7 +30,7 @@ class SingleEstate extends Component {
 
   render() {
     const { item } = this.state;
-    console.log(item);
+    console.log("item", item);
 
     return (
       <div>
@@ -95,10 +95,19 @@ class SingleEstate extends Component {
             </article>
           </div>
         </section>
-
-        <Link to="/MainContainer" className="btn-primary">
-          Back To The Map
-        </Link>
+        <div className="buttonG">
+          <Link to="/MainContainer" className="btn-primary">
+            Back To The Map~
+          </Link>
+          <Link
+            to={{
+              pathname: `/Chat/${item.userUid}`
+            }}
+            className="btn-primary"
+          >
+            Message
+          </Link>
+        </div>
       </div>
     );
   }
