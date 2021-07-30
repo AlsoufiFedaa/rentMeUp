@@ -33,7 +33,7 @@ class Chat extends React.Component {
           .get()
           .then((doc) => {
             this.currentUserName = doc.data().name;
-            console.log(this.currentUserName);
+      
           })
           .catch(function(error) {
             console.log('Error getting documents: ', error);

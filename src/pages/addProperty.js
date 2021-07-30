@@ -175,7 +175,7 @@ class AddProperty extends Component {
   /*stores info/ detials in firebase*/
 
   addPropertyToMap = () => {
-    const { currentUser } = this.context;
+    var currentUser = firebase.auth().currentUser;
     let email, name, phone;
     if (currentUser != null) {
       name = this.state.UserDetials.name;
@@ -252,7 +252,7 @@ class AddProperty extends Component {
     );
 
     //getting user's detials
-    const { currentUser } = this.context;
+    var currentUser = firebase.auth().currentUser;
 
     let { UserDetials } = this.state;
     firebase
@@ -362,12 +362,12 @@ class AddProperty extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="">Address</label>
+                  <label htmlFor="">Street</label>
                   <input
                     type="text"
-                    id="address"
+                    id="street"
                     onChange={this.handleChange}
-                    value={this.state.address}
+                    value={this.state.street}
                   />
                 </div>
 
